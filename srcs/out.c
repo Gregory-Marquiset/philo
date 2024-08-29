@@ -6,11 +6,11 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 18:08:00 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/08/27 03:50:33 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/08/29 23:23:06 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "philo.h"
+# include "../includes/philo.h"
 
 static size_t	ft_strlen(char *str)
 {
@@ -29,23 +29,28 @@ void	ft_exit(int fd_out, char *message, int error_code)
 	exit(error_code);
 }
 
-void	ft_leave_table(t_college *college, int fd_out, char *message,
+void	ft_quit_philo(t_sympos *sympos, int fd_out, char *message,
 	int error_code)
 {
 	int	i;
 
 	i = 0;
-	if (college->philos)
+	if (sympos->epís)
 	{
-		while (college->philos[i])
+		pthread_mutex_destroy(&sympos->epís->mprintf);
+		free(sympos->epís->meal_stat);
+		free(sympos->epís);
+	}
+	if (sympos->philos)
+	{
+		while (sympos->philos[i])
 		{
-			pthread_mutex_destroy(&college->philos[i]->left_chopstick);
-			free(college->philos[i]);
+			pthread_mutex_destroy(&sympos->philos[i]->dexi_obeli);
+			free(sympos->philos[i]);
 			i++;
 		}
-		free(college->philos);
+		free(sympos->philos);
 	}
-	if (college->utils)
-		free(college->utils);
+	free(sympos);
 	ft_exit(fd_out, message, error_code);
 }
