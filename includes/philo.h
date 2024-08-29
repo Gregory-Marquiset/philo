@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:16:57 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/08/29 23:17:10 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/08/30 01:45:55 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ t_sympos	*ft_init_sympos(t_epís *tmp);
 void	ft_muprintf(pthread_mutex_t *mutex, int id, char *message);
 
 		//		out.c		//
-void	ft_exit(int fd_out, char *message, int error_code);
 void	ft_quit_philo(t_sympos *sympos, int fd_out, char *message,
 	int error_code);
 

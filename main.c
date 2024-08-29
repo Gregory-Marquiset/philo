@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:36:48 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/08/29 23:37:21 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/08/30 01:38:50 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,26 +48,25 @@
 int	main(int argc, char **argv)
 {
 	t_sympos	*sympos;
-	//int			i = 0;
+	int			i = 0;
 
 	sympos = ft_args_verif_and_make_sympos(argc, argv);
 	printf(LU_GRE LTEST_SUCC_IN LU_END);
-	/*while (i < sympos->epís->n_philos)
+	while (i < sympos->epís->n_philos)
 	{
-		printf("philos[%d] join the table\n", sympos->philos[i]->id);
-		if (pthread_create(&sympos->philos[i]->thread, NULL, &ft_routine, &sympos->philos[i]->dexi_obeli))
+		printf("philos[%d] join the table\n", sympos->philos[i].id);
+		if (pthread_create(&sympos->philos[i].thread, NULL, &ft_routine, &sympos->philos[i].dexi_obeli))
 			ft_quit_philo(sympos, 2, LERR_PT_CREAT, CERR_PT_CREAT);
 		i++;
 	}
 	i = 0;
 	while (i < sympos->epís->n_philos)
 	{
-		printf("philos[%d] leave the table\n", sympos->philos[i]->id);
-		if (pthread_join(sympos->philos[i]->thread, NULL))
+		printf("philos[%d] leave the table\n", sympos->philos[i].id);
+		if (pthread_join(sympos->philos[i].thread, NULL))
 			ft_quit_philo(sympos, 2, LERR_PT_JOIN, CERR_PT_JOIN);
 		i++;
-	}*/
-
+	}
 	printf(LU_YEL LTEST_TEST_3D LU_END, 52);
 	ft_print_sympos(sympos);
 	ft_quit_philo(sympos, 1, LU_GRE LTEST_SUCC_OUT LU_END, 0);

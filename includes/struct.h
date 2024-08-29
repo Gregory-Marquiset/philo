@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 15:41:17 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/08/29 22:20:01 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/08/30 01:35:56 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef struct s_philo
 typedef struct s_sympos
 {
 	t_epís	*epís;
-	t_philo	**philos;
+	t_philo	*philos;
 }				t_sympos;
 
 #endif

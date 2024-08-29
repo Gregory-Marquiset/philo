@@ -6,23 +6,23 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 22:41:45 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/08/29 23:21:30 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/08/30 01:38:08 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../includes/philo.h"
-/*
-static void	ft_chopstick_init(t_philo *philo, t_philo *l_philo, int pos)
+
+static void	ft_init_obeliskos(t_philo *philo, t_philo *l_philo, int pos)
 {
 	if (pos == 0)
-		pthread_mutex_init(&philo->dexiós_obeliskos, NULL);
+		pthread_mutex_init(&philo->dexi_obeli, NULL);
 	else if (pos == 1)
 	{
 		pthread_mutex_init(&philo->dexi_obeli, NULL);
-		philo->aristerós_obeliskos = &l_philo->dexiós_obeliskos;
+		philo->aris_obeli = &l_philo->dexi_obeli;
 	}
 	else if (pos == 2)
-		philo->aristerós_obeliskos = &l_philo->dexiós_obeliskos;
+		philo->aris_obeli = &l_philo->dexi_obeli;
 }
 
 static void	ft_init_philos(t_sympos *sympos)
@@ -30,26 +30,25 @@ static void	ft_init_philos(t_sympos *sympos)
 	int	i;
 
 	i = 0;
-	while (i < symposium->epís->n_philos)
+	sympos->philos = malloc(sympos->epís->n_philos * sizeof(t_philo));
+	if (!sympos->philos)
+		ft_quit_philo(sympos, 2, LERR_MALLOC, CERR_MALLOC);
+	while (i < sympos->epís->n_philos)
 	{
-		symposium->philos[i] = malloc(sizeof(t_philo));
-		if (!symposium->philos[i])
-			ft_leave_table(symposium, 2, "Error: echec malloc symposium->philos[n]\n", 52);
-		symposium->philos[i]->id = i + 1;
-		symposium->philos[i]->thread = 0;
-		symposium->philos[i]->last_meal = 0;
-		symposium->philos[i]->count_meal = 0;
-		symposium->philos[i]->state = 0;
+		sympos->philos[i].id = i + 1;
+		sympos->philos[i].thread = 0;
+		sympos->philos[i].last_meal = 0;
+		sympos->philos[i].count_meal = 0;
+		sympos->philos[i].state = 0;
 		if (i == 0)
-			ft_chopstick_init(symposium->philos[i], NULL , 0);
+			ft_init_obeliskos(&sympos->philos[i], NULL , 0);
 		else
-			ft_chopstick_init(symposium->philos[i], symposium->philos[i - 1], 1);
+			ft_init_obeliskos(&sympos->philos[i], &sympos->philos[i - 1], 1);
 		i++;
 	}
-	if (symposium->epís->n_philos > 1)
-		ft_chopstick_init(symposium->philos[0], symposium->philos[i - 1], 2);
+	if (sympos->epís->n_philos > 1)
+		ft_init_obeliskos(&sympos->philos[0], &sympos->philos[i - 1], 2);
 }
-*/
 
 static void	ft_init_epis(t_sympos *sympos, t_epís *tmp)
 {
@@ -77,15 +76,6 @@ t_sympos	*ft_init_sympos(t_epís *tmp)
 	if (!sympos)
 		ft_quit_philo(NULL, 2, LERR_MALLOC, CERR_MALLOC);
 	ft_init_epis(sympos, tmp);
-
-	/*sympos->philos = malloc(epís.n_philos * sizeof(t_philo *) + 1);
-	if (!sympos->philos)
-		ft_exit(2, "Error: echec malloc symposium->philos\n", 52);
-	sympos->philos[epís.n_philos] = NULL;
-	sympos->epís = malloc(sizeof(t_epís));
-	if (!sympos->epís)
-		ft_leave_table(sympos, 2, "Error: echec malloc symposium->utils\n", 52);
-	*sympos->epís = epís;
-	ft_init_philos(sympos);*/
+	ft_init_philos(sympos);
 	return (sympos);
 }
