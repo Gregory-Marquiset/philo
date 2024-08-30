@@ -6,23 +6,23 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 22:41:45 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/08/30 01:38:08 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/08/30 17:51:02 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../includes/philo.h"
 
-static void	ft_init_obeliskos(t_philo *philo, t_philo *l_philo, int pos)
+static void	ft_init_obeliskos(t_philo *philo, t_philo *dexi_philo, int pos)
 {
 	if (pos == 0)
-		pthread_mutex_init(&philo->dexi_obeli, NULL);
+		pthread_mutex_init(&philo->aris_obeli, NULL);
 	else if (pos == 1)
 	{
-		pthread_mutex_init(&philo->dexi_obeli, NULL);
-		philo->aris_obeli = &l_philo->dexi_obeli;
+		pthread_mutex_init(&philo->aris_obeli, NULL);
+		philo->dexi_obeli = &dexi_philo->aris_obeli;
 	}
 	else if (pos == 2)
-		philo->aris_obeli = &l_philo->dexi_obeli;
+		philo->dexi_obeli = &dexi_philo->aris_obeli;
 }
 
 static void	ft_init_philos(t_sympos *sympos)
@@ -40,6 +40,7 @@ static void	ft_init_philos(t_sympos *sympos)
 		sympos->philos[i].last_meal = 0;
 		sympos->philos[i].count_meal = 0;
 		sympos->philos[i].state = 0;
+		sympos->philos[i].epís = sympos->epís;
 		if (i == 0)
 			ft_init_obeliskos(&sympos->philos[i], NULL , 0);
 		else

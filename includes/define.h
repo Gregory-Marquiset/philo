@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 20:07:20 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/08/29 23:49:31 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/08/30 17:58:15 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ All value most be an int between 1 and int max\n\n" LU_END
 
 	//		test log		//
 # define LTEST_TEST_3D LU_YEL "Test:%3d\n" LU_END
-# define LTEST_SUCC_IN LU_GRE "Success: Symposium opened!\n" LU_END
-# define LTEST_SUCC_OUT LU_GRE "Success: Symposium closed!\n" LU_END
+# define LTEST_SUCC_IN LU_GRE "\nSuccess: Symposium opened!\n\n" LU_END
+# define LTEST_SUCC_OUT LU_GRE "\nSuccess: Symposium closed!\n\n" LU_END
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 15:41:17 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/08/30 01:35:56 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/08/30 17:50:00 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ typedef struct s_philo
 {
 	int				id;				//	Un id unique par philosophe, utilisé pour les distinguer l'rs de l'affichage ou la gestion des ressources
 	pthread_t		thread;			//	Le thread associé à chaque philosophe, permettant de gérer leur exécution simultanée
-	pthread_mutex_t	*aris_obeli;	//	Pointeurs vers les mutexes représentant les baguettes à gauche et à droite du philosophe
-	pthread_mutex_t	dexi_obeli;		//	Ils sont utilisés pour synchroniser l'accès aux baguettes
+	pthread_mutex_t	aris_obeli;		//	Pointeurs vers les mutexes représentant les baguettes à gauche et à droite du philosophe
+	pthread_mutex_t	*dexi_obeli;	//	Ils sont utilisés pour synchroniser l'accès aux baguettes
 	time_t			last_meal;		//	Le moment où le philosophe a mangé pour la dernière fois, utilisé pour vérifier s'il a faim ou implémenter des règles supplémentaires (comme la gestion de la famine)
 	int				count_meal;		//	Nombre de repas pris, utilisé pour limiter le nombre de fois qu'un philosophe mange ou pour collecter des statistiques
 	t_state			state;			//	Indique l'état actuel du philosophe (penser, manger, dormir), utile pour le débogage et affichages précis
