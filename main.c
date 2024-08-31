@@ -6,23 +6,11 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:36:48 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/08/30 17:56:46 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/08/31 19:07:38 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "includes/philo.h"
-
-/*	> programme logs:
-
-	timestamp_in_ms X has taken a fork
-	timestamp_in_ms X is eating
-	timestamp_in_ms X is sleeping
-	timestamp_in_ms X is thinking
-	timestamp_in_ms X died
-
-	Replace timestamp_in_ms with the current timestamp in milliseconds
-	and X with the philosopher number.
-*/
+# include "includes/proto.h"
 
 /*	> External fonction:
 	memset, printf, malloc, free, write,
@@ -48,25 +36,12 @@
 int	main(int argc, char **argv)
 {
 	t_sympos	*sympos;
-	int			i = 0;
 
 	sympos = ft_args_verif_and_make_sympos(argc, argv);
-	printf(LU_GRE LTEST_SUCC_IN LU_END);
-	while (i < sympos->epís->n_philos)
-	{
-		if (pthread_create(&sympos->philos[i].thread, NULL, &ft_routine, &sympos->philos[i]))
-			ft_quit_philo(sympos, 2, LERR_PT_CREAT, CERR_PT_CREAT);
-		i++;
-	}
-	i = 0;
-	while (i < sympos->epís->n_philos)
-	{
-		if (pthread_join(sympos->philos[i].thread, NULL))
-			ft_quit_philo(sympos, 2, LERR_PT_JOIN, CERR_PT_JOIN);
-		i++;
-	}
-	ft_print_sympos(sympos);
-	ft_quit_philo(sympos, 1, LU_GRE LTEST_SUCC_OUT LU_END, 0);
+	printf(LTEST_SUCC_IN);
+	//ft_print_sympos(sympos);
+	ft_threading(sympos);
+	ft_quit_philo(sympos, 1, LTEST_SUCC_OUT, 0);
 }
 
 /*	simple thread + mutex

@@ -1,42 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   proto.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:16:57 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/08/30 01:45:55 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/08/31 18:37:48 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#ifndef PROTO_H
+# define PROTO_H
 
 # include "struct.h"
 # include "define.h"
 
+		//	act.c			//
+void		ft_eating(t_philo *tmp);
+void		ft_sleeping(t_philo *tmp);
+
 		//	args_verif.c	//
 t_sympos	*ft_args_verif_and_make_sympos(int argc, char **argv);
 
-		//		init.c		//
+		//	init.c			//
 t_sympos	*ft_init_sympos(t_epís *tmp);
 
-		//		mutex_ft.c	//
-void	ft_muprintf(pthread_mutex_t *mutex, int id, char *message);
-
-		//		out.c		//
-void	ft_quit_philo(t_sympos *sympos, int fd_out, char *message,
+		//	out.c			//
+void		ft_quit_philo(t_sympos *sympos, int fd_out, char *message,
 	int error_code);
 
-		//		routine.c	//
-void	*ft_routine(void *dexi_obeli);
+		//	threading.c		//
+void		ft_threading(t_sympos *sympos);
 
-		//		time.c		//
-size_t	ft_actualtime(void);
-void	ft_sleeping(size_t inter);
+		//	utils.c			//
+size_t		ft_actualtime(void);
+void		ft_speaking(pthread_mutex_t *mutex, int time, int id, char *message);
 
 		//	test_file.c		//
-void	ft_print_sympos(t_sympos *sympos);
+void		ft_print_sympos(t_sympos *sympos);
 
 #endif

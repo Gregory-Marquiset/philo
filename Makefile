@@ -6,25 +6,25 @@
 #    By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/26 18:05:12 by gmarquis          #+#    #+#              #
-#    Updated: 2024/08/29 22:23:29 by gmarquis         ###   ########.fr        #
+#    Updated: 2024/08/31 18:43:12 by gmarquis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS = main.c $\
 test_file.c $\
 
-SRCS_U = srcs/args_verif.c $\
+SRCS_U = srcs/act.c $\
+srcs/args_verif.c $\
 srcs/init.c $\
-srcs/mutex_ft.c $\
 srcs/out.c $\
-srcs/routine.c $\
-srcs/time.c
+srcs/threading.c $\
+srcs/utils.c
 
 NAME = philo
 
 MK = mkdir
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror -g3 -MMD -MP
 PHFLAGS = -pthread
 RM = rm -rf
 

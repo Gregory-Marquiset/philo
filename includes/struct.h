@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 15:41:17 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/08/30 17:50:00 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/08/31 15:17:46 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@
 
 typedef enum s_state
 {
-	WAITING,
 	THINK,
 	EAT,
 	SLEEP,
@@ -50,16 +49,18 @@ typedef struct s_epís
 	size_t			time_to_eat;	//	(in milliseconds) time needed by a philosopher for eating a meal
 	size_t			time_to_sleep;	//	(in milliseconds) time spend sleeping
 	int				n_meal;			//	n meal for each philo, when reached program stop, if ndef infinit loop until 1 philo die
-
+	int				start_time;
+	pthread_t		thread_ep;
 	pthread_mutex_t	mprintf;		//	pour mute printf
 	int				*id_dead;		//	l'id du philo mort
 	int				*meal_stat;		//	tableau de buleen de n_philos qui sera placer a 1 si le philo a attein n_meal, si il sont tous a 1 le programme s'arrete
+	int				end_sympos;		//	0 si il faut terminer le symposium
 }				t_epís;
 
 typedef struct s_philo
 {
 	int				id;				//	Un id unique par philosophe, utilisé pour les distinguer l'rs de l'affichage ou la gestion des ressources
-	pthread_t		thread;			//	Le thread associé à chaque philosophe, permettant de gérer leur exécution simultanée
+	pthread_t		thread_ph;			//	Le thread associé à chaque philosophe, permettant de gérer leur exécution simultanée
 	pthread_mutex_t	aris_obeli;		//	Pointeurs vers les mutexes représentant les baguettes à gauche et à droite du philosophe
 	pthread_mutex_t	*dexi_obeli;	//	Ils sont utilisés pour synchroniser l'accès aux baguettes
 	time_t			last_meal;		//	Le moment où le philosophe a mangé pour la dernière fois, utilisé pour vérifier s'il a faim ou implémenter des règles supplémentaires (comme la gestion de la famine)

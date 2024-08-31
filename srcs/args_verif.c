@@ -6,15 +6,15 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 18:00:45 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/08/30 01:46:53 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/08/31 18:38:24 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/philo.h"
+# include "../includes/proto.h"
 
 static int	ft_isdigit(int c)
 {
-	if (c >= 48 && c <= 57)
+	if (c >= '0' && c <= '9')
 		return (1);
 	return (0);
 }
@@ -23,6 +23,8 @@ static int	ft_atoi_safe(char *str)
 {
 	long (result) = 0;
 	int (i) = 0;
+	while (str[i] == ' ')
+		i++;
 	if (str[i] == '-' || str[i] == '+')
 	{
 		if (str[i] == '-')

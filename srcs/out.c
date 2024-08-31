@@ -6,11 +6,11 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 18:08:00 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/08/30 17:58:40 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/08/31 18:38:32 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/philo.h"
+# include "../includes/proto.h"
 
 static size_t	ft_strlen(char *str)
 {
