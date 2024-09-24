@@ -6,7 +6,7 @@
 #    By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/26 18:05:12 by gmarquis          #+#    #+#              #
-#    Updated: 2024/08/31 18:43:12 by gmarquis         ###   ########.fr        #
+#    Updated: 2024/09/24 19:22:06 by gmarquis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ test_file.c $\
 
 SRCS_U = srcs/act.c $\
 srcs/args_verif.c $\
+srcs/epis_utils.c $\
 srcs/init.c $\
 srcs/out.c $\
 srcs/threading.c $\

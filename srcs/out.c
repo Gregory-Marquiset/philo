@@ -6,13 +6,13 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 18:08:00 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/08/31 18:38:32 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/24 21:25:53 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../includes/proto.h"
 
-static size_t	ft_strlen(char *str)
+static size_t	ph_strlen(char *str)
 {
 	size_t	i;
 
@@ -22,14 +22,14 @@ static size_t	ft_strlen(char *str)
 	return (i);
 }
 
-static void	ft_exit(int fd_out, char *message, int error_code)
+static void	ph_exit(int fd_out, char *message, int error_code)
 {
 	if (message)
-		write(fd_out, message, ft_strlen(message));
+		write(fd_out, message, ph_strlen(message));
 	exit(error_code);
 }
 
-void	ft_quit_philo(t_sympos *sympos, int fd_out, char *message,
+void	ph_quit_philo(t_sympos *sympos, int fd_out, char *message,
 	int error_code)
 {
 	int	i;
@@ -42,19 +42,20 @@ void	ft_quit_philo(t_sympos *sympos, int fd_out, char *message,
 		{
 			tmp_n_philos = sympos->epís->n_philos;
 			pthread_mutex_destroy(&sympos->epís->mprintf);
-			free(sympos->epís->meal_stat);
+			free(sympos->epís->philos_states);
+			free(sympos->epís->philos_meals);
 			free(sympos->epís);
 		}
 		if (sympos->philos)
 		{
 			while (i < tmp_n_philos)
 			{
-				pthread_mutex_destroy(&sympos->philos[i].aris_obeli);
+				pthread_mutex_destroy(&sympos->philos[i].lf_fork);
 				i++;
 			}
 			free(sympos->philos);
 		}
 		free(sympos);
 		}
-	ft_exit(fd_out, message, error_code);
+	ph_exit(fd_out, message, error_code);
 }

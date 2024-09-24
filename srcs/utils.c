@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 17:56:48 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/08/31 18:38:38 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/24 18:03:07 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*	ad a epis le start_time	*/
 
-size_t	ft_actualtime(void)
+size_t	ph_actualtime(void)
 {
 	struct timeval	t_val;
 
@@ -24,16 +24,6 @@ size_t	ft_actualtime(void)
 		return (0);
 	}
 	return (t_val.tv_sec * 1000 + t_val.tv_usec / 1000);
-}
-
-void	ft_speaking(pthread_mutex_t *mutex, int start_time, int id, char *message)
-{
-	pthread_mutex_lock(mutex);
-	if (id == 0)
-		printf("%-10d %s", (int)ft_actualtime() - start_time, message);
-	else
-		printf("%-10d %-4d %s", (int)ft_actualtime() - start_time, id, message);
-	pthread_mutex_unlock(mutex);
 }
 
 /*	> programme logs:
