@@ -6,13 +6,11 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 17:56:48 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/24 18:03:07 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/25 18:53:12 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/proto.h"
-
-/*	ad a epis le start_time	*/
+#include "../includes/proto.h"
 
 size_t	ph_actualtime(void)
 {
@@ -24,6 +22,16 @@ size_t	ph_actualtime(void)
 		return (0);
 	}
 	return (t_val.tv_sec * 1000 + t_val.tv_usec / 1000);
+}
+
+void	*ph_init_malloc(t_sympos *sympos, int nbr, int var_size)
+{
+	void	*ptr;
+
+	ptr = malloc(nbr * var_size);
+	if (!ptr)
+		ph_quit_philo(sympos, 2, LERR_MALLOC, CERR_MALLOC);
+	return (ptr);
 }
 
 /*	> programme logs:

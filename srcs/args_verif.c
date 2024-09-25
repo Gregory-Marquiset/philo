@@ -6,11 +6,11 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 18:00:45 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/25 14:36:02 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/25 18:49:10 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/proto.h"
+#include "../includes/proto.h"
 
 static int	ph_isdigit(int c)
 {
@@ -59,13 +59,13 @@ static int	ph_strncmp(const char *s1, const char *s2, size_t n)
 
 static void	ph_program_run_helper(int flag)
 {
-	if(flag == 1)
+	if (flag == 1)
 		ph_quit_philo(NULL, 2, LERR_ARGS_H2, CERR_ARGS_H1);
-	else if(flag == 2)
+	else if (flag == 2)
 		ph_quit_philo(NULL, 2, LERR_ARGS_H3, CERR_ARGS_H1);
 }
 
-t_sympos	*ph_args_verif_and_make_sympos(int argc, char ** argv)
+t_sympos	*ph_args_verif_and_make_sympos(int argc, char **argv)
 {
 	t_e_agalma	tmp;
 
@@ -79,12 +79,12 @@ t_sympos	*ph_args_verif_and_make_sympos(int argc, char ** argv)
 	if (argc < 5 || argc > 6)
 		ph_quit_philo(NULL, 2, LERR_ARGS_H1, CERR_ARGS_H1);
 	tmp.n_philos = ph_atoi_safe(argv[1]);
-	tmp.time_to_die = (size_t)ph_atoi_safe(argv[2]);
-	tmp.time_to_eat = (size_t)ph_atoi_safe(argv[3]);
-	tmp.time_to_sleep = (size_t)ph_atoi_safe(argv[4]);
+	tmp.tt_die = (size_t)ph_atoi_safe(argv[2]);
+	tmp.tt_eat = (size_t)ph_atoi_safe(argv[3]);
+	tmp.tt_sleep = (size_t)ph_atoi_safe(argv[4]);
 	if (argv[5])
 		tmp.n_meal = ph_atoi_safe(argv[5]);
 	else
 		tmp.n_meal = -1;
-	return(ph_init_sympos(&tmp));
+	return (ph_init_sympos(&tmp));
 }

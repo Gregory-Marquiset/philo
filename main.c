@@ -6,11 +6,11 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:36:48 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/25 11:05:05 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/25 19:18:07 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "includes/proto.h"
+#include "includes/proto.h"
 
 /*	> External fonction:
 	memset, printf, malloc, free, write,
@@ -82,7 +82,8 @@ int	main(int argc, char **argv)
 	ft_philo_init(&philo);
 
 	pthread_mutex_init(&philo.right_chopstick, NULL);
-	pthread_create(&philo.thread_r, NULL, &ft_thlock_right, &philo.right_chopstick);
+	pthread_create(&philo.thread_r, NULL, &ft_thlock_right,
+		&philo.right_chopstick);
 
 	printf("thread created\n");
 
@@ -160,9 +161,11 @@ int	main(int argc, char **argv)
 		{
 			ft_philo_init(&college[i]);
 			printf("philo[%d] created\n", i);
-			if (pthread_create(&college[i].thread_l, NULL, &ft_thlock_left, &college[i].left_chopstick))
+			if (pthread_create(&college[i].thread_l, NULL, &ft_thlock_left,
+					&college[i].left_chopstick))
 				return (1);
-			if (pthread_create(&college[i].thread_r, NULL, &ft_thlock_right, &college[i].right_chopstick))
+			if (pthread_create(&college[i].thread_r, NULL, &ft_thlock_right,
+					&college[i].right_chopstick))
 				return (2);
 			i++;
 		}

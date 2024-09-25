@@ -6,32 +6,33 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:01:05 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/25 14:11:48 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/25 18:59:15 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/proto.h"
+#include "../includes/proto.h"
 
 void	ph_open_table(t_epis *epis)
 {
 	int	i;
 
 	i = 0;
-	while (i < epis->n_philos)
+	while (i < epis->agal->n_philos)
 	{
-		if (epis->philos_states[i] == READY)
+		if (epis->kine->phs_states[i] == READY)
 			i++;
 	}
-	epis->sympos_states = OPEN;
+	epis->kine->sy_states = OPEN;
 }
 
 void	ph_seat_on_table(t_philo *philo)
 {
-	while (philo->epis->sympos_states == SETING)
+	while (philo->epis->kine->sy_states == SETING)
 		ph_waiting(10);
 }
 
-void	ph_speaking(pthread_mutex_t *mutex, int start_time, int id, char *message)
+void	ph_speaking(pthread_mutex_t *mutex, int start_time, int id,
+	char *message)
 {
 	pthread_mutex_lock(mutex);
 	if (id == 0)
