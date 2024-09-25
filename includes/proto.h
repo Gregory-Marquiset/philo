@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:16:57 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/25 11:26:05 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/25 14:36:22 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void		ph_seat_on_table(t_philo *philo);
 void		ph_speaking(pthread_mutex_t *mutex, int time, int id, char *message);
 
 		//	init.c			//
-t_sympos	*ph_init_sympos(t_epis *tmp);
+t_sympos	*ph_init_sympos(t_e_agalma *tmp);
 
 		//	out.c			//
 void		ph_quit_philo(t_sympos *sympos, int fd_out, char *message,

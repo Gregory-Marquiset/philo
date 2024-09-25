@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 18:00:45 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/25 10:43:47 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/25 14:36:02 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	ph_program_run_helper(int flag)
 
 t_sympos	*ph_args_verif_and_make_sympos(int argc, char ** argv)
 {
-	t_epis	tmp;
+	t_e_agalma	tmp;
 
 	if (argc == 2)
 	{

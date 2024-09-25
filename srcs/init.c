@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 22:41:45 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/25 10:42:55 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/25 14:41:53 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,45 +59,54 @@ static void	ph_init_states_meals(t_sympos *sympos)
 	int	i;
 
 	i = 0;
-	sympos->epis->philos_states = malloc(sympos->epis->n_philos * sizeof(int));
-	if (!sympos->epis->philos_states)
+	sympos->epis->kinesis->philos_states = malloc(sympos->epis->agalma->n_philos * sizeof(int));
+	if (!sympos->epis->kinesis->philos_states)
 		ph_quit_philo(sympos, 2, LERR_MALLOC, CERR_MALLOC);
-	sympos->epis->philos_meals = malloc(sympos->epis->n_philos * sizeof(int));
-	if (!sympos->epis->philos_meals)
+	sympos->epis->kinesis->philos_meals = malloc(sympos->epis->agalma->n_philos * sizeof(int));
+	if (!sympos->epis->kinesis->philos_meals)
 		ph_quit_philo(sympos, 2, LERR_MALLOC, CERR_MALLOC);
-	while (i < sympos->epis->n_philos)
+	while (i < sympos->epis->agalma->n_philos)
 	{
-		sympos->epis->philos_states[i] = GET_READY;
-		if (sympos->epis->n_meal == -1)
-			sympos->epis->philos_meals[i] = -1;
+		sympos->epis->kinesis->philos_states[i] = GET_READY;
+		if (sympos->epis->agalma->n_meal == -1)
+			sympos->epis->kinesis->philos_meals[i] = -1;
 		else
-			sympos->epis->philos_meals[i] = 0;
+			sympos->epis->kinesis->philos_meals[i] = 0;
 		i++;
 	}
 
 }
 
-static void	ph_init_epis(t_sympos *sympos, t_epis *tmp)
+static void	ph_init_epis(t_sympos *sympos, t_e_agalma *tmp)
 {
 	sympos->epis = malloc(sizeof(t_epis));
 	if (!sympos->epis)
 		ph_quit_philo(sympos, 2, LERR_MALLOC, CERR_MALLOC);
-	sympos->epis->n_philos = tmp->n_philos;
-	sympos->epis->n_meal = tmp->n_meal;
+
+	sympos->epis->agalma = malloc(sizeof(t_e_agalma));
+	if (!sympos->epis->agalma)
+		ph_quit_philo(sympos, 2, LERR_MALLOC, CERR_MALLOC);
+	sympos->epis->agalma->n_philos = tmp->n_philos;
+	sympos->epis->agalma->n_meal = tmp->n_meal;
+	sympos->epis->agalma->start_time = 0;
+	sympos->epis->agalma->n_philos = tmp->n_philos;
+	sympos->epis->agalma->time_to_die = tmp->time_to_die;
+	sympos->epis->agalma->time_to_eat = tmp->time_to_eat;
+	sympos->epis->agalma->time_to_sleep = tmp->time_to_sleep;
+
+	sympos->epis->kinesis = malloc(sizeof(t_e_kinesis));
+	if (!sympos->epis->kinesis)
+		ph_quit_philo(sympos, 2, LERR_MALLOC, CERR_MALLOC);
+	sympos->epis->kinesis->id_dead = 0;
+	sympos->epis->kinesis->sympos_states = SETING;
 	ph_init_states_meals(sympos);
+
 	if (pthread_mutex_init(&sympos->epis->mprintf, NULL))
 		ph_quit_philo(sympos, 2, LERR_MU_INIT, CERR_MU_INIT);
-	sympos->epis->start_time = 0;
 	sympos->epis->thread_ep = 0;
-	sympos->epis->id_dead = 0;
-	sympos->epis->n_philos = tmp->n_philos;
-	sympos->epis->time_to_die = tmp->time_to_die;
-	sympos->epis->time_to_eat = tmp->time_to_eat;
-	sympos->epis->time_to_sleep = tmp->time_to_sleep;
-	sympos->epis->sympos_states = SETING;
 }
 
-t_sympos	*ph_init_sympos(t_epis *tmp)
+t_sympos	*ph_init_sympos(t_e_agalma *tmp)
 {
 	t_sympos	*sympos;
 
