@@ -6,13 +6,13 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:01:05 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/25 13:34:08 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/25 14:11:48 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../includes/proto.h"
 
-void		ph_open_table(t_epis *epis)
+void	ph_open_table(t_epis *epis)
 {
 	int	i;
 

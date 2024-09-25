@@ -6,7 +6,7 @@
 #    By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/26 18:05:12 by gmarquis          #+#    #+#              #
-#    Updated: 2024/09/24 19:22:06 by gmarquis         ###   ########.fr        #
+#    Updated: 2024/09/25 14:13:49 by gmarquis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,10 @@ NAME = philo
 
 MK = mkdir
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3 -MMD -MP
+CFLAGS = -Wall -Wextra -Werror -g3 -MMD -MP -fPIC
 PHFLAGS = -pthread
+VALGRIND = valgrind --tool=helgrind --history-level=full 
+ARGS = 5 800 200 200 5
 RM = rm -rf
 
 OBJS_DIR = objs/
@@ -42,6 +44,10 @@ DEPENDENCIES_U = $(patsubst %.o,%.d,$(OBJS_U_PREF))
 all : $(NAME)
 
 bonus : $(NAME)
+
+v: $(NAME)
+	clear
+	-$(VALGRIND) ./$(word 1, $^) $(ARGS) 2> valgrind
 
 $(OBJS_DIR)%.o : %.c 
 	$(MK) -p $(OBJS_DIR)
