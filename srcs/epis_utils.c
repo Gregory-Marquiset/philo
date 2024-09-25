@@ -6,20 +6,29 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:01:05 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/24 19:22:35 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/25 13:34:08 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../includes/proto.h"
 
-void	ph_seat_on_table(void)
+void		ph_open_table(t_epis *epis)
 {
-	int (i) = 0;
+	int	i;
 
-	while (i != 50)
+	i = 0;
+	while (i < epis->n_philos)
 	{
-		i++;
+		if (epis->philos_states[i] == READY)
+			i++;
 	}
+	epis->sympos_states = OPEN;
+}
+
+void	ph_seat_on_table(t_philo *philo)
+{
+	while (philo->epis->sympos_states == SETING)
+		ph_waiting(10);
 }
 
 void	ph_speaking(pthread_mutex_t *mutex, int start_time, int id, char *message)

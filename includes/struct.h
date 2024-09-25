@@ -6,14 +6,21 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 15:41:17 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/24 21:26:05 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/25 11:15:32 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-typedef enum s_state
+typedef enum s_sympos_state
+{
+	SETING,
+	OPEN,
+	CLOSE,
+}			t_sympos_state;
+
+typedef enum s_philo_state
 {
 	GET_READY,
 	READY,
@@ -21,9 +28,9 @@ typedef enum s_state
 	SLEEP,
 	THINK,
 	DEAD,
-}			t_state;
+}			t_philo_state;
 
-typedef struct s_epís
+typedef struct s_epis
 {
 	int				n_philos;		//	Number of philosophers and fork from 1 to n
 	size_t			time_to_die;	//	(in milliseconds) time max beatween each philosophermeal
@@ -36,8 +43,8 @@ typedef struct s_epís
 	int				*id_dead;		//	l'id du philo mort
 	int				*philos_states;	//	indique l'etat des philos en fonction de la struct enum
 	int				*philos_meals;	//	indique l'etat des repas des philos
-	int				end_sympos;		//	0 si il faut terminer le symposium
-}				t_epís;
+	int				sympos_states;	//	t_sympos_state 0:seting 1:open 2:close
+}				t_epis;
 
 typedef struct s_philo
 {
@@ -49,12 +56,12 @@ typedef struct s_philo
 	int				count_meal;		//	Nombre de repas pris, utilisé pour limiter le nombre de fois qu'un philosophe mange ou pour collecter des statistiques
 	int				*philo_state;	//	Pointeur vair un tableau de l'epis qui contient l'etat du philos
 	int				*philo_meal;	//	Pointeur vair un tableau de l'epis qui contient l'etat des repas
-	t_epís			*epís;
+	t_epis			*epis;
 }				t_philo;
 
 typedef struct s_sympos
 {
-	t_epís	*epís;
+	t_epis	*epis;
 	t_philo	*philos;
 }				t_sympos;
 

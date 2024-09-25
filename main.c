@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:36:48 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/24 17:58:44 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/25 11:05:05 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,8 @@ void	ft_philo_init(t_philosophe *philo)
 	philo->id = 0;
 	philo->last_meal = 0;
 	philo->state = 0;
+	pthread_mutex_init(philo->left_chopstick, NULL);
+	pthread_mutex_init(philo->right_chopstick, NULL);
 }
 
 int	main(int argc, char **argv)
@@ -157,8 +159,6 @@ int	main(int argc, char **argv)
 		while (i < n)
 		{
 			ft_philo_init(&college[i]);
-			pthread_mutex_init(&college[i].left_chopstick, NULL);
-			pthread_mutex_init(&college[i].right_chopstick, NULL);
 			printf("philo[%d] created\n", i);
 			if (pthread_create(&college[i].thread_l, NULL, &ft_thlock_left, &college[i].left_chopstick))
 				return (1);

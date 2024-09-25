@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:16:57 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/24 18:03:34 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/25 11:26:05 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,18 @@
 		//	act.c			//
 void		ph_eating(t_philo *tmp);
 void		ph_sleeping(t_philo *tmp);
+void		ph_waiting(size_t time);
 
 		//	args_verif.c	//
 t_sympos	*ph_args_verif_and_make_sympos(int argc, char **argv);
 
 		//	epis_utils.c	//
-void		ph_seat_on_table();
+void		ph_open_table(t_epis *epis);
+void		ph_seat_on_table(t_philo *philo);
 void		ph_speaking(pthread_mutex_t *mutex, int time, int id, char *message);
 
 		//	init.c			//
-t_sympos	*ph_init_sympos(t_epís *tmp);
+t_sympos	*ph_init_sympos(t_epis *tmp);
 
 		//	out.c			//
 void		ph_quit_philo(t_sympos *sympos, int fd_out, char *message,
