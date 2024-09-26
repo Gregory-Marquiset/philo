@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 20:07:20 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/25 19:14:30 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/26 18:25:36 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ All value most be an int between 1 and int max\n\n" LU_END
 # define LPRO_DIED LU_RED1 "died\n" LU_END
 
 	//		test log		//
-# define LTEST_TEST_3D LU_YEL2 "Test:%3d\n" LU_END
+# define LTEST_TEST_3D LU_YEL2 "Test: %3d\n" LU_END
 # define LTEST_TEST_EW LU_BLU1 "epis watch the symposium\n" LU_END
 # define LTEST_TEST_PL LU_BLU2 "left the symposium\n" LU_END
 # define LTEST_TEST_EL LU_BLU1 "epis left the symposium\n" LU_END

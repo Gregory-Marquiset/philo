@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 20:13:07 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/26 15:01:42 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/26 17:42:38 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,16 @@
 void	ph_eating(t_philo *tmp)
 {
 	t_philo	*philo;
-	size_t	init_time;
 
 	philo = tmp;
-	init_time = ph_actualtime();
-	*philo->kine->phs_state = EAT;
+	philo->kine->last_meal = ph_actualtime();
 	ph_speaking(&philo->epis->mtx->mtx_printf, philo->epis->agal->st_time,
 		philo->id, LPRO_EAT);
 	while (1)
 	{
-		if ((ph_actualtime() - init_time) >= philo->epis->agal->tt_eat)
+		if ((ph_actualtime() - philo->kine->last_meal) >= philo->epis->agal->tt_eat)
 			break ;
 	}
-	philo->kine->last_meal = ph_actualtime();
 	philo->kine->count_meal++;
 	if (philo->epis->agal->n_meal > 0)
 	{
@@ -43,7 +40,6 @@ void	ph_sleeping(t_philo *tmp)
 
 	philo = tmp;
 	init_time = ph_actualtime();
-	*philo->kine->phs_state = SLEEP;
 	ph_speaking(&philo->epis->mtx->mtx_printf, philo->epis->agal->st_time,
 		philo->id, LPRO_SLEEP);
 	while (1)
@@ -51,7 +47,6 @@ void	ph_sleeping(t_philo *tmp)
 		if ((ph_actualtime() - init_time) >= philo->epis->agal->tt_sleep)
 			break ;
 	}
-	*philo->kine->phs_state = THINK;
 }
 
 void	ph_waiting(size_t time)

@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 07:46:37 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/26 13:50:19 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/26 17:37:32 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 static void	ph_init_epis_kinesis(t_sympos *sympos)
 {
-	int	i;
-
-	i = 0;
 	sympos->epis->kine = ph_init_malloc(sympos, 1, sizeof(t_e_kinesis));
 	sympos->epis->kine->id_dead = ph_init_malloc(sympos, 1, sizeof(int));
 	ph_modif_var(&sympos->epis->mtx->mtx_id_dead, sympos->epis->kine->id_dead, 0);

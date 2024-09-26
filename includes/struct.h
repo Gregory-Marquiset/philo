@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 15:41:17 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/26 14:22:14 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/26 17:44:23 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,6 @@ typedef enum s_sympos_state
 	OPEN,
 	CLOSE,
 }			t_sympos_state;
-
-typedef enum s_philo_state
-{
-	GET_READY,
-	READY,
-	EAT,
-	SLEEP,
-	THINK,
-	DEAD,
-}			t_philo_state;
 
 		//		episkopos		//
 
