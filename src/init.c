@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 22:41:45 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/26 08:30:49 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/26 13:51:28 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ void	ph_init_fork(t_sympos *sympos, t_philo *philo, t_philo *rg_philo,
 	else if (pos == 1)
 	{
 		ph_init_mtx(sympos, philo->lf_fork);
-		philo->rg_fork = &rg_philo->lf_fork;
+		philo->rg_fork = &(rg_philo->lf_fork);
 	}
 	else if (pos == 2)
-		philo->rg_fork = &rg_philo->lf_fork;
+		philo->rg_fork = &(rg_philo->lf_fork);
 }
 
 t_sympos	*ph_init_sympos(t_e_agalma *tmp)

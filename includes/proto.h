@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:16:57 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/26 08:27:09 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:00:26 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,14 @@ t_sympos	*ph_init_sympos(t_e_agalma *tmp);
 void		ph_quit_philo(t_sympos *sympos, int fd_out, char *message,
 				int error_code);
 
+		//	philos_utils.c	//
+void	ph_seat_on_table(t_philo *philo);
+
 		//	threading.c		//
 void		ph_threading(t_sympos *sympos);
 
 		//	utils.c			//
+void		ph_modif_var(pthread_mutex_t *mutex, int *dest, int src);
 size_t		ph_actualtime(void);
 
 		//	test_file.c		//

@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:01:05 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/25 18:59:15 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/26 14:59:43 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,15 @@
 
 void	ph_open_table(t_epis *epis)
 {
-	int	i;
-
-	i = 0;
-	while (i < epis->agal->n_philos)
+	pthread_mutex_lock(&epis->mtx->mtx_phs_states);
+	while (*(epis->kine->phs_states) != epis->agal->n_philos)
 	{
-		if (epis->kine->phs_states[i] == READY)
-			i++;
+		pthread_mutex_unlock(&epis->mtx->mtx_phs_states);
+		ph_waiting(1);
+		pthread_mutex_lock(&epis->mtx->mtx_phs_states);
 	}
-	epis->kine->sy_states = OPEN;
-}
-
-void	ph_seat_on_table(t_philo *philo)
-{
-	while (philo->epis->kine->sy_states == SETING)
-		ph_waiting(10);
+	pthread_mutex_unlock(&epis->mtx->mtx_phs_states);
+	ph_modif_var(&epis->mtx->mtx_sy_states, epis->kine->sy_states, OPEN);
 }
 
 void	ph_speaking(pthread_mutex_t *mutex, int start_time, int id,

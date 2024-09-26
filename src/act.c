@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 20:13:07 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/26 07:31:34 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:01:42 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	ph_eating(t_philo *tmp)
 
 	philo = tmp;
 	init_time = ph_actualtime();
-	*philo->kine->ph_state = EAT;
-	ph_speaking(&philo->epis->mtx->printf, philo->epis->agal->st_time,
+	*philo->kine->phs_state = EAT;
+	ph_speaking(&philo->epis->mtx->mtx_printf, philo->epis->agal->st_time,
 		philo->id, LPRO_EAT);
 	while (1)
 	{
@@ -32,7 +32,7 @@ void	ph_eating(t_philo *tmp)
 	if (philo->epis->agal->n_meal > 0)
 	{
 		if (philo->kine->count_meal >= philo->epis->agal->n_meal)
-			*(philo->kine->ph_meal) = -1;
+			ph_modif_var(philo->kine->mtx_meal, philo->kine->phs_meal, *(philo->kine->phs_meal) + 1);
 	}
 }
 
@@ -43,15 +43,15 @@ void	ph_sleeping(t_philo *tmp)
 
 	philo = tmp;
 	init_time = ph_actualtime();
-	*philo->kine->ph_state = SLEEP;
-	ph_speaking(&philo->epis->mtx->printf, philo->epis->agal->st_time,
+	*philo->kine->phs_state = SLEEP;
+	ph_speaking(&philo->epis->mtx->mtx_printf, philo->epis->agal->st_time,
 		philo->id, LPRO_SLEEP);
 	while (1)
 	{
 		if ((ph_actualtime() - init_time) >= philo->epis->agal->tt_sleep)
 			break ;
 	}
-	*philo->kine->ph_state = THINK;
+	*philo->kine->phs_state = THINK;
 }
 
 void	ph_waiting(size_t time)

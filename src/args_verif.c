@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 18:00:45 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/25 18:49:10 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/26 10:28:55 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,11 @@ static int	ph_isdigit(int c)
 
 static int	ph_atoi_safe(char *str)
 {
-	long (result) = 0;
-	int (i) = 0;
+	long	result;
+	int		i;
+
+	result = 0;
+	i = 0;
 	while (str[i] == ' ')
 		i++;
 	if (str[i] == '-' || str[i] == '+')

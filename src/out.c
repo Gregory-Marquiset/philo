@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 18:08:00 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/26 08:04:06 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/26 13:54:20 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ static void	*ph_free_epis(t_epis *epis, int *tmp_n_philos)
 		free(epis->kine->phs_meals);
 		free(epis->kine);
 	}
-	pthread_mutex_destroy(&epis->mtx->printf);
-	pthread_mutex_destroy(&epis->mtx->phs_meals);
-	pthread_mutex_destroy(&epis->mtx->phs_states);
-	pthread_mutex_destroy(&epis->mtx->sy_states);
+	pthread_mutex_destroy(&epis->mtx->mtx_printf);
+	pthread_mutex_destroy(&epis->mtx->mtx_phs_meals);
+	pthread_mutex_destroy(&epis->mtx->mtx_phs_states);
+	pthread_mutex_destroy(&epis->mtx->mtx_sy_states);
 	free(epis->mtx);
 	return (NULL);
 }

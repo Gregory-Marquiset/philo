@@ -6,11 +6,18 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 17:56:48 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/26 07:21:24 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/26 09:53:35 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/proto.h"
+
+void	ph_modif_var(pthread_mutex_t *mutex, int *dest, int src)
+{
+	pthread_mutex_lock(mutex);
+	*dest = src;
+	pthread_mutex_unlock(mutex);
+}
 
 size_t	ph_actualtime(void)
 {
