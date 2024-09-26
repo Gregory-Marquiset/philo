@@ -1,0 +1,331 @@
+==1553171== Helgrind, a thread error detector
+==1553171== Copyright (C) 2007-2017, and GNU GPL'd, by OpenWorks LLP et al.
+==1553171== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==1553171== Command: ./philo 5 800 200 200 5
+==1553171== 
+==1553171== ---Thread-Announcement------------------------------------------
+==1553171== 
+==1553171== Thread #3 was created
+==1553171==    at 0x49A09F3: clone (clone.S:76)
+==1553171==    by 0x49A18EE: __clone_internal (clone-internal.c:83)
+==1553171==    by 0x490F6D8: create_thread (pthread_create.c:295)
+==1553171==    by 0x49101FF: pthread_create@@GLIBC_2.34 (pthread_create.c:828)
+==1553171==    by 0x4853767: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==1553171==    by 0x4023C0: ph_threading (threading.c:68)
+==1553171==    by 0x40121E: main (main.c:43)
+==1553171== 
+==1553171== ---Thread-Announcement------------------------------------------
+==1553171== 
+==1553171== Thread #2 was created
+==1553171==    at 0x49A09F3: clone (clone.S:76)
+==1553171==    by 0x49A18EE: __clone_internal (clone-internal.c:83)
+==1553171==    by 0x490F6D8: create_thread (pthread_create.c:295)
+==1553171==    by 0x49101FF: pthread_create@@GLIBC_2.34 (pthread_create.c:828)
+==1553171==    by 0x4853767: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==1553171==    by 0x402344: ph_threading (threading.c:62)
+==1553171==    by 0x40121E: main (main.c:43)
+==1553171== 
+==1553171== ---Thread-Announcement------------------------------------------
+==1553171== 
+==1553171== Thread #1 is the program's root thread
+==1553171== 
+==1553171== ----------------------------------------------------------------
+==1553171== 
+==1553171== Possible data race during read of size 4 at 0x4AA7198 by thread #3
+==1553171== Locks held: none
+==1553171==    at 0x401A38: ph_seat_on_table (epis_utils.c:30)
+==1553171==    by 0x40260C: ph_routine_philos (threading.c:20)
+==1553171==    by 0x485396A: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==1553171==    by 0x490FAC2: start_thread (pthread_create.c:442)
+==1553171==    by 0x49A0A03: clone (clone.S:100)
+==1553171== 
+==1553171== This conflicts with a previous write of size 4 by thread #2
+==1553171== Locks held: none
+==1553171==    at 0x401A11: ph_open_table (epis_utils.c:25)
+==1553171==    by 0x40253D: ph_routine_epis (threading.c:44)
+==1553171==    by 0x485396A: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==1553171==    by 0x490FAC2: start_thread (pthread_create.c:442)
+==1553171==    by 0x49A0A03: clone (clone.S:100)
+==1553171==  Address 0x4aa7198 is 24 bytes inside a block of size 32 alloc'd
+==1553171==    at 0x484A919: malloc (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==1553171==    by 0x402770: ph_init_malloc (utils.c:31)
+==1553171==    by 0x401C1A: ph_init_epis (init.c:93)
+==1553171==    by 0x401B17: ph_init_sympos (init.c:108)
+==1553171==    by 0x4016C7: ph_args_verif_and_make_sympos (args_verif.c:89)
+==1553171==    by 0x4011FA: main (main.c:40)
+==1553171==  Block was alloc'd by thread #1
+==1553171== 
+==1553171== ----------------------------------------------------------------
+==1553171== 
+==1553171== Possible data race during read of size 4 at 0x4AA7134 by thread #3
+==1553171== Locks held: none
+==1553171==    at 0x402624: ph_routine_philos (threading.c:21)
+==1553171==    by 0x485396A: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==1553171==    by 0x490FAC2: start_thread (pthread_create.c:442)
+==1553171==    by 0x49A0A03: clone (clone.S:100)
+==1553171== 
+==1553171== This conflicts with a previous write of size 4 by thread #2
+==1553171== Locks held: none
+==1553171==    at 0x402512: ph_routine_epis (threading.c:42)
+==1553171==    by 0x485396A: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==1553171==    by 0x490FAC2: start_thread (pthread_create.c:442)
+==1553171==    by 0x49A0A03: clone (clone.S:100)
+==1553171==  Address 0x4aa7134 is 36 bytes inside a block of size 40 alloc'd
+==1553171==    at 0x484A919: malloc (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==1553171==    by 0x402770: ph_init_malloc (utils.c:31)
+==1553171==    by 0x401B6F: ph_init_epis (init.c:85)
+==1553171==    by 0x401B17: ph_init_sympos (init.c:108)
+==1553171==    by 0x4016C7: ph_args_verif_and_make_sympos (args_verif.c:89)
+==1553171==    by 0x4011FA: main (main.c:40)
+==1553171==  Block was alloc'd by thread #1
+==1553171== 
+==1553171== ----------------------------------------------------------------
+==1553171== 
+==1553171== Possible data race during read of size 4 at 0x4AA7198 by thread #3
+==1553171== Locks held: none
+==1553171==    at 0x402645: ph_routine_philos (threading.c:23)
+==1553171==    by 0x485396A: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==1553171==    by 0x490FAC2: start_thread (pthread_create.c:442)
+==1553171==    by 0x49A0A03: clone (clone.S:100)
+==1553171== 
+==1553171== This conflicts with a previous write of size 4 by thread #2
+==1553171== Locks held: none
+==1553171==    at 0x401A11: ph_open_table (epis_utils.c:25)
+==1553171==    by 0x40253D: ph_routine_epis (threading.c:44)
+==1553171==    by 0x485396A: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==1553171==    by 0x490FAC2: start_thread (pthread_create.c:442)
+==1553171==    by 0x49A0A03: clone (clone.S:100)
+==1553171==  Address 0x4aa7198 is 24 bytes inside a block of size 32 alloc'd
+==1553171==    at 0x484A919: malloc (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==1553171==    by 0x402770: ph_init_malloc (utils.c:31)
+==1553171==    by 0x401C1A: ph_init_epis (init.c:93)
+==1553171==    by 0x401B17: ph_init_sympos (init.c:108)
+==1553171==    by 0x4016C7: ph_args_verif_and_make_sympos (args_verif.c:89)
+==1553171==    by 0x4011FA: main (main.c:40)
+==1553171==  Block was alloc'd by thread #1
+==1553171== 
+==1553171== ----------------------------------------------------------------
+==1553171== 
+==1553171== Possible data race during write of size 4 at 0x4AA71E0 by thread #3
+==1553171== Locks held: none
+==1553171==    at 0x4013E9: ph_eating (act.c:22)
+==1553171==    by 0x40266D: ph_routine_philos (threading.c:26)
+==1553171==    by 0x485396A: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==1553171==    by 0x490FAC2: start_thread (pthread_create.c:442)
+==1553171==    by 0x49A0A03: clone (clone.S:100)
+==1553171== 
+==1553171== This conflicts with a previous read of size 4 by thread #2
+==1553171== Locks held: none
+==1553171==    at 0x4019F1: ph_open_table (epis_utils.c:22)
+==1553171==    by 0x40253D: ph_routine_epis (threading.c:44)
+==1553171==    by 0x485396A: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==1553171==    by 0x490FAC2: start_thread (pthread_create.c:442)
+==1553171==    by 0x49A0A03: clone (clone.S:100)
+==1553171==  Address 0x4aa71e0 is 0 bytes inside a block of size 20 alloc'd
+==1553171==    at 0x484A919: malloc (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==1553171==    by 0x402770: ph_init_malloc (utils.c:31)
+==1553171==    by 0x401F4C: ph_init_states_meals (init.c:67)
+==1553171==    by 0x401C55: ph_init_epis (init.c:96)
+==1553171==    by 0x401B17: ph_init_sympos (init.c:108)
+==1553171==    by 0x4016C7: ph_args_verif_and_make_sympos (args_verif.c:89)
+==1553171==    by 0x4011FA: main (main.c:40)
+==1553171==  Block was alloc'd by thread #1
+==1553171== 
+==1553171== ----------------------------------------------------------------
+==1553171== 
+==1553171== Possible data race during read of size 4 at 0x4AA7198 by thread #3
+==1553171== Locks held: none
+==1553171==    at 0x40267A: ph_routine_philos (threading.c:27)
+==1553171==    by 0x485396A: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==1553171==    by 0x490FAC2: start_thread (pthread_create.c:442)
+==1553171==    by 0x49A0A03: clone (clone.S:100)
+==1553171== 
+==1553171== This conflicts with a previous write of size 4 by thread #2
+==1553171== Locks held: none
+==1553171==    at 0x401A11: ph_open_table (epis_utils.c:25)
+==1553171==    by 0x40253D: ph_routine_epis (threading.c:44)
+==1553171==    by 0x485396A: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==1553171==    by 0x490FAC2: start_thread (pthread_create.c:442)
+==1553171==    by 0x49A0A03: clone (clone.S:100)
+==1553171==  Address 0x4aa7198 is 24 bytes inside a block of size 32 alloc'd
+==1553171==    at 0x484A919: malloc (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==1553171==    by 0x402770: ph_init_malloc (utils.c:31)
+==1553171==    by 0x401C1A: ph_init_epis (init.c:93)
+==1553171==    by 0x401B17: ph_init_sympos (init.c:108)
+==1553171==    by 0x4016C7: ph_args_verif_and_make_sympos (args_verif.c:89)
+==1553171==    by 0x4011FA: main (main.c:40)
+==1553171==  Block was alloc'd by thread #1
+==1553171== 
+==1553171== ----------------------------------------------------------------
+==1553171== 
+==1553171== Possible data race during write of size 4 at 0x4AA71E0 by thread #3
+==1553171== Locks held: none
+==1553171==    at 0x4014E9: ph_sleeping (act.c:46)
+==1553171==    by 0x40268C: ph_routine_philos (threading.c:28)
+==1553171==    by 0x485396A: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==1553171==    by 0x490FAC2: start_thread (pthread_create.c:442)
+==1553171==    by 0x49A0A03: clone (clone.S:100)
+==1553171== 
+==1553171== This conflicts with a previous read of size 4 by thread #2
+==1553171== Locks held: none
+==1553171==    at 0x4019F1: ph_open_table (epis_utils.c:22)
+==1553171==    by 0x40253D: ph_routine_epis (threading.c:44)
+==1553171==    by 0x485396A: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==1553171==    by 0x490FAC2: start_thread (pthread_create.c:442)
+==1553171==    by 0x49A0A03: clone (clone.S:100)
+==1553171==  Address 0x4aa71e0 is 0 bytes inside a block of size 20 alloc'd
+==1553171==    at 0x484A919: malloc (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==1553171==    by 0x402770: ph_init_malloc (utils.c:31)
+==1553171==    by 0x401F4C: ph_init_states_meals (init.c:67)
+==1553171==    by 0x401C55: ph_init_epis (init.c:96)
+==1553171==    by 0x401B17: ph_init_sympos (init.c:108)
+==1553171==    by 0x4016C7: ph_args_verif_and_make_sympos (args_verif.c:89)
+==1553171==    by 0x4011FA: main (main.c:40)
+==1553171==  Block was alloc'd by thread #1
+==1553171== 
+==1553171== ----------------------------------------------------------------
+==1553171== 
+==1553171== Possible data race during write of size 4 at 0x4AA71E0 by thread #3
+==1553171== Locks held: none
+==1553171==    at 0x40154F: ph_sleeping (act.c:54)
+==1553171==    by 0x40268C: ph_routine_philos (threading.c:28)
+==1553171==    by 0x485396A: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==1553171==    by 0x490FAC2: start_thread (pthread_create.c:442)
+==1553171==    by 0x49A0A03: clone (clone.S:100)
+==1553171== 
+==1553171== This conflicts with a previous read of size 4 by thread #2
+==1553171== Locks held: none
+==1553171==    at 0x4019F1: ph_open_table (epis_utils.c:22)
+==1553171==    by 0x40253D: ph_routine_epis (threading.c:44)
+==1553171==    by 0x485396A: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==1553171==    by 0x490FAC2: start_thread (pthread_create.c:442)
+==1553171==    by 0x49A0A03: clone (clone.S:100)
+==1553171==  Address 0x4aa71e0 is 0 bytes inside a block of size 20 alloc'd
+==1553171==    at 0x484A919: malloc (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==1553171==    by 0x402770: ph_init_malloc (utils.c:31)
+==1553171==    by 0x401F4C: ph_init_states_meals (init.c:67)
+==1553171==    by 0x401C55: ph_init_epis (init.c:96)
+==1553171==    by 0x401B17: ph_init_sympos (init.c:108)
+==1553171==    by 0x4016C7: ph_args_verif_and_make_sympos (args_verif.c:89)
+==1553171==    by 0x4011FA: main (main.c:40)
+==1553171==  Block was alloc'd by thread #1
+==1553171== 
+==1553171== ----------------------------------------------------------------
+==1553171== 
+==1553171== Possible data race during read of size 4 at 0x4AA7198 by thread #3
+==1553171== Locks held: none
+==1553171==    at 0x402699: ph_routine_philos (threading.c:29)
+==1553171==    by 0x485396A: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==1553171==    by 0x490FAC2: start_thread (pthread_create.c:442)
+==1553171==    by 0x49A0A03: clone (clone.S:100)
+==1553171== 
+==1553171== This conflicts with a previous write of size 4 by thread #2
+==1553171== Locks held: none
+==1553171==    at 0x401A11: ph_open_table (epis_utils.c:25)
+==1553171==    by 0x40253D: ph_routine_epis (threading.c:44)
+==1553171==    by 0x485396A: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==1553171==    by 0x490FAC2: start_thread (pthread_create.c:442)
+==1553171==    by 0x49A0A03: clone (clone.S:100)
+==1553171==  Address 0x4aa7198 is 24 bytes inside a block of size 32 alloc'd
+==1553171==    at 0x484A919: malloc (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==1553171==    by 0x402770: ph_init_malloc (utils.c:31)
+==1553171==    by 0x401C1A: ph_init_epis (init.c:93)
+==1553171==    by 0x401B17: ph_init_sympos (init.c:108)
+==1553171==    by 0x4016C7: ph_args_verif_and_make_sympos (args_verif.c:89)
+==1553171==    by 0x4011FA: main (main.c:40)
+==1553171==  Block was alloc'd by thread #1
+==1553171== 
+==1553171== ----------------------------------------------------------------
+==1553171== 
+==1553171== Possible data race during write of size 4 at 0x4AA7240 by thread #3
+==1553171== Locks held: none
+==1553171==    at 0x4014A7: ph_eating (act.c:35)
+==1553171==    by 0x40266D: ph_routine_philos (threading.c:26)
+==1553171==    by 0x485396A: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==1553171==    by 0x490FAC2: start_thread (pthread_create.c:442)
+==1553171==    by 0x49A0A03: clone (clone.S:100)
+==1553171== 
+==1553171== This conflicts with a previous read of size 4 by thread #2
+==1553171== Locks held: none
+==1553171==    at 0x4025A4: ph_routine_epis (threading.c:50)
+==1553171==    by 0x485396A: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==1553171==    by 0x490FAC2: start_thread (pthread_create.c:442)
+==1553171==    by 0x49A0A03: clone (clone.S:100)
+==1553171==  Address 0x4aa7240 is 0 bytes inside a block of size 20 alloc'd
+==1553171==    at 0x484A919: malloc (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==1553171==    by 0x402770: ph_init_malloc (utils.c:31)
+==1553171==    by 0x401F78: ph_init_states_meals (init.c:69)
+==1553171==    by 0x401C55: ph_init_epis (init.c:96)
+==1553171==    by 0x401B17: ph_init_sympos (init.c:108)
+==1553171==    by 0x4016C7: ph_args_verif_and_make_sympos (args_verif.c:89)
+==1553171==    by 0x4011FA: main (main.c:40)
+==1553171==  Block was alloc'd by thread #1
+==1553171== 
+==1553171== ----------------------------------------------------------------
+==1553171== 
+==1553171== Possible data race during read of size 4 at 0x4AA7240 by thread #2
+==1553171== Locks held: none
+==1553171==    at 0x4025A4: ph_routine_epis (threading.c:50)
+==1553171==    by 0x485396A: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==1553171==    by 0x490FAC2: start_thread (pthread_create.c:442)
+==1553171==    by 0x49A0A03: clone (clone.S:100)
+==1553171== 
+==1553171== This conflicts with a previous write of size 4 by thread #3
+==1553171== Locks held: none
+==1553171==    at 0x4014A7: ph_eating (act.c:35)
+==1553171==    by 0x40266D: ph_routine_philos (threading.c:26)
+==1553171==    by 0x485396A: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==1553171==    by 0x490FAC2: start_thread (pthread_create.c:442)
+==1553171==    by 0x49A0A03: clone (clone.S:100)
+==1553171==  Address 0x4aa7240 is 0 bytes inside a block of size 20 alloc'd
+==1553171==    at 0x484A919: malloc (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==1553171==    by 0x402770: ph_init_malloc (utils.c:31)
+==1553171==    by 0x401F78: ph_init_states_meals (init.c:69)
+==1553171==    by 0x401C55: ph_init_epis (init.c:96)
+==1553171==    by 0x401B17: ph_init_sympos (init.c:108)
+==1553171==    by 0x4016C7: ph_args_verif_and_make_sympos (args_verif.c:89)
+==1553171==    by 0x4011FA: main (main.c:40)
+==1553171==  Block was alloc'd by thread #1
+==1553171== 
+==1553171== 
+==1553171== Process terminating with default action of signal 2 (SIGINT)
+==1553171==    at 0x40255C: ph_routine_epis (threading.c:48)
+==1553171==    by 0x485396A: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==1553171==    by 0x490FAC2: start_thread (pthread_create.c:442)
+==1553171==    by 0x49A0A03: clone (clone.S:100)
+==1553171== ---Thread-Announcement------------------------------------------
+==1553171== 
+==1553171== Thread #7 was created
+==1553171==    at 0x49A09F3: clone (clone.S:76)
+==1553171==    by 0x49A18EE: __clone_internal (clone-internal.c:83)
+==1553171==    by 0x490F6D8: create_thread (pthread_create.c:295)
+==1553171==    by 0x49101FF: pthread_create@@GLIBC_2.34 (pthread_create.c:828)
+==1553171==    by 0x4853767: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==1553171==    by 0x4023C0: ph_threading (threading.c:68)
+==1553171==    by 0x40121E: main (main.c:43)
+==1553171== 
+==1553171== ----------------------------------------------------------------
+==1553171== 
+==1553171== Thread #7: Exiting thread still holds 1 lock
+==1553171==    at 0x498F8BF: __libc_write (write.c:26)
+==1553171==    by 0x498F8BF: write (write.c:24)
+==1553171==    by 0x4905EEC: _IO_file_write@@GLIBC_2.2.5 (fileops.c:1180)
+==1553171==    by 0x49079E0: new_do_write (fileops.c:448)
+==1553171==    by 0x49079E0: _IO_new_do_write (fileops.c:425)
+==1553171==    by 0x49079E0: _IO_do_write@@GLIBC_2.2.5 (fileops.c:422)
+==1553171==    by 0x49066D4: _IO_new_file_xsputn (fileops.c:1243)
+==1553171==    by 0x49066D4: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+==1553171==    by 0x48F200B: outstring_func (vfprintf-internal.c:239)
+==1553171==    by 0x48F200B: __vfprintf_internal (vfprintf-internal.c:1517)
+==1553171==    by 0x48DB79E: printf (printf.c:33)
+==1553171==    by 0x401AC8: ph_speaking (epis_utils.c:41)
+==1553171==    by 0x4026CE: ph_routine_philos (threading.c:30)
+==1553171==    by 0x485396A: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==1553171==    by 0x490FAC2: start_thread (pthread_create.c:442)
+==1553171==    by 0x49A0A03: clone (clone.S:100)
+==1553171== 
+==1553171== 
+==1553171== Use --history-level=approx or =none to gain increased speed, at
+==1553171== the cost of reduced accuracy of conflicting-access information
+==1553171== For lists of detected and suppressed errors, rerun with: -s
+==1553171== ERROR SUMMARY: 207 errors from 11 contexts (suppressed: 316 from 24)

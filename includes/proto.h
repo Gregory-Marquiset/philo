@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:16:57 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/25 19:18:59 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/26 08:27:09 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,19 @@ void		ph_seat_on_table(t_philo *philo);
 void		ph_speaking(pthread_mutex_t *mutex, int time, int id,
 				char *message);
 
+		//	init_epis.c	//
+void		ph_init_epis(t_sympos *sympos, t_e_agalma *tmp);
+
+		//	init_philos.c	//
+void		ph_init_philos(t_sympos *sympos);
+
 		//	init.c			//
+void		ph_init_thread(t_sympos *sympos, pthread_t *thread, void *fun,
+				void *arg);
+void		ph_init_mtx(t_sympos *sympos, pthread_mutex_t mtx);
+void		*ph_init_malloc(t_sympos *sympos, int nbr, int var_size);
+void		ph_init_fork(t_sympos *sympos, t_philo *philo, t_philo *rg_philo,
+				int pos);
 t_sympos	*ph_init_sympos(t_e_agalma *tmp);
 
 		//	out.c			//
@@ -48,7 +60,6 @@ void		ph_quit_philo(t_sympos *sympos, int fd_out, char *message,
 void		ph_threading(t_sympos *sympos);
 
 		//	utils.c			//
-void		*ph_init_malloc(t_sympos *sympos, int nbr, int var_size);
 size_t		ph_actualtime(void);
 
 		//	test_file.c		//

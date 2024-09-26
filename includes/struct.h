@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 15:41:17 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/25 18:35:26 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/26 07:20:06 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,20 @@ typedef struct s_e_kinesis
 	int				sy_states;	//	t_sympos_state 0:seting 1:open 2:close
 }				t_e_kinesis;
 
+typedef struct s_e_mtx
+{
+	pthread_mutex_t	printf;			//	mute printf
+	pthread_mutex_t	phs_states;		//	mute phs_states
+	pthread_mutex_t	phs_meals;		//	mute phs_meals
+	pthread_mutex_t	sy_states;		//	mute sy_states
+}				t_e_mtx;
+
 typedef struct s_epis
 {
 	t_e_agalma		*agal;
 	t_e_kinesis		*kine;
+	t_e_mtx			*mtx;
 	pthread_t		thread_ep;
-	pthread_mutex_t	mprintf;		//	pour mute printf
 }				t_epis;
 
 typedef struct s_p_kinesis

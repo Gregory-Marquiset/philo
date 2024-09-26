@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 20:13:07 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/25 18:51:53 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/26 07:31:34 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ph_eating(t_philo *tmp)
 	philo = tmp;
 	init_time = ph_actualtime();
 	*philo->kine->ph_state = EAT;
-	ph_speaking(&philo->epis->mprintf, philo->epis->agal->st_time,
+	ph_speaking(&philo->epis->mtx->printf, philo->epis->agal->st_time,
 		philo->id, LPRO_EAT);
 	while (1)
 	{
@@ -44,7 +44,7 @@ void	ph_sleeping(t_philo *tmp)
 	philo = tmp;
 	init_time = ph_actualtime();
 	*philo->kine->ph_state = SLEEP;
-	ph_speaking(&philo->epis->mprintf, philo->epis->agal->st_time,
+	ph_speaking(&philo->epis->mtx->printf, philo->epis->agal->st_time,
 		philo->id, LPRO_SLEEP);
 	while (1)
 	{

@@ -6,20 +6,22 @@
 #    By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/26 18:05:12 by gmarquis          #+#    #+#              #
-#    Updated: 2024/09/25 14:13:49 by gmarquis         ###   ########.fr        #
+#    Updated: 2024/09/26 07:59:37 by gmarquis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = main.c $\
+SRC = main.c $\
 test_file.c $\
 
-SRCS_U = srcs/act.c $\
-srcs/args_verif.c $\
-srcs/epis_utils.c $\
-srcs/init.c $\
-srcs/out.c $\
-srcs/threading.c $\
-srcs/utils.c
+SRC_U = src/act.c $\
+src/args_verif.c $\
+src/epis_utils.c $\
+src/init_epis.c $\
+src/init_philos.c $\
+src/init.c $\
+src/out.c $\
+src/threading.c $\
+src/utils.c
 
 NAME = philo
 
@@ -28,18 +30,18 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -g3 -MMD -MP -fPIC
 PHFLAGS = -pthread
 VALGRIND = valgrind --tool=helgrind --history-level=full 
-ARGS = 5 800 200 200 5
+ARGS = 3 800 200 200 2
 RM = rm -rf
 
-OBJS_DIR = objs/
-OBJS = $(notdir $(SRCS:>C=.o))
-OBJS_PREF = $(addprefix $(OBJS_DIR), $(OBJS:.c=.o))
-DEPENDENCIES = $(patsubst %.o,%.d,$(OBJS_PREF))
+OBJ_DIR = obj/
+OBJ = $(notdir $(SRC:>C=.o))
+OBJ_PREF = $(addprefix $(OBJ_DIR), $(OBJ:.c=.o))
+DEPENDENCIES = $(patsubst %.o,%.d,$(OBJ_PREF))
 
-OBJS_U_DIR = objs/srcs/
-OBJS_U = $(notdir $(SRCS_U:>C=.o))
-OBJS_U_PREF = $(addprefix $(OBJS_U_DIR), $(OBJS_U:.c=.o))
-DEPENDENCIES_U = $(patsubst %.o,%.d,$(OBJS_U_PREF))
+OBJ_U_DIR = obj/src/
+OBJ_U = $(notdir $(SRC_U:>C=.o))
+OBJ_U_PREF = $(addprefix $(OBJ_U_DIR), $(OBJ_U:.c=.o))
+DEPENDENCIES_U = $(patsubst %.o,%.d,$(OBJ_U_PREF))
 
 all : $(NAME)
 
@@ -49,19 +51,19 @@ v: $(NAME)
 	clear
 	-$(VALGRIND) ./$(word 1, $^) $(ARGS) 2> valgrind
 
-$(OBJS_DIR)%.o : %.c 
-	$(MK) -p $(OBJS_DIR)
+$(OBJ_DIR)%.o : %.c 
+	$(MK) -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(PHFLAGS) -c $< -o $@
 
-$(OBJS_U_DIR)%.o : srcs/%.c 
-	$(MK) -p $(OBJS_U_DIR)
+$(OBJ_U_DIR)%.o : src/%.c 
+	$(MK) -p $(OBJ_U_DIR)
 	$(CC) $(CFLAGS) $(PHFLAGS) -c $< -o $@
 
-$(NAME) : $(OBJS_PREF) $(OBJS_U_PREF)
+$(NAME) : $(OBJ_PREF) $(OBJ_U_PREF)
 	$(CC) $(CFLAGS) $^ -o $@ $(PHFLAGS)
 
 clean :
-	$(RM) objs/
+	$(RM) obj/
 
 fclean : clean
 	$(RM) $(NAME)
