@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 22:41:45 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/26 13:51:28 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/28 17:07:58 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,21 @@ void	ph_init_mtx(t_sympos *sympos, pthread_mutex_t mtx)
 		ph_quit_philo(sympos, 2, LERR_MU_INIT, CERR_MU_INIT);
 }
 
-void	ph_init_fork(t_sympos *sympos, t_philo *philo, t_philo *rg_philo,
+void	ph_init_fork(t_sympos *sympos, t_philo *philo, t_philo *lf_philo,
 	int pos)
 {
 	if (pos == 0)
-		ph_init_mtx(sympos, philo->lf_fork);
+	{
+		ph_init_mtx(sympos, philo->rg_fork);
+		philo->lf_fork = NULL;
+	}
 	else if (pos == 1)
 	{
-		ph_init_mtx(sympos, philo->lf_fork);
-		philo->rg_fork = &(rg_philo->lf_fork);
+		ph_init_mtx(sympos, philo->rg_fork);
+		philo->lf_fork = &(lf_philo->rg_fork);
 	}
 	else if (pos == 2)
-		philo->rg_fork = &(rg_philo->lf_fork);
+		philo->lf_fork = &(lf_philo->rg_fork);
 }
 
 t_sympos	*ph_init_sympos(t_e_agalma *tmp)

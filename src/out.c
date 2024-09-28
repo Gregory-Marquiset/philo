@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 18:08:00 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/26 13:54:20 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/28 17:09:02 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	ph_quit_philo(t_sympos *sympos, int fd_out, char *message,
 		{
 			while (i < tmp_n_philos)
 			{
-				pthread_mutex_destroy(&sympos->philos[i].lf_fork);
+				pthread_mutex_destroy(&sympos->philos[i].rg_fork);
 				free(sympos->philos[i].kine);
 				i++;
 			}

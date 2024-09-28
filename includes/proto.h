@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:16:57 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/26 15:00:26 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/28 16:45:47 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_sympos	*ph_args_verif_and_make_sympos(int argc, char **argv);
 		//	epis_utils.c	//
 void		ph_open_table(t_epis *epis);
 void		ph_seat_on_table(t_philo *philo);
-void		ph_speaking(pthread_mutex_t *mutex, int time, int id,
+void		ph_speaking(pthread_mutex_t *mutex, int tmp, int id,
 				char *message);
 
 		//	init_epis.c	//
@@ -63,10 +63,13 @@ void	ph_seat_on_table(t_philo *philo);
 void		ph_threading(t_sympos *sympos);
 
 		//	utils.c			//
+void		ph_incr_var(pthread_mutex_t *mutex, int *var);
 void		ph_modif_var(pthread_mutex_t *mutex, int *dest, int src);
 size_t		ph_actualtime(void);
 
 		//	test_file.c		//
-void		ph_print_sympos(t_sympos *sympos);
+void		ts_print_philos_fork(t_sympos *sympos);
+void		ts_print_philos_states(t_epis *epis);
+void		ts_print_sympos(t_sympos *sympos);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 15:41:17 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/27 23:26:49 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/28 17:06:54 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ typedef struct s_p_kinesis
 	time_t			last_meal;		//	Le moment où le philosophe a mangé pour la dernière fois, utilisé pour vérifier s'il a faim ou implémenter des règles supplémentaires (comme la gestion de la famine)
 	int				count_meal;		//	Nombre de repas pris, utilisé pour limiter le nombre de fois qu'un philosophe mange ou pour collecter des statistiques
 	int				*phs_meals;		//	Pointeur de int que les philos incremente l'orsqu'il ont manger tout leurs repas
-	pthread_mutex_t	*mtx_meals;
+	pthread_mutex_t	*mtx_phs_meals;
 	int				*phs_states;		//	Pointeur de int que les philos incremente l'orsqu'ils ont join la table
-	pthread_mutex_t	*mtx_states;
+	pthread_mutex_t	*mtx_phs_states;
 	pthread_mutex_t	*mtx_printf;
 	pthread_mutex_t	*mtx_sy_states;
 }				t_p_kinesis;
@@ -75,8 +75,8 @@ typedef struct s_philo
 {
 	int				id;				//	Un id unique par philosophe, utilisé pour les distinguer l'rs de l'affichage ou la gestion des ressources
 	pthread_t		thread_ph;		//	Le thread associé à chaque philosophe, permettant de gérer leur exécution simultanée
-	pthread_mutex_t	lf_fork;		//	Pointeurs vers les mutexes représentant les baguettes à gauche et à droite du philosophe
-	pthread_mutex_t	*rg_fork;		//	Ils sont utilisés pour synchroniser l'accès aux baguettes
+	pthread_mutex_t	*lf_fork;		//	Pointeurs vers les mutexes représentant les baguettes à gauche et à droite du philosophe
+	pthread_mutex_t	rg_fork;		//	Ils sont utilisés pour synchroniser l'accès aux baguettes
 	t_p_kinesis		*kine;			//	variable modifiable
 	t_epis			*epis;			//	acces direct a l'episkopos
 }				t_philo;

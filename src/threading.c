@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 19:56:41 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/27 23:27:23 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/28 17:30:36 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,7 @@ static void	*ph_routine_philos(void *tmp)
 
 static void	*ph_routine_epis(void *tmp)
 {
-	t_epis	*epis;
-
-	epis = (t_epis *)tmp;
-	epis->agal->st_time = ph_actualtime();
+	t_epis *(epis) = (t_epis *)tmp;
 	ph_speaking(&epis->mtx->mtx_printf, epis->agal->st_time, 0, LTEST_TEST_EW);
 	ph_open_table(epis);
 	pthread_mutex_lock(&epis->mtx->mtx_sy_states);
@@ -52,11 +49,13 @@ static void	*ph_routine_epis(void *tmp)
 			if (*(epis->kine->phs_meals) >= epis->agal->n_philos)
 			{
 				pthread_mutex_unlock(&epis->mtx->mtx_phs_meals);
-				ph_modif_var(&epis->mtx->mtx_sy_states, epis->kine->sy_states, CLOSE);
+				ph_modif_var(&epis->mtx->mtx_sy_states, epis->kine->sy_states,
+					CLOSE);
 				break ;
 			}
 			else
 				pthread_mutex_unlock(&epis->mtx->mtx_phs_meals);
+			ph_waiting(2);
 		}
 		pthread_mutex_lock(&epis->mtx->mtx_sy_states);
 	}
@@ -70,7 +69,6 @@ void	ph_threading(t_sympos *sympos)
 
 	ph_init_thread(sympos, &sympos->epis->thread_ep, &ph_routine_epis,
 		sympos->epis);
-	ph_waiting(1);
 	i = 0;
 	while (i < sympos->epis->agal->n_philos)
 	{

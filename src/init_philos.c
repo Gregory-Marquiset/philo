@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 07:20:41 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/27 23:26:37 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/28 14:10:59 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static void	ph_init_philo_kine(t_sympos *sympos, t_philo *philo)
 	philo->kine->count_meal = 0;
 	philo->kine->phs_states = sympos->epis->kine->phs_states;
 	philo->kine->phs_meals = sympos->epis->kine->phs_meals;
-	philo->kine->mtx_meals = &(sympos->epis->mtx->mtx_phs_meals);
+	philo->kine->mtx_phs_meals = &(sympos->epis->mtx->mtx_phs_meals);
 	philo->kine->phs_states = sympos->epis->kine->phs_states;
-	philo->kine->mtx_states = &(sympos->epis->mtx->mtx_phs_states);
+	philo->kine->mtx_phs_states = &(sympos->epis->mtx->mtx_phs_states);
 	philo->kine->mtx_printf = &(sympos->epis->mtx->mtx_printf);
 	philo->kine->mtx_sy_states = &(sympos->epis->mtx->mtx_sy_states);
 }

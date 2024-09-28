@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 20:13:07 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/27 23:27:08 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/28 17:29:58 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,15 @@ void	ph_eating(t_philo *tmp)
 		philo->id, LPRO_EAT);
 	while (1)
 	{
-		if ((ph_actualtime() - philo->kine->last_meal) >= philo->epis->agal->tt_eat)
+		if ((ph_actualtime() - philo->kine->last_meal)
+			>= philo->epis->agal->tt_eat)
 			break ;
 	}
 	philo->kine->count_meal++;
 	if (philo->epis->agal->n_meal > 0)
 	{
 		if (philo->kine->count_meal == philo->epis->agal->n_meal)
-			ph_modif_var(philo->kine->mtx_meals, philo->kine->phs_meals, *(philo->kine->phs_meals) + 1);
+			ph_incr_var(philo->kine->mtx_phs_meals, philo->kine->phs_meals);
 	}
 }
 
