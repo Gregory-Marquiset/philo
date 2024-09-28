@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 15:41:17 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/28 17:06:54 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/28 18:13:11 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ typedef struct s_p_kinesis
 	pthread_mutex_t	*mtx_phs_meals;
 	int				*phs_states;		//	Pointeur de int que les philos incremente l'orsqu'ils ont join la table
 	pthread_mutex_t	*mtx_phs_states;
+	int				*id_dead;
+	pthread_mutex_t	*mtx_id_dead;
 	pthread_mutex_t	*mtx_printf;
 	pthread_mutex_t	*mtx_sy_states;
 }				t_p_kinesis;

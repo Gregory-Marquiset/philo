@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:16:57 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/28 16:45:47 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/28 18:18:58 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,16 @@
 		//	act.c			//
 void		ph_eating(t_philo *tmp);
 void		ph_sleeping(t_philo *tmp);
+void		ph_thinking(t_philo *tmp);
 void		ph_waiting(size_t time);
 
 		//	args_verif.c	//
 t_sympos	*ph_args_verif_and_make_sympos(int argc, char **argv);
 
 		//	epis_utils.c	//
+void		ph_without_target_meals(t_epis *epis);
+void		ph_with_target_meals(t_epis *epis);
 void		ph_open_table(t_epis *epis);
-void		ph_seat_on_table(t_philo *philo);
 void		ph_speaking(pthread_mutex_t *mutex, int tmp, int id,
 				char *message);
 
