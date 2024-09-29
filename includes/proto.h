@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:16:57 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/28 18:18:58 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/29 15:03:30 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_sympos	*ph_args_verif_and_make_sympos(int argc, char **argv);
 void		ph_without_target_meals(t_epis *epis);
 void		ph_with_target_meals(t_epis *epis);
 void		ph_open_table(t_epis *epis);
-void		ph_speaking(pthread_mutex_t *mutex, int tmp, int id,
+void		ph_speaking(pthread_mutex_t *mutex, size_t tmp, int id,
 				char *message);
 
 		//	init_epis.c	//

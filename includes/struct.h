@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 15:41:17 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/28 18:13:11 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/29 15:25:50 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct s_e_agalma
 	size_t			tt_eat;			//	(in milliseconds) time needed by a philosopher for eating a meal
 	size_t			tt_sleep;		//	(in milliseconds) time spend sleeping
 	int				n_meal;			//	n meal for each philo, when reached program stop, if ndef infinit loop until 1 philo die
-	int				st_time;
+	size_t			st_time;
 }				t_e_agalma;
 
 typedef struct s_epis
@@ -61,8 +61,8 @@ typedef struct s_epis
 
 typedef struct s_p_kinesis
 {
-	time_t			last_meal;		//	Le moment où le philosophe a mangé pour la dernière fois, utilisé pour vérifier s'il a faim ou implémenter des règles supplémentaires (comme la gestion de la famine)
-	int				count_meal;		//	Nombre de repas pris, utilisé pour limiter le nombre de fois qu'un philosophe mange ou pour collecter des statistiques
+	size_t			*last_meal;		//	Le moment où le philosophe a mangé pour la dernière fois, utilisé pour vérifier s'il a faim ou implémenter des règles supplémentaires (comme la gestion de la famine)
+	int				*count_meal;		//	Nombre de repas pris, utilisé pour limiter le nombre de fois qu'un philosophe mange ou pour collecter des statistiques
 	int				*phs_meals;		//	Pointeur de int que les philos incremente l'orsqu'il ont manger tout leurs repas
 	pthread_mutex_t	*mtx_phs_meals;
 	int				*phs_states;		//	Pointeur de int que les philos incremente l'orsqu'ils ont join la table

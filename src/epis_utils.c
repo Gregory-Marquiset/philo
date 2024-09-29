@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:01:05 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/28 19:03:12 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/29 15:06:46 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,16 @@ void	ph_open_table(t_epis *epis)
 	ph_modif_var(&epis->mtx->mtx_sy_states, epis->kine->sy_states, OPEN);
 }
 
-void	ph_speaking(pthread_mutex_t *mutex, int tmp, int id,
+void	ph_speaking(pthread_mutex_t *mutex, size_t tmp, int id,
 	char *message)
 {
-	int	start_time;
+	size_t	start_time;
 
 	start_time = tmp;
 	pthread_mutex_lock(mutex);
 	if (id == 0)
-		printf("%-10d %s", (int)ph_actualtime() - start_time, message);
+		printf("%-10ld %s", (ph_actualtime() - start_time), message);
 	else
-		printf("%-10d %-4d %s", (int)ph_actualtime() - start_time, id, message);
+		printf("%-10ld %-4d %s", (ph_actualtime() - start_time), id, message);
 	pthread_mutex_unlock(mutex);
 }

@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 19:56:41 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/28 19:02:34 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/29 15:04:25 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	*ph_routine_philos(void *tmp)
 static void	*ph_routine_epis(void *tmp)
 {
 	t_epis *(epis) = (t_epis *)tmp;
-	//ph_speaking(&epis->mtx->mtx_printf, epis->agal->st_time, 0, LTEST_TEST_EW);
+	ph_speaking(&epis->mtx->mtx_printf, epis->agal->st_time, 0, LTEST_TEST_EW);
 	ph_open_table(epis);
 	pthread_mutex_lock(&epis->mtx->mtx_sy_states);
 	while (*(epis->kine->sy_states) == OPEN)
