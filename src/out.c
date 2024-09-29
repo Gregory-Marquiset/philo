@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 18:08:00 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/28 17:09:02 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/29 16:46:44 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,27 @@ static void	*ph_free_epis(t_epis *epis, int *tmp_n_philos)
 	}
 	if (epis->kine)
 	{
+		free(epis->kine->id_dead);
 		free(epis->kine->phs_states);
 		free(epis->kine->phs_meals);
+		free(epis->kine->sy_states);
 		free(epis->kine);
 	}
-	pthread_mutex_destroy(&epis->mtx->mtx_printf);
-	pthread_mutex_destroy(&epis->mtx->mtx_phs_meals);
-	pthread_mutex_destroy(&epis->mtx->mtx_phs_states);
-	pthread_mutex_destroy(&epis->mtx->mtx_sy_states);
-	free(epis->mtx);
+	if (epis->mtx)
+	{
+		pthread_mutex_destroy(&epis->mtx->mtx_id_dead);
+		pthread_mutex_destroy(&epis->mtx->mtx_phs_meals);
+		pthread_mutex_destroy(&epis->mtx->mtx_phs_states);
+		pthread_mutex_destroy(&epis->mtx->mtx_sy_states);
+		free(epis->mtx);
+	}
+	if (epis->use_printf)
+	{
+		pthread_mutex_destroy(&epis->use_printf->mtx_printf);
+		pthread_mutex_destroy(&epis->use_printf->mtx_verif);
+		free (epis->use_printf->verif);
+		free (epis->use_printf);
+	}
 	return (NULL);
 }
 
@@ -64,6 +76,8 @@ void	ph_quit_philo(t_sympos *sympos, int fd_out, char *message,
 			while (i < tmp_n_philos)
 			{
 				pthread_mutex_destroy(&sympos->philos[i].rg_fork);
+				free(sympos->philos[i].kine->last_meal);
+				free(sympos->philos[i].kine->count_meal);
 				free(sympos->philos[i].kine);
 				i++;
 			}

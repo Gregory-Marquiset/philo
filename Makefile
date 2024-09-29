@@ -6,7 +6,7 @@
 #    By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/26 18:05:12 by gmarquis          #+#    #+#              #
-#    Updated: 2024/09/29 15:41:59 by gmarquis         ###   ########.fr        #
+#    Updated: 2024/09/29 16:57:31 by gmarquis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -g3 -MMD -MP -fPIC
 PHFLAGS = -pthread
 VALGRIND = valgrind --tool=helgrind --history-level=full 
-ARGS = 4 450 200 200 5
+ARGS = 4 450 200 200 
 RM = rm -rf
 
 OBJ_DIR = obj/

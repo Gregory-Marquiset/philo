@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 15:41:17 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/29 15:25:50 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/29 17:58:32 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,14 @@ typedef enum s_sympos_state
 
 		//		episkopos		//
 
+typedef struct s_printf
+{
+	pthread_mutex_t	mtx_verif;
+	int				*verif;
+	pthread_mutex_t	mtx_printf;			//	mute printf
+}				t_printf;
+
+
 typedef struct s_e_kinesis
 {
 	int				*id_dead;		//	l'id du philo mort
@@ -32,7 +40,6 @@ typedef struct s_e_kinesis
 
 typedef struct s_e_mtx
 {
-	pthread_mutex_t	mtx_printf;			//	mute printf
 	pthread_mutex_t	mtx_id_dead;		//	mute id_dead
 	pthread_mutex_t	mtx_phs_meals;		//	mute phs_meals
 	pthread_mutex_t	mtx_phs_states;		//	mute phs_states
@@ -54,6 +61,7 @@ typedef struct s_epis
 	t_e_agalma		*agal;			//	varible immuable
 	t_e_mtx			*mtx;			//	mutex
 	t_e_kinesis		*kine;			//	variable modifiable
+	t_printf		*use_printf;
 	pthread_t		thread_ep;
 }				t_epis;
 
@@ -62,14 +70,13 @@ typedef struct s_epis
 typedef struct s_p_kinesis
 {
 	size_t			*last_meal;		//	Le moment où le philosophe a mangé pour la dernière fois, utilisé pour vérifier s'il a faim ou implémenter des règles supplémentaires (comme la gestion de la famine)
-	int				*count_meal;		//	Nombre de repas pris, utilisé pour limiter le nombre de fois qu'un philosophe mange ou pour collecter des statistiques
+	int				*count_meal;	//	Nombre de repas pris, utilisé pour limiter le nombre de fois qu'un philosophe mange ou pour collecter des statistiques
 	int				*phs_meals;		//	Pointeur de int que les philos incremente l'orsqu'il ont manger tout leurs repas
 	pthread_mutex_t	*mtx_phs_meals;
-	int				*phs_states;		//	Pointeur de int que les philos incremente l'orsqu'ils ont join la table
+	int				*phs_states;	//	Pointeur de int que les philos incremente l'orsqu'ils ont join la table
 	pthread_mutex_t	*mtx_phs_states;
 	int				*id_dead;
 	pthread_mutex_t	*mtx_id_dead;
-	pthread_mutex_t	*mtx_printf;
 	pthread_mutex_t	*mtx_sy_states;
 }				t_p_kinesis;
 

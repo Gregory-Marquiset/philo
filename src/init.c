@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 22:41:45 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/28 17:07:58 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/29 16:31:57 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,20 @@ void	ph_init_thread(t_sympos *sympos, pthread_t *thread, void *fun,
 {
 	if (pthread_create(&*(thread), NULL, fun, arg))
 		ph_quit_philo(sympos, 2, LERR_PT_CREAT, CERR_PT_CREAT);
+}
+
+void	*ph_init_malloc_mutex(t_sympos *sympos, pthread_mutex_t *mutex,
+	int nbr, int var_size)
+{
+	void	*ptr;
+
+	ptr = malloc(nbr * var_size);
+	if (!ptr)
+	{
+		pthread_mutex_unlock(mutex);
+		ph_quit_philo(sympos, 2, LERR_MALLOC, CERR_MALLOC);
+	}
+	return (ptr);
 }
 
 void	*ph_init_malloc(t_sympos *sympos, int nbr, int var_size)

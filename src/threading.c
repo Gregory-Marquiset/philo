@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 19:56:41 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/29 15:04:25 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/29 17:55:52 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ static void	*ph_routine_philos(void *tmp)
 	t_philo	*philo;
 
 	philo = (t_philo *)tmp;
-	ph_speaking(philo->kine->mtx_printf, philo->epis->agal->st_time,
-		philo->id, LPRO_JSYM);
+	ph_speaking(philo->epis, philo->id, LPRO_JSYM);
 	ph_seat_on_table(philo);
 	pthread_mutex_lock(philo->kine->mtx_sy_states);
 	while (*(philo->epis->kine->sy_states) == OPEN)
@@ -36,7 +35,7 @@ static void	*ph_routine_philos(void *tmp)
 static void	*ph_routine_epis(void *tmp)
 {
 	t_epis *(epis) = (t_epis *)tmp;
-	ph_speaking(&epis->mtx->mtx_printf, epis->agal->st_time, 0, LTEST_TEST_EW);
+	ph_speaking(epis, -1, LTEST_TEST_EW);
 	ph_open_table(epis);
 	pthread_mutex_lock(&epis->mtx->mtx_sy_states);
 	while (*(epis->kine->sy_states) == OPEN)
@@ -53,7 +52,7 @@ static void	*ph_routine_epis(void *tmp)
 	if (*(epis->kine->id_dead) != 0)
 	{
 		pthread_mutex_unlock(&epis->mtx->mtx_id_dead);
-		ph_speaking(&epis->mtx->mtx_printf, epis->agal->st_time, *epis->kine->id_dead, LPRO_DIED);
+		ph_speaking(epis, *epis->kine->id_dead, LPRO_DIED);
 	}
 	else
 		pthread_mutex_unlock(&epis->mtx->mtx_id_dead);

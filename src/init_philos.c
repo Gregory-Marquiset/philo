@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 07:20:41 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/29 15:29:35 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/29 16:46:52 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static void	ph_init_philo_kine(t_sympos *sympos, t_philo *philo)
 	philo->kine->mtx_phs_states = &(sympos->epis->mtx->mtx_phs_states);
 	philo->kine->id_dead = sympos->epis->kine->id_dead;
 	philo->kine->mtx_id_dead = &(sympos->epis->mtx->mtx_id_dead);
-	philo->kine->mtx_printf = &(sympos->epis->mtx->mtx_printf);
 	philo->kine->mtx_sy_states = &(sympos->epis->mtx->mtx_sy_states);
 }
 

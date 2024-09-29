@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 22:53:35 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/28 17:28:46 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/29 16:54:24 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ts_print_philos_fork(t_sympos *sympos)
 {
 	int (i) = 0;
-	pthread_mutex_lock(&sympos->epis->mtx->mtx_printf);
+	pthread_mutex_lock(&sympos->epis->use_printf->mtx_printf);
 	while (i < sympos->epis->agal->n_philos)
 	{
 		printf(LU_YEL1 "Philosopher[%2d] is here:\n" LU_END,
@@ -38,12 +38,12 @@ void	ts_print_philos_fork(t_sympos *sympos)
 		}
 		i++;
 	}
-	pthread_mutex_unlock(&sympos->epis->mtx->mtx_printf);
+	pthread_mutex_unlock(&sympos->epis->use_printf->mtx_printf);
 }
 
 void	ts_print_philos_states(t_epis *epis)
 {
-	pthread_mutex_lock(&epis->mtx->mtx_printf);
+	pthread_mutex_lock(&epis->use_printf->mtx_printf);
 	pthread_mutex_lock(&epis->mtx->mtx_phs_states);
 	pthread_mutex_lock(&epis->mtx->mtx_phs_meals);
 	pthread_mutex_lock(&epis->mtx->mtx_sy_states);
@@ -53,19 +53,19 @@ void	ts_print_philos_states(t_epis *epis)
 	pthread_mutex_unlock(&epis->mtx->mtx_sy_states);
 	pthread_mutex_unlock(&epis->mtx->mtx_phs_meals);
 	pthread_mutex_unlock(&epis->mtx->mtx_phs_states);
-	pthread_mutex_unlock(&epis->mtx->mtx_printf);
+	pthread_mutex_unlock(&epis->use_printf->mtx_printf);
 }
 
 void	ts_print_sympos(t_sympos *sympos)
 {
-	pthread_mutex_lock(&sympos->epis->mtx->mtx_printf);
+	pthread_mutex_lock(&sympos->epis->use_printf->mtx_printf);
 	printf(LTEST_SUCC_IN LU_BLU1 "Episkopos watches the symposium:\n"
 		"He speak at %14p for %d philosophers\ntt_die: %ld\ntt_eat: %ld\n"
 		"tt_sleep: %ld\nn_meal: %d\n" LU_END,
-		(void *)&sympos->epis->mtx->mtx_printf, sympos->epis->agal->n_philos,
+		(void *)&sympos->epis->use_printf->mtx_printf, sympos->epis->agal->n_philos,
 		sympos->epis->agal->tt_die, sympos->epis->agal->tt_eat,
 		sympos->epis->agal->tt_sleep, sympos->epis->agal->n_meal);
-	pthread_mutex_unlock(&sympos->epis->mtx->mtx_printf);
+	pthread_mutex_unlock(&sympos->epis->use_printf->mtx_printf);
 	ts_print_philos_states(sympos->epis);
 	ts_print_philos_fork(sympos);
 }
