@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 19:56:41 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/29 17:55:52 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/30 22:08:41 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	*ph_routine_epis(void *tmp)
 	if (*(epis->kine->id_dead) != 0)
 	{
 		pthread_mutex_unlock(&epis->mtx->mtx_id_dead);
-		ph_speaking(epis, *epis->kine->id_dead, LPRO_DIED);
+		ph_speaking_for_dead(epis, *epis->kine->id_dead, LPRO_DIED);
 	}
 	else
 		pthread_mutex_unlock(&epis->mtx->mtx_id_dead);
@@ -77,12 +77,8 @@ void	ph_threading(t_sympos *sympos)
 	{
 		if (pthread_join(sympos->philos[i].thread_ph, NULL))
 			ph_quit_philo(sympos, 2, LERR_PT_JOIN, CERR_PT_JOIN);
-		//ph_speaking(&sympos->epis->mtx->mtx_printf, sympos->epis->agal->st_time,
-		//	i + 1, LTEST_TEST_PL);
 		i++;
 	}
 	if (pthread_join(sympos->epis->thread_ep, NULL))
 		ph_quit_philo(sympos, 2, LERR_PT_JOIN, CERR_PT_JOIN);
-	//ph_speaking(&sympos->epis->mtx->mtx_printf, sympos->epis->agal->st_time,
-	//	0, LTEST_TEST_EL);
 }

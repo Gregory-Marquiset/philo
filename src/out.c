@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 18:08:00 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/29 16:46:44 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/09/30 22:06:42 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,15 @@ static void	ph_exit(int fd_out, char *message, int error_code)
 	exit(error_code);
 }
 
+static void	ph_destroy_mtx(t_epis *epis)
+{
+	pthread_mutex_destroy(&epis->mtx->mtx_id_dead);
+	pthread_mutex_destroy(&epis->mtx->mtx_phs_meals);
+	pthread_mutex_destroy(&epis->mtx->mtx_phs_states);
+	pthread_mutex_destroy(&epis->mtx->mtx_sy_states);
+	free(epis->mtx);
+}
+
 static void	*ph_free_epis(t_epis *epis, int *tmp_n_philos)
 {
 	if (epis->agal)
@@ -45,13 +54,7 @@ static void	*ph_free_epis(t_epis *epis, int *tmp_n_philos)
 		free(epis->kine);
 	}
 	if (epis->mtx)
-	{
-		pthread_mutex_destroy(&epis->mtx->mtx_id_dead);
-		pthread_mutex_destroy(&epis->mtx->mtx_phs_meals);
-		pthread_mutex_destroy(&epis->mtx->mtx_phs_states);
-		pthread_mutex_destroy(&epis->mtx->mtx_sy_states);
-		free(epis->mtx);
-	}
+		ph_destroy_mtx(epis);
 	if (epis->use_printf)
 	{
 		pthread_mutex_destroy(&epis->use_printf->mtx_printf);

@@ -6,21 +6,24 @@
 #    By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/26 18:05:12 by gmarquis          #+#    #+#              #
-#    Updated: 2024/09/29 16:57:31 by gmarquis         ###   ########.fr        #
+#    Updated: 2024/09/30 22:34:53 by gmarquis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC = main.c $\
 test_file.c $\
 
-SRC_U = src/act.c $\
+SRC_U = src/act_utils.c $\
+src/act.c $\
 src/args_verif.c $\
 src/epis_utils.c $\
 src/init_epis.c $\
 src/init_philos.c $\
+src/init_utils.c $\
 src/init.c $\
 src/out.c $\
 src/philo_utils.c $\
+src/threading_utils.c $\
 src/threading.c $\
 src/utils.c
 
