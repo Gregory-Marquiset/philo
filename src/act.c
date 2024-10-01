@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 20:13:07 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/30 21:57:18 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/01 20:22:28 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,29 @@ void	ph_eating(t_philo *tmp)
 	}
 }
 
+static int	ph_check_die_in_sleep(t_philo *philo)
+{
+	size_t	last_meal;
+	size_t	tt_sleep;
+	size_t	tt_die;
+	size_t	tt_eat;
+
+	last_meal = *philo->kine->last_meal;
+	tt_sleep = philo->epis->agal->tt_sleep;
+	tt_die = philo->epis->agal->tt_die;
+	tt_eat = philo->epis->agal->tt_eat;
+	if ((ph_actualtime() - (last_meal + tt_eat)) + tt_sleep <= tt_die)
+		return (0);
+	else
+	{
+		ph_waiting(tt_die - (ph_actualtime() - last_meal) + tt_eat);
+		ph_speaking(philo->epis, philo->id, LPRO_SLEEP);
+		ph_modif_var(&(philo->epis->mtx->mtx_id_dead),
+			philo->epis->kine->id_dead, philo->id);
+		return (1);
+	}
+}
+
 void	ph_sleeping(t_philo *tmp)
 {
 	t_philo	*philo;
@@ -44,6 +67,8 @@ void	ph_sleeping(t_philo *tmp)
 
 	philo = tmp;
 	if (ph_check_sympos_states(philo))
+		return ;
+	if (ph_check_die_in_sleep(philo))
 		return ;
 	init_time = ph_actualtime();
 	ph_speaking(philo->epis, philo->id, LPRO_SLEEP);

@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 20:07:20 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/27 21:04:25 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/01 12:43:46 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ All value most be an int between 1 and int max\n\n" LU_END
 
 	//		project log		//
 # define LPRO_JSYM LU_GRE1 "join the symposium\n" LU_END
-# define LPRO_LSYM LU_GRE1 "left the symposium\n" LU_END
+# define LPRO_LSYM LU_GRE1 "left the symposium\nsymposium" LU_END
 # define LPRO_FORK LU_BLU1 "has taken a fork\n" LU_END
 # define LPRO_MEAL LU_GRE1 "all meal as bean eaten\n\n" LU_END
 # define LPRO_EAT LU_MAJ1 "is eating\n" LU_END

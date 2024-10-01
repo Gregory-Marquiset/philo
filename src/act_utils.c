@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 21:55:16 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/30 21:57:28 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/01 20:09:56 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@ int	ph_check_sympos_states(t_philo *philo)
 		return (1);
 	}
 	pthread_mutex_unlock(philo->kine->mtx_sy_states);
+	pthread_mutex_lock(philo->kine->mtx_id_dead);
+	if (*(philo->epis->kine->id_dead) != 0)
+	{
+		pthread_mutex_unlock(philo->kine->mtx_id_dead);
+		return (1);
+	}
+	pthread_mutex_unlock(philo->kine->mtx_id_dead);
 	return (0);
 }
 

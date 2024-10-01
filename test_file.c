@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 22:53:35 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/29 16:54:24 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/01 11:34:28 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ void	ts_print_philos_fork(t_sympos *sympos)
 		if ((void *)&*sympos->philos[i].lf_fork != NULL)
 		{
 			pthread_mutex_lock(sympos->philos[i].lf_fork);
+
 			printf(LU_YEL1 "lf_fork = %14p" LU_END,
 				(void *)&*sympos->philos[i].lf_fork);
+
 			pthread_mutex_unlock(sympos->philos[i].lf_fork);
 		}
 		else
