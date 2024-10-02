@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 15:41:17 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/29 17:58:32 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/01 21:05:11 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ typedef struct s_printf
 	int				*verif;
 	pthread_mutex_t	mtx_printf;			//	mute printf
 }				t_printf;
-
 
 typedef struct s_e_kinesis
 {

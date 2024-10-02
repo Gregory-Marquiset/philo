@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 19:56:41 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/30 22:08:41 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/01 20:47:09 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	*ph_routine_philos(void *tmp)
 	ph_speaking(philo->epis, philo->id, LPRO_JSYM);
 	ph_seat_on_table(philo);
 	pthread_mutex_lock(philo->kine->mtx_sy_states);
-	while (*(philo->epis->kine->sy_states) == OPEN)
+	while (*(philo->epis->kine->sy_states) != CLOSE)
 	{
 		pthread_mutex_unlock(philo->kine->mtx_sy_states);
 		ph_eating(philo);
@@ -38,7 +38,7 @@ static void	*ph_routine_epis(void *tmp)
 	ph_speaking(epis, -1, LTEST_TEST_EW);
 	ph_open_table(epis);
 	pthread_mutex_lock(&epis->mtx->mtx_sy_states);
-	while (*(epis->kine->sy_states) == OPEN)
+	while (*(epis->kine->sy_states) != CLOSE)
 	{
 		pthread_mutex_unlock(&epis->mtx->mtx_sy_states);
 		if (epis->agal->n_meal > 0)
