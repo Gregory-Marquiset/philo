@@ -6,19 +6,12 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 15:41:17 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/01 21:05:11 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/08 16:22:43 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
-
-typedef enum s_sympos_state
-{
-	SETING,
-	OPEN,
-	CLOSE,
-}			t_sympos_state;
 
 		//		episkopos		//
 
@@ -34,7 +27,6 @@ typedef struct s_e_kinesis
 	int				*id_dead;		//	l'id du philo mort
 	int				*phs_meals;		//	indique l'etat des repas des philos
 	int				*phs_states;	//	indique si les philo son assis a la table
-	int				*sy_states;		//	t_sympos_state 0:seting 1:open 2:close
 }				t_e_kinesis;
 
 typedef struct s_e_mtx
@@ -42,7 +34,6 @@ typedef struct s_e_mtx
 	pthread_mutex_t	mtx_id_dead;		//	mute id_dead
 	pthread_mutex_t	mtx_phs_meals;		//	mute phs_meals
 	pthread_mutex_t	mtx_phs_states;		//	mute phs_states
-	pthread_mutex_t	mtx_sy_states;		//	mute sy_states
 }				t_e_mtx;
 
 typedef struct s_e_agalma
@@ -52,7 +43,7 @@ typedef struct s_e_agalma
 	size_t			tt_eat;			//	(in milliseconds) time needed by a philosopher for eating a meal
 	size_t			tt_sleep;		//	(in milliseconds) time spend sleeping
 	int				n_meal;			//	n meal for each philo, when reached program stop, if ndef infinit loop until 1 philo die
-	size_t			st_time;
+	size_t			*st_time;
 }				t_e_agalma;
 
 typedef struct s_epis
@@ -76,7 +67,6 @@ typedef struct s_p_kinesis
 	pthread_mutex_t	*mtx_phs_states;
 	int				*id_dead;
 	pthread_mutex_t	*mtx_id_dead;
-	pthread_mutex_t	*mtx_sy_states;
 }				t_p_kinesis;
 
 typedef struct s_philo

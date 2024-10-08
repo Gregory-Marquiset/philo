@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 22:53:35 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/01 11:34:28 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/08 16:18:16 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,9 @@ void	ts_print_philos_states(t_epis *epis)
 	pthread_mutex_lock(&epis->use_printf->mtx_printf);
 	pthread_mutex_lock(&epis->mtx->mtx_phs_states);
 	pthread_mutex_lock(&epis->mtx->mtx_phs_meals);
-	pthread_mutex_lock(&epis->mtx->mtx_sy_states);
-	printf(LU_MAJ1 "\nEpiskopos check:\nsy_states %d | phs_states = %d "
-		"| phs_meals = %d\n\n" LU_END, *(epis->kine->sy_states),
-		*(epis->kine->phs_states), *(epis->kine->phs_meals));
-	pthread_mutex_unlock(&epis->mtx->mtx_sy_states);
+	printf(LU_MAJ1 "\nEpiskopos check:\n phs_states = %d "
+		"| phs_meals = %d\n\n" LU_END, *(epis->kine->phs_states),
+		*(epis->kine->phs_meals));
 	pthread_mutex_unlock(&epis->mtx->mtx_phs_meals);
 	pthread_mutex_unlock(&epis->mtx->mtx_phs_states);
 	pthread_mutex_unlock(&epis->use_printf->mtx_printf);
@@ -71,3 +69,5 @@ void	ts_print_sympos(t_sympos *sympos)
 	ts_print_philos_states(sympos->epis);
 	ts_print_philos_fork(sympos);
 }
+
+//	-fsanitize=thread

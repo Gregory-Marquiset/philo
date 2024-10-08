@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 19:56:41 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/01 20:47:09 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/08 16:46:32 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,47 +15,44 @@
 static void	*ph_routine_philos(void *tmp)
 {
 	t_philo	*philo;
+	int		turn;
 
 	philo = (t_philo *)tmp;
-	ph_speaking(philo->epis, philo->id, LPRO_JSYM);
+	turn = 0;
 	ph_seat_on_table(philo);
-	pthread_mutex_lock(philo->kine->mtx_sy_states);
-	while (*(philo->epis->kine->sy_states) != CLOSE)
+	while (turn == 0)
 	{
-		pthread_mutex_unlock(philo->kine->mtx_sy_states);
-		ph_eating(philo);
-		ph_sleeping(philo);
+		turn = ph_eating(philo);
+		turn = ph_sleeping(philo);
 		ph_thinking(philo);
-		pthread_mutex_lock(philo->kine->mtx_sy_states);
 	}
-	pthread_mutex_unlock(philo->kine->mtx_sy_states);
 	return (NULL);
 }
 
 static void	*ph_routine_epis(void *tmp)
 {
-	t_epis *(epis) = (t_epis *)tmp;
-	ph_speaking(epis, -1, LTEST_TEST_EW);
+	t_epis *epis;
+	int		dead;
+	int		meal;
+
+	epis = (t_epis *)tmp;
+	dead = 0;
+	meal = 0;
 	ph_open_table(epis);
-	pthread_mutex_lock(&epis->mtx->mtx_sy_states);
-	while (*(epis->kine->sy_states) != CLOSE)
+	while (dead == 0 && meal == 0)
 	{
-		pthread_mutex_unlock(&epis->mtx->mtx_sy_states);
 		if (epis->agal->n_meal > 0)
-			ph_with_target_meals(epis);
+		{
+			meal = ph_with_target_meals(epis);
+			if (meal == 1)
+				ph_modif_var(&epis->mtx->mtx_id_dead, epis->kine->id_dead, -1);
+			dead = ph_check_id_dead(epis);
+		}
 		else
-			ph_without_target_meals(epis);
-		pthread_mutex_lock(&epis->mtx->mtx_sy_states);
+			dead = ph_without_target_meals(epis);
 	}
-	pthread_mutex_unlock(&epis->mtx->mtx_sy_states);
-	pthread_mutex_lock(&epis->mtx->mtx_id_dead);
-	if (*(epis->kine->id_dead) != 0)
-	{
-		pthread_mutex_unlock(&epis->mtx->mtx_id_dead);
-		ph_speaking_for_dead(epis, *epis->kine->id_dead, LPRO_DIED);
-	}
-	else
-		pthread_mutex_unlock(&epis->mtx->mtx_id_dead);
+	if (dead != 0)
+		ph_speaking_for_dead(epis, dead, LPRO_DIED);
 	return (NULL);
 }
 

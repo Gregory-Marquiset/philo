@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:01:05 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/01 20:06:51 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/08 16:36:50 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 
 int	ph_check_id_dead(t_epis *epis)
 {
+	int	res;
+
+	res = 0;
 	pthread_mutex_lock(&epis->mtx->mtx_id_dead);
-	if (*(epis->kine->id_dead) != 0)
+	if (*(epis->kine->id_dead) > 0)
 	{
+		res = *epis->kine->id_dead;
 		pthread_mutex_unlock(&epis->mtx->mtx_id_dead);
-		ph_modif_var(&epis->mtx->mtx_sy_states, epis->kine->sy_states,
-			CLOSE);
-		return (1);
+		return (res);
 	}
 	pthread_mutex_unlock(&epis->mtx->mtx_id_dead);
 	return (0);
@@ -36,14 +38,15 @@ void	ph_open_table(t_epis *epis)
 		pthread_mutex_lock(&epis->mtx->mtx_phs_states);
 	}
 	pthread_mutex_unlock(&epis->mtx->mtx_phs_states);
-	ph_modif_var(&epis->mtx->mtx_sy_states, epis->kine->sy_states, OPEN);
+	*epis->agal->st_time = ph_actualtime();
+	ph_modif_var(&epis->mtx->mtx_id_dead, epis->kine->id_dead, 0);
 }
 
 void	ph_speaking_for_dead(t_epis *epis, int id, char *message)
 {
 	size_t	start_time;
 
-	start_time = epis->agal->st_time;
+	start_time = *epis->agal->st_time;
 	while (1)
 	{
 		pthread_mutex_lock(&epis->use_printf->mtx_verif);

@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 18:08:00 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/30 22:06:42 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/08 16:24:36 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static void	ph_destroy_mtx(t_epis *epis)
 	pthread_mutex_destroy(&epis->mtx->mtx_id_dead);
 	pthread_mutex_destroy(&epis->mtx->mtx_phs_meals);
 	pthread_mutex_destroy(&epis->mtx->mtx_phs_states);
-	pthread_mutex_destroy(&epis->mtx->mtx_sy_states);
 	free(epis->mtx);
 }
 
@@ -43,6 +42,7 @@ static void	*ph_free_epis(t_epis *epis, int *tmp_n_philos)
 	if (epis->agal)
 	{
 		*tmp_n_philos = epis->agal->n_philos;
+		free(epis->agal->st_time);
 		free(epis->agal);
 	}
 	if (epis->kine)
@@ -50,7 +50,6 @@ static void	*ph_free_epis(t_epis *epis, int *tmp_n_philos)
 		free(epis->kine->id_dead);
 		free(epis->kine->phs_states);
 		free(epis->kine->phs_meals);
-		free(epis->kine->sy_states);
 		free(epis->kine);
 	}
 	if (epis->mtx)

@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:16:57 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/30 22:31:53 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/08 16:15:10 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int			ph_check_printf_verif(t_epis *epis, int id);
 void		ph_speaking(t_epis *epis, int id, char *message);
 
 		//	act.c			//
-void		ph_eating(t_philo *tmp);
-void		ph_sleeping(t_philo *tmp);
+int			ph_eating(t_philo *tmp);
+int			ph_sleeping(t_philo *tmp);
 void		ph_thinking(t_philo *tmp);
 void		ph_waiting(size_t time);
 
@@ -67,11 +67,11 @@ void		ph_quit_philo(t_sympos *sympos, int fd_out, char *message,
 				int error_code);
 
 		//	philos_utils.c	//
-void	ph_seat_on_table(t_philo *philo);
+void		ph_seat_on_table(t_philo *philo);
 
 		//	threading_utils.c		//
-void		ph_without_target_meals(t_epis *epis);
-void		ph_with_target_meals(t_epis *epis);
+int			ph_without_target_meals(t_epis *epis);
+int			ph_with_target_meals(t_epis *epis);
 
 		//	threading.c		//
 void		ph_threading(t_sympos *sympos);

@@ -6,23 +6,23 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 20:13:07 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/01 20:22:28 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/08 16:27:13 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/proto.h"
 
-void	ph_eating(t_philo *tmp)
+int	ph_eating(t_philo *tmp)
 {
 	t_philo	*philo;
 
 	philo = tmp;
 	if (ph_check_sympos_states(philo))
-		return ;
+		return (1);
 	if (ph_check_tt_eat(philo))
-		return ;
-	*(philo->kine->last_meal) = ph_actualtime();
+		return (1);
 	ph_speaking(philo->epis, philo->id, LPRO_EAT);
+	*(philo->kine->last_meal) = ph_actualtime();
 	while (1)
 	{
 		if ((ph_actualtime() - *(philo->kine->last_meal))
@@ -35,6 +35,7 @@ void	ph_eating(t_philo *tmp)
 		if (*(philo->kine->count_meal) == philo->epis->agal->n_meal)
 			ph_incr_var(philo->kine->mtx_phs_meals, philo->kine->phs_meals);
 	}
+	return (0);
 }
 
 static int	ph_check_die_in_sleep(t_philo *philo)
@@ -60,23 +61,18 @@ static int	ph_check_die_in_sleep(t_philo *philo)
 	}
 }
 
-void	ph_sleeping(t_philo *tmp)
+int	ph_sleeping(t_philo *tmp)
 {
 	t_philo	*philo;
-	size_t	init_time;
 
 	philo = tmp;
 	if (ph_check_sympos_states(philo))
-		return ;
+		return (1);
 	if (ph_check_die_in_sleep(philo))
-		return ;
-	init_time = ph_actualtime();
+		return (1);
 	ph_speaking(philo->epis, philo->id, LPRO_SLEEP);
-	while (1)
-	{
-		if ((ph_actualtime() - init_time) >= philo->epis->agal->tt_sleep)
-			break ;
-	}
+	ph_waiting(philo->epis->agal->tt_sleep);
+	return (0);
 }
 
 void	ph_thinking(t_philo *tmp)
@@ -94,6 +90,8 @@ void	ph_waiting(size_t time)
 	size_t	init_time;
 
 	init_time = ph_actualtime();
+	if (time > 99)
+		usleep((time * 70) / 100);
 	while (1)
 	{
 		if ((ph_actualtime() - init_time) >= time)
