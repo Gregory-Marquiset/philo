@@ -6,20 +6,50 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 20:13:07 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/08 16:27:13 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/09 19:27:30 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/proto.h"
+
+static int	ph_wait_or_not(t_philo *philo)
+{
+	if (philo->id % 2 != 0)
+	{
+		if (*(philo->kine->count_meal) % 2 == 0 && philo->epis->agal->n_philos % 2 != 0)
+		{
+			if (philo->id == philo->epis->agal->n_philos && (*(philo->kine->count_meal) == 0 || *(philo->kine->count_meal) % 2 == 0))
+			{
+				if (ph_check_tt_eat(philo))
+					return (1);
+				ph_waiting(philo->epis->agal->tt_eat - 1);
+			}
+		}
+		else if (*(philo->kine->count_meal) % 2 != 0)
+		{
+			if (ph_check_tt_eat(philo))
+				return (1);
+			ph_waiting(philo->epis->agal->tt_eat - 1);
+		}
+	}
+	else
+	{
+		if (*(philo->kine->count_meal) % 2 == 0)
+			ph_waiting(philo->epis->agal->tt_eat - 1);
+	}
+	if (ph_check_sympos_states(philo))
+		return (1);
+	if (ph_check_tt_eat(philo))
+		return (1);
+	return (0);
+}
 
 int	ph_eating(t_philo *tmp)
 {
 	t_philo	*philo;
 
 	philo = tmp;
-	if (ph_check_sympos_states(philo))
-		return (1);
-	if (ph_check_tt_eat(philo))
+	if (ph_wait_or_not(philo))
 		return (1);
 	ph_speaking(philo->epis, philo->id, LPRO_EAT);
 	*(philo->kine->last_meal) = ph_actualtime();
