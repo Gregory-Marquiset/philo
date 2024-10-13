@@ -6,13 +6,13 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 20:13:07 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/09 19:27:30 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/13 16:09:13 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/proto.h"
 
-static int	ph_wait_or_not(t_philo *philo)
+/*static int	ph_wait_or_not(t_philo *philo)
 {
 	if (philo->id % 2 != 0)
 	{
@@ -42,15 +42,15 @@ static int	ph_wait_or_not(t_philo *philo)
 	if (ph_check_tt_eat(philo))
 		return (1);
 	return (0);
-}
+}*/
 
 int	ph_eating(t_philo *tmp)
 {
 	t_philo	*philo;
 
 	philo = tmp;
-	if (ph_wait_or_not(philo))
-		return (1);
+	//if (ph_wait_or_not(philo))
+	//	return (1);
 	ph_speaking(philo->epis, philo->id, LPRO_EAT);
 	*(philo->kine->last_meal) = ph_actualtime();
 	while (1)

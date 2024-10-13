@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 14:59:27 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/08 16:37:19 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/13 16:08:45 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,8 @@ void	ph_seat_on_table(t_philo *philo)
 		pthread_mutex_lock(&philo->epis->mtx->mtx_id_dead);
 	}
 	pthread_mutex_unlock(&philo->epis->mtx->mtx_id_dead);
+	while (ph_actualtime() < *(philo->epis->agal->st_time))
+	{
+		;
+	}
 }

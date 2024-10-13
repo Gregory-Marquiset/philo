@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 21:55:16 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/08 16:47:05 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/13 16:05:16 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 int	ph_check_sympos_states(t_philo *philo)
 {
+	int	tmp;
+
 	pthread_mutex_lock(philo->kine->mtx_id_dead);
-	if (*(philo->epis->kine->id_dead) != 0)
-	{
-		pthread_mutex_unlock(philo->kine->mtx_id_dead);
-		return (1);
-	}
+	tmp = *(philo->epis->kine->id_dead);
 	pthread_mutex_unlock(philo->kine->mtx_id_dead);
+	if (tmp != 0)
+		return (1);
 	return (0);
 }
 
@@ -39,29 +39,17 @@ int	ph_check_tt_eat(t_philo *philo)
 	return (0);
 }
 
-int	ph_check_printf_verif(t_epis *epis, int id)
+int	ph_check_printf_verif(t_epis *epis)
 {
-	while (1)
-	{
-		pthread_mutex_lock(&epis->use_printf->mtx_verif);
-		if (*(epis->use_printf->verif) == 0)
-		{
-			*(epis->use_printf->verif) = id;
-			pthread_mutex_unlock(&epis->use_printf->mtx_verif);
-			break ;
-		}
-		else if (*(epis->use_printf->verif) == -2)
-		{
-			pthread_mutex_unlock(&epis->use_printf->mtx_verif);
-			return (1);
-		}
-		else
-		{
-			pthread_mutex_unlock(&epis->use_printf->mtx_verif);
-			ph_waiting(1);
-		}
-	}
-	return (0);
+	int	tmp;
+
+	pthread_mutex_lock(&epis->use_printf->mtx_verif);
+	tmp = *(epis->use_printf->verif);
+	pthread_mutex_unlock(&epis->use_printf->mtx_verif);
+	if (tmp == -2)
+		return (1);
+	else
+		return (0);
 }
 
 void	ph_speaking(t_epis *epis, int id, char *message)
@@ -69,12 +57,9 @@ void	ph_speaking(t_epis *epis, int id, char *message)
 	size_t	start_time;
 
 	start_time = *epis->agal->st_time;
-	if (ph_check_printf_verif(epis, id))
+	if (ph_check_printf_verif(epis))
 		return ;
 	pthread_mutex_lock(&epis->use_printf->mtx_printf);
 	printf("%-10ld %-4d %s", (ph_actualtime() - start_time), id, message);
-	pthread_mutex_lock(&epis->use_printf->mtx_verif);
-	*(epis->use_printf->verif) = 0;
-	pthread_mutex_unlock(&epis->use_printf->mtx_verif);
 	pthread_mutex_unlock(&epis->use_printf->mtx_printf);
 }

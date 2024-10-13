@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:16:57 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/08 16:15:10 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/13 16:01:43 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 		//	act_utils.c			//
 int			ph_check_sympos_states(t_philo *philo);
 int			ph_check_tt_eat(t_philo *philo);
-int			ph_check_printf_verif(t_epis *epis, int id);
+int			ph_check_printf_verif(t_epis *epis);
 void		ph_speaking(t_epis *epis, int id, char *message);
 
 		//	act.c			//
