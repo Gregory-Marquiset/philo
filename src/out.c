@@ -6,15 +6,15 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 18:08:00 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/08 16:24:36 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/14 22:43:14 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/proto.h"
 
-static size_t	ph_strlen(char *str)
+static unsigned long	ph_strlen(char *str)
 {
-	size_t	i;
+	unsigned long	i;
 
 	i = 0;
 	while (str[i])
@@ -42,7 +42,6 @@ static void	*ph_free_epis(t_epis *epis, int *tmp_n_philos)
 	if (epis->agal)
 	{
 		*tmp_n_philos = epis->agal->n_philos;
-		free(epis->agal->st_time);
 		free(epis->agal);
 	}
 	if (epis->kine)

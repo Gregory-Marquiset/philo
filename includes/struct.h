@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 15:41:17 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/08 16:22:43 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/14 22:39:46 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ typedef struct s_e_mtx
 typedef struct s_e_agalma
 {
 	int				n_philos;		//	Number of philosophers and fork from 1 to n
-	size_t			tt_die;			//	(in milliseconds) time max beatween each philosophermeal
-	size_t			tt_eat;			//	(in milliseconds) time needed by a philosopher for eating a meal
-	size_t			tt_sleep;		//	(in milliseconds) time spend sleeping
+	unsigned long	tt_die;			//	(in milliseconds) time max beatween each philosophermeal
+	unsigned long	tt_eat;			//	(in milliseconds) time needed by a philosopher for eating a meal
+	unsigned long	tt_sleep;		//	(in milliseconds) time spend sleeping
 	int				n_meal;			//	n meal for each philo, when reached program stop, if ndef infinit loop until 1 philo die
-	size_t			*st_time;
+	unsigned long	st_time;
 }				t_e_agalma;
 
 typedef struct s_epis
@@ -59,7 +59,7 @@ typedef struct s_epis
 
 typedef struct s_p_kinesis
 {
-	size_t			*last_meal;		//	Le moment où le philosophe a mangé pour la dernière fois, utilisé pour vérifier s'il a faim ou implémenter des règles supplémentaires (comme la gestion de la famine)
+	unsigned long	*last_meal;		//	Le moment où le philosophe a mangé pour la dernière fois, utilisé pour vérifier s'il a faim ou implémenter des règles supplémentaires (comme la gestion de la famine)
 	int				*count_meal;	//	Nombre de repas pris, utilisé pour limiter le nombre de fois qu'un philosophe mange ou pour collecter des statistiques
 	int				*phs_meals;		//	Pointeur de int que les philos incremente l'orsqu'il ont manger tout leurs repas
 	pthread_mutex_t	*mtx_phs_meals;

@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 20:13:07 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/13 16:09:13 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/14 22:42:23 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,10 @@ int	ph_eating(t_philo *tmp)
 
 static int	ph_check_die_in_sleep(t_philo *philo)
 {
-	size_t	last_meal;
-	size_t	tt_sleep;
-	size_t	tt_die;
-	size_t	tt_eat;
+	unsigned long	last_meal;
+	unsigned long	tt_sleep;
+	unsigned long	tt_die;
+	unsigned long	tt_eat;
 
 	last_meal = *philo->kine->last_meal;
 	tt_sleep = philo->epis->agal->tt_sleep;
@@ -115,16 +115,13 @@ void	ph_thinking(t_philo *tmp)
 	ph_speaking(philo->epis, philo->id, LPRO_THINK);
 }
 
-void	ph_waiting(size_t time)
+void	ph_waiting(unsigned long time)
 {
-	size_t	init_time;
+	unsigned long	init_time;
 
 	init_time = ph_actualtime();
-	if (time > 99)
-		usleep((time * 70) / 100);
-	while (1)
+	while ((ph_actualtime() - init_time) < time)
 	{
-		if ((ph_actualtime() - init_time) >= time)
-			break ;
+		usleep(time / 100);
 	}
 }

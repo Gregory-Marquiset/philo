@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 19:56:41 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/09 17:35:35 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/14 23:01:25 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,11 @@ static void	*ph_routine_philos(void *tmp)
 	int		turn;
 
 	philo = (t_philo *)tmp;
+	while (ph_actualtime() < philo->epis->agal->st_time)
+	{
+		ph_waiting(1);
+	}
 	turn = 0;
-	ph_seat_on_table(philo);
 	while (turn == 0)
 	{
 		turn = ph_eating(philo);
@@ -38,7 +41,7 @@ static void	*ph_routine_epis(void *tmp)
 	epis = (t_epis *)tmp;
 	dead = 0;
 	meal = 0;
-	ph_open_table(epis);
+	//ph_open_table(epis);
 	while (dead == 0 && meal == 0)
 	{
 		if (epis->agal->n_meal > 0)

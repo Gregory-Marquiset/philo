@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 18:00:45 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/26 10:28:55 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/14 22:42:35 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ static int	ph_atoi_safe(char *str)
 	return ((int)result);
 }
 
-static int	ph_strncmp(const char *s1, const char *s2, size_t n)
+static int	ph_strncmp(const char *s1, const char *s2, unsigned long n)
 {
-	size_t	i;
+	unsigned long	i;
 
 	i = 0;
 	if (n == 0)
@@ -82,9 +82,9 @@ t_sympos	*ph_args_verif_and_make_sympos(int argc, char **argv)
 	if (argc < 5 || argc > 6)
 		ph_quit_philo(NULL, 2, LERR_ARGS_H1, CERR_ARGS_H1);
 	tmp.n_philos = ph_atoi_safe(argv[1]);
-	tmp.tt_die = (size_t)ph_atoi_safe(argv[2]);
-	tmp.tt_eat = (size_t)ph_atoi_safe(argv[3]);
-	tmp.tt_sleep = (size_t)ph_atoi_safe(argv[4]);
+	tmp.tt_die = (unsigned long)ph_atoi_safe(argv[2]);
+	tmp.tt_eat = (unsigned long)ph_atoi_safe(argv[3]);
+	tmp.tt_sleep = (unsigned long)ph_atoi_safe(argv[4]);
 	if (argv[5])
 		tmp.n_meal = ph_atoi_safe(argv[5]);
 	else

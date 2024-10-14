@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 17:56:48 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/28 15:07:56 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/14 22:35:50 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ph_modif_var(pthread_mutex_t *mutex, int *dest, int src)
 	pthread_mutex_unlock(mutex);
 }
 
-size_t	ph_actualtime(void)
+unsigned long	ph_actualtime(void)
 {
 	struct timeval	t_val;
 

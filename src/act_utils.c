@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 21:55:16 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/13 16:05:16 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/14 23:03:22 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,13 @@ int	ph_check_printf_verif(t_epis *epis)
 
 void	ph_speaking(t_epis *epis, int id, char *message)
 {
-	size_t	start_time;
+	unsigned long	start_time;
+	unsigned long	ttime = ph_actualtime();
 
-	start_time = *epis->agal->st_time;
-	if (ph_check_printf_verif(epis))
-		return ;
+	start_time = epis->agal->st_time;
+	/*if (ph_check_printf_verif(epis))
+		return ;*/
 	pthread_mutex_lock(&epis->use_printf->mtx_printf);
-	printf("%-10ld %-4d %s", (ph_actualtime() - start_time), id, message);
+	printf("%-10ld %-4d %s", (ttime - start_time), id, message);
 	pthread_mutex_unlock(&epis->use_printf->mtx_printf);
 }

@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:01:05 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/13 16:07:32 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/14 22:54:41 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,14 @@ void	ph_open_table(t_epis *epis)
 		pthread_mutex_lock(&epis->mtx->mtx_phs_states);
 	}
 	pthread_mutex_unlock(&epis->mtx->mtx_phs_states);
-	*epis->agal->st_time = ph_actualtime() + 100;
 	ph_modif_var(&epis->mtx->mtx_id_dead, epis->kine->id_dead, 0);
 }
 
 void	ph_speaking_for_dead(t_epis *epis, int id, char *message)
 {
-	size_t	start_time;
+	unsigned long	start_time;
 
-	start_time = *epis->agal->st_time;
+	start_time = epis->agal->st_time;
 	pthread_mutex_lock(&epis->use_printf->mtx_verif);
 	*(epis->use_printf->verif) = -2;
 	pthread_mutex_unlock(&epis->use_printf->mtx_verif);
