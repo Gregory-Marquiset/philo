@@ -6,13 +6,90 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 19:56:41 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/14 23:01:25 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/15 19:14:18 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/proto.h"
 
-static void	*ph_routine_philos(void *tmp)
+static void	*ph_routine_even(void *tmp)
+{
+	t_philo	*philo;
+	int i = 0;
+
+	philo = (t_philo *)tmp;
+	pthread_mutex_lock(&philo->epis->mtx->mtx_phs_states);
+	pthread_mutex_unlock(&philo->epis->mtx->mtx_phs_states);
+	while (ph_actualtime() < philo->epis->agal->st_time)
+	{
+		ph_waiting(1);
+	}
+	while (i < philo->epis->agal->n_meal)
+	{
+		if (i % 2 == 0)
+			ph_waiting(philo->epis->agal->tt_eat);
+		ph_speaking(philo->epis, philo->id, LPRO_EAT);
+
+		pthread_mutex_lock(&philo->rg_fork);
+		pthread_mutex_lock(philo->lf_fork);
+
+		ph_waiting(philo->epis->agal->tt_eat);
+
+		pthread_mutex_unlock(&philo->rg_fork);
+		pthread_mutex_unlock(philo->lf_fork);
+
+		ph_speaking(philo->epis, philo->id, LPRO_SLEEP);
+		ph_waiting(philo->epis->agal->tt_sleep);
+		ph_speaking(philo->epis, philo->id, LPRO_THINK);
+		i++;
+	}
+	return (NULL);
+}
+
+static void	*ph_routine_uneven(void *tmp)
+{
+	t_philo	*philo;
+	int	i = 0;
+
+	philo = (t_philo *)tmp;
+	pthread_mutex_lock(&philo->epis->mtx->mtx_phs_states);
+	pthread_mutex_unlock(&philo->epis->mtx->mtx_phs_states);
+	while (ph_actualtime() < philo->epis->agal->st_time)
+	{
+		ph_waiting(1);
+	}
+	while (i < philo->epis->agal->n_meal)
+	{
+		if (i % 2 != 0)
+			ph_waiting(philo->epis->agal->tt_eat);
+		ph_speaking(philo->epis, philo->id, LPRO_EAT);
+
+		pthread_mutex_lock(philo->lf_fork);
+		pthread_mutex_lock(&philo->rg_fork);
+
+		ph_waiting(philo->epis->agal->tt_eat);
+
+		pthread_mutex_lock(philo->lf_fork);
+		pthread_mutex_lock(&philo->rg_fork);
+
+		ph_speaking(philo->epis, philo->id, LPRO_SLEEP);
+		ph_waiting(philo->epis->agal->tt_sleep);
+		ph_speaking(philo->epis, philo->id, LPRO_THINK);
+		i++;
+	}
+	return (NULL);
+}
+
+static void	*ph_routine_epis(void *tmp)
+{
+	t_epis	*epis;
+
+	epis = (t_epis *)tmp;
+	epis->agal->st_time = ph_actualtime() + 100;
+	return (NULL);
+}
+
+/*static void	*ph_routine_philos(void *tmp)
 {
 	t_philo	*philo;
 	int		turn;
@@ -57,7 +134,7 @@ static void	*ph_routine_epis(void *tmp)
 	if (dead != 0)
 		ph_speaking_for_dead(epis, dead, LPRO_DIED);
 	return (NULL);
-}
+}*/
 
 void	ph_threading(t_sympos *sympos)
 {
@@ -66,12 +143,22 @@ void	ph_threading(t_sympos *sympos)
 	ph_init_thread(sympos, &sympos->epis->thread_ep, &ph_routine_epis,
 		sympos->epis);
 	i = 0;
+	pthread_mutex_lock(&sympos->epis->mtx->mtx_phs_states);
 	while (i < sympos->epis->agal->n_philos)
 	{
-		ph_init_thread(sympos, &sympos->philos[i].thread_ph, &ph_routine_philos,
-			&sympos->philos[i]);
+		if ((i + 1) % 2 == 0)
+		{
+			ph_init_thread(sympos, &sympos->philos[i].thread_ph, &ph_routine_even,
+				&sympos->philos[i]);
+		}
+		else
+		{
+			ph_init_thread(sympos, &sympos->philos[i].thread_ph, &ph_routine_uneven,
+				&sympos->philos[i]);
+		}
 		i++;
 	}
+	pthread_mutex_unlock(&sympos->epis->mtx->mtx_phs_states);
 	i = 0;
 	while (i < sympos->epis->agal->n_philos)
 	{

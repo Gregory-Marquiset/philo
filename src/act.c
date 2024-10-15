@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 20:13:07 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/14 22:42:23 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/15 16:09:26 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,8 @@
 	return (0);
 }*/
 
-int	ph_eating(t_philo *tmp)
+int	ph_eating(t_philo *philo)
 {
-	t_philo	*philo;
-
-	philo = tmp;
 	//if (ph_wait_or_not(philo))
 	//	return (1);
 	ph_speaking(philo->epis, philo->id, LPRO_EAT);
@@ -91,11 +88,8 @@ static int	ph_check_die_in_sleep(t_philo *philo)
 	}
 }
 
-int	ph_sleeping(t_philo *tmp)
+int	ph_sleeping(t_philo *philo)
 {
-	t_philo	*philo;
-
-	philo = tmp;
 	if (ph_check_sympos_states(philo))
 		return (1);
 	if (ph_check_die_in_sleep(philo))
@@ -105,11 +99,8 @@ int	ph_sleeping(t_philo *tmp)
 	return (0);
 }
 
-void	ph_thinking(t_philo *tmp)
+void	ph_thinking(t_philo *philo)
 {
-	t_philo	*philo;
-
-	philo = tmp;
 	if (ph_check_sympos_states(philo))
 		return ;
 	ph_speaking(philo->epis, philo->id, LPRO_THINK);

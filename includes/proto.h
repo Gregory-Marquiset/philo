@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:16:57 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/14 22:37:11 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/15 16:05:25 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int				ph_check_printf_verif(t_epis *epis);
 void			ph_speaking(t_epis *epis, int id, char *message);
 
 		//	act.c			//
-int				ph_eating(t_philo *tmp);
-int				ph_sleeping(t_philo *tmp);
-void			ph_thinking(t_philo *tmp);
+int				ph_eating(t_philo *philo);
+int				ph_sleeping(t_philo *philo);
+void			ph_thinking(t_philo *philo);
 void			ph_waiting(unsigned long time);
 
 		//	args_verif.c	//

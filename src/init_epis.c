@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 07:46:37 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/14 22:54:16 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/15 13:01:43 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	ph_init_epis_agalma(t_sympos *sympos, t_e_agalma *tmp)
 	sympos->epis->agal = ph_init_malloc(sympos, 1, sizeof(t_e_agalma));
 	sympos->epis->agal->n_philos = tmp->n_philos;
 	sympos->epis->agal->n_meal = tmp->n_meal;
-	sympos->epis->agal->st_time = ph_actualtime() + 100;
+	sympos->epis->agal->st_time = ph_actualtime();
 	sympos->epis->agal->tt_die = tmp->tt_die;
 	sympos->epis->agal->tt_eat = tmp->tt_eat;
 	sympos->epis->agal->tt_sleep = tmp->tt_sleep;
