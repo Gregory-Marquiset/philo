@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 19:56:41 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/16 17:45:53 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/16 20:19:18 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,12 @@ static int	ph_check_die_while_eating(t_philo *philo)
 	tt_sleep = philo->epis->agal->tt_sleep;
 	tt_die = philo->epis->agal->tt_die;
 	tt_eat = philo->epis->agal->tt_eat;
-	*(philo->kine->last_meal) = ph_actualtime();
 	if (ph_actualtime() - last_meal + tt_eat < tt_die)
+	{
+		ph_speaking(philo->epis, philo->id, LTEST_TEST);
+		*(philo->kine->last_meal) = ph_actualtime();
 		return (0);
+	}
 	else
 	{
 		ph_speaking(philo->epis, philo->id, LPRO_EAT);
@@ -183,7 +186,7 @@ static void	*ph_routine_epis(void *tmp)
 	epis = (t_epis *)tmp;
 	dead = 0;
 	meal = 0;
-	epis->agal->st_time = ph_actualtime() + 100;
+	epis->agal->st_time = ph_actualtime() + 101;
 	while (dead == 0 && meal == 0)
 	{
 		if (epis->agal->n_meal > 0)
@@ -255,6 +258,7 @@ void	ph_threading(t_sympos *sympos)
 	ph_init_thread(sympos, &sympos->epis->thread_ep, &ph_routine_epis,
 		sympos->epis);
 	i = 0;
+	ph_waiting(1);
 	pthread_mutex_lock(&sympos->epis->mtx->mtx_phs_states);
 	while (i < sympos->epis->agal->n_philos)
 	{
