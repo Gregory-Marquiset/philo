@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 15:41:17 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/14 22:39:46 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/16 14:52:24 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_e_agalma
 	unsigned long	tt_die;			//	(in milliseconds) time max beatween each philosophermeal
 	unsigned long	tt_eat;			//	(in milliseconds) time needed by a philosopher for eating a meal
 	unsigned long	tt_sleep;		//	(in milliseconds) time spend sleeping
+	unsigned long	tt_think;		//	(in milliseconds) time spend thinking (if tt_sleep < tt_eat)
 	int				n_meal;			//	n meal for each philo, when reached program stop, if ndef infinit loop until 1 philo die
 	unsigned long	st_time;
 }				t_e_agalma;

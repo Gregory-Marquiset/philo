@@ -6,11 +6,22 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 17:56:48 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/14 22:35:50 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/16 14:11:02 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/proto.h"
+
+int	ph_take_var(pthread_mutex_t *mutex, int *var)
+{
+	int	tmp;
+
+	tmp = 0;
+	pthread_mutex_lock(mutex);
+	tmp = *var;
+	pthread_mutex_unlock(mutex);
+	return (tmp);
+}
 
 void	ph_incr_var(pthread_mutex_t *mutex, int *var)
 {

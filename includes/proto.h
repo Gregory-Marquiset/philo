@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:16:57 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/15 16:05:25 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/16 16:54:57 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int				ph_check_printf_verif(t_epis *epis);
 void			ph_speaking(t_epis *epis, int id, char *message);
 
 		//	act.c			//
-int				ph_eating(t_philo *philo);
 int				ph_sleeping(t_philo *philo);
 void			ph_thinking(t_philo *philo);
 void			ph_waiting(unsigned long time);
@@ -77,6 +76,7 @@ int				ph_with_target_meals(t_epis *epis);
 void			ph_threading(t_sympos *sympos);
 
 		//	utils.c			//
+int				ph_take_var(pthread_mutex_t *mutex, int *var);
 void			ph_incr_var(pthread_mutex_t *mutex, int *var);
 void			ph_modif_var(pthread_mutex_t *mutex, int *dest, int src);
 unsigned long	ph_actualtime(void);

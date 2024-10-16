@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 18:00:45 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/14 22:42:35 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/16 16:21:21 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ static int	ph_strncmp(const char *s1, const char *s2, unsigned long n)
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
-static void	ph_program_run_helper(int flag)
+static void	ph_program_run_helper(char *argv_1)
 {
-	if (flag == 1)
+	if (!ph_strncmp(argv_1, "--help", 7))
 		ph_quit_philo(NULL, 2, LERR_ARGS_H2, CERR_ARGS_H1);
-	else if (flag == 2)
+	else if (!ph_strncmp(argv_1, "--help++", 9))
 		ph_quit_philo(NULL, 2, LERR_ARGS_H3, CERR_ARGS_H1);
 }
 
@@ -73,21 +73,23 @@ t_sympos	*ph_args_verif_and_make_sympos(int argc, char **argv)
 	t_e_agalma	tmp;
 
 	if (argc == 2)
-	{
-		if (!ph_strncmp(argv[1], "--help", 7))
-			ph_program_run_helper(1);
-		else if (!ph_strncmp(argv[1], "--help++", 9))
-			ph_program_run_helper(2);
-	}
+		ph_program_run_helper(argv[1]);
 	if (argc < 5 || argc > 6)
 		ph_quit_philo(NULL, 2, LERR_ARGS_H1, CERR_ARGS_H1);
 	tmp.n_philos = ph_atoi_safe(argv[1]);
 	tmp.tt_die = (unsigned long)ph_atoi_safe(argv[2]);
 	tmp.tt_eat = (unsigned long)ph_atoi_safe(argv[3]);
 	tmp.tt_sleep = (unsigned long)ph_atoi_safe(argv[4]);
+	if (tmp.n_philos > 200 || tmp.tt_die < 60 || tmp.tt_eat < 60
+		|| tmp.tt_sleep < 60)
+		ph_quit_philo(NULL, 2, LERR_ARGS_H1, CERR_ARGS_H1);
 	if (argv[5])
 		tmp.n_meal = ph_atoi_safe(argv[5]);
 	else
 		tmp.n_meal = -1;
+	if (tmp.tt_eat > tmp.tt_sleep)
+		tmp.tt_think = tmp.tt_eat - tmp.tt_sleep;
+	else
+		tmp.tt_think = 0;
 	return (ph_init_sympos(&tmp));
 }

@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 20:07:20 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/01 12:43:46 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/16 12:14:41 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,10 @@ LU_BLU2 "For run project philo you need 5 or 6 arguments\n" LU_END \
 5: time_to_sleep -> Time spent sleeping\n\
 6: (optional)number_of_times_each_philosopher_must_eat -> Number of meal for each philo,\n\
 when reached program stop, ifndef run until 1 philo die\n\n" \
-LU_YEL1 "All time values are in milliseconds\n\
-All value most be an int between 1 and int max\n\n" LU_END
+LU_YEL1 "Number of philos most be between 1 and 200\n\
+Number of meal most be between 1 and int max\n\
+All time values most be between 60 and int max\n\
+All time values are in milliseconds\n\n" LU_END
 
 	//		log error		//
 # define LERR_ARGS_H0 LU_RED1 "Error: arguments can only be positive int\n" LU_END
