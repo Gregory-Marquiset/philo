@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 22:53:35 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/17 09:04:23 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/17 20:24:18 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,11 @@ void	ts_print_sympos(t_sympos *sympos)
 	pthread_mutex_lock(&sympos->epis->use_printf->mtx_printf);
 	printf(LU_BLU1 "Episkopos watches the symposium:\n"
 		"He speak at %14p for %d philosophers\ntt_die: %ld\ntt_eat: %ld\n"
-		"tt_sleep: %ld\nn_meal: %d\n" LU_END,
+		"tt_sleep: %ld\nn_meal: %d\ntt_think = %ld\ntt_alt = %ld\n" LU_END,
 		(void *)&sympos->epis->use_printf->mtx_printf, sympos->epis->agal->n_philos,
 		sympos->epis->agal->tt_die, sympos->epis->agal->tt_eat,
-		sympos->epis->agal->tt_sleep, sympos->epis->agal->n_meal);
+		sympos->epis->agal->tt_sleep, sympos->epis->agal->n_meal,
+		sympos->epis->agal->tt_think, sympos->epis->agal->tt_alt);
 	pthread_mutex_unlock(&sympos->epis->use_printf->mtx_printf);
 	ts_print_philos_states(sympos->epis);
 	ts_print_philos_fork(sympos);

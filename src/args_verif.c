@@ -6,18 +6,11 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 18:00:45 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/16 16:21:21 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/17 20:21:50 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/proto.h"
-
-static int	ph_isdigit(int c)
-{
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
-}
 
 static int	ph_atoi_safe(char *str)
 {
@@ -36,7 +29,7 @@ static int	ph_atoi_safe(char *str)
 	}
 	while (str[i])
 	{
-		if (!ph_isdigit(str[i]))
+		if (str[i] < '0' || str[i] > '9')
 			ph_quit_philo(NULL, 2, LERR_ARGS_H0, CERR_ARGS_H0);
 		result = result * 10 + (str[i] - '0');
 		i++;
@@ -68,6 +61,21 @@ static void	ph_program_run_helper(char *argv_1)
 		ph_quit_philo(NULL, 2, LERR_ARGS_H3, CERR_ARGS_H1);
 }
 
+static unsigned long	ph_think_or_alt(t_e_agalma tmp, int flag)
+{
+	if (flag == 1)
+	{
+		if (tmp.tt_eat > tmp.tt_sleep)
+			return (tmp.tt_eat - tmp.tt_sleep);
+	}
+	else
+	{
+		if (tmp.n_philos % 2 != 0)
+			return (tmp.tt_eat + tmp.tt_sleep);
+	}
+	return (0);
+}
+
 t_sympos	*ph_args_verif_and_make_sympos(int argc, char **argv)
 {
 	t_e_agalma	tmp;
@@ -87,9 +95,7 @@ t_sympos	*ph_args_verif_and_make_sympos(int argc, char **argv)
 		tmp.n_meal = ph_atoi_safe(argv[5]);
 	else
 		tmp.n_meal = -1;
-	if (tmp.tt_eat > tmp.tt_sleep)
-		tmp.tt_think = tmp.tt_eat - tmp.tt_sleep;
-	else
-		tmp.tt_think = 0;
+	tmp.tt_think = ph_think_or_alt(tmp, 1);
+	tmp.tt_alt = ph_think_or_alt(tmp, 2);
 	return (ph_init_sympos(&tmp));
 }
