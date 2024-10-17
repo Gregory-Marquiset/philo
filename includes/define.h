@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 20:07:20 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/16 12:14:41 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/17 08:53:26 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,9 @@ All time values are in milliseconds\n\n" LU_END
 
 	//		test log		//
 # define LTEST_TEST_3D LU_YEL2 "Test: %3d\n" LU_END
-# define LTEST_TEST LU_YEL2 "ceci est un Test\n" LU_END
-# define LTEST_TEST_EW LU_BLU1 "epis watch the symposium\n" LU_END
-# define LTEST_TEST_PL LU_BLU2 "left the symposium\n" LU_END
-# define LTEST_TEST_EL LU_BLU1 "epis left the symposium\n" LU_END
-# define LTEST_SUCC_IN LU_GRE2 "\nSuccess: Symposium opened!\n\n" LU_END
-# define LTEST_SUCC_OUT LU_GRE2 "\nSuccess: Symposium closed!\n\n" LU_END
+# define LTEST_TEST_0 LU_YEL2 "ceci est un Test 0\n" LU_END
+# define LTEST_TEST_1 LU_YEL2 "ceci est un Test 1\n" LU_END
+# define LTEST_TEST_2 LU_YEL2 "ceci est un Test 2\n" LU_END
+# define LTEST_TEST_3 LU_YEL2 "ceci est un Test 2\n" LU_END
 
 #endif

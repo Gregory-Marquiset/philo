@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 22:53:35 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/08 16:18:16 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/17 09:04:23 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	ts_print_philos_states(t_epis *epis)
 void	ts_print_sympos(t_sympos *sympos)
 {
 	pthread_mutex_lock(&sympos->epis->use_printf->mtx_printf);
-	printf(LTEST_SUCC_IN LU_BLU1 "Episkopos watches the symposium:\n"
+	printf(LU_BLU1 "Episkopos watches the symposium:\n"
 		"He speak at %14p for %d philosophers\ntt_die: %ld\ntt_eat: %ld\n"
 		"tt_sleep: %ld\nn_meal: %d\n" LU_END,
 		(void *)&sympos->epis->use_printf->mtx_printf, sympos->epis->agal->n_philos,

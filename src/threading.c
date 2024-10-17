@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 19:56:41 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/16 20:19:18 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/17 09:09:40 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,21 +47,18 @@ static int	ph_check_die_while_sleeping(t_philo *philo)
 
 static int	ph_check_die_while_eating(t_philo *philo)
 {
-	unsigned long	last_meal;
 	unsigned long	tt_sleep;
 	unsigned long	tt_die;
 	unsigned long	tt_eat;
+	unsigned long	*last_meal = NULL;
 
-	last_meal = *philo->kine->last_meal;
 	tt_sleep = philo->epis->agal->tt_sleep;
 	tt_die = philo->epis->agal->tt_die;
 	tt_eat = philo->epis->agal->tt_eat;
-	if (ph_actualtime() - last_meal + tt_eat < tt_die)
-	{
-		ph_speaking(philo->epis, philo->id, LTEST_TEST);
-		*(philo->kine->last_meal) = ph_actualtime();
+	last_meal = philo->kine->last_meal;
+	*(philo->kine->last_meal) = ph_actualtime();
+	if ((ph_actualtime() - *last_meal) + tt_eat <= tt_die)
 		return (0);
-	}
 	else
 	{
 		ph_speaking(philo->epis, philo->id, LPRO_EAT);
