@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:16:57 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/16 16:54:57 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/25 10:22:49 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,17 @@
 # include "struct.h"
 # include "define.h"
 
-		//	act_utils.c			//
-int				ph_check_sympos_states(t_philo *philo);
-int				ph_check_tt_eat(t_philo *philo);
+		//	act.c			//
 int				ph_check_printf_verif(t_epis *epis);
 void			ph_speaking(t_epis *epis, int id, char *message);
-
-		//	act.c			//
-int				ph_sleeping(t_philo *philo);
-void			ph_thinking(t_philo *philo);
 void			ph_waiting(unsigned long time);
 
 		//	args_verif.c	//
 t_sympos		*ph_args_verif_and_make_sympos(int argc, char **argv);
 
 		//	epis_utils.c	//
+int				ph_without_target_meals(t_epis *epis);
+int				ph_with_target_meals(t_epis *epis);
 int				ph_check_id_dead(t_epis *epis);
 void			ph_speaking_for_dead(t_epis *epis, int id, char *message);
 void			ph_open_table(t_epis *epis);
@@ -65,13 +61,6 @@ t_sympos		*ph_init_sympos(t_e_agalma *tmp);
 void			ph_quit_philo(t_sympos *sympos, int fd_out, char *message,
 					int error_code);
 
-		//	philos_utils.c	//
-void			ph_seat_on_table(t_philo *philo);
-
-		//	threading_utils.c		//
-int				ph_without_target_meals(t_epis *epis);
-int				ph_with_target_meals(t_epis *epis);
-
 		//	threading.c		//
 void			ph_threading(t_sympos *sympos);
 
@@ -85,5 +74,17 @@ unsigned long	ph_actualtime(void);
 void			ts_print_philos_fork(t_sympos *sympos);
 void			ts_print_philos_states(t_epis *epis);
 void			ts_print_sympos(t_sympos *sympos);
+
+		//		epis.c		//
+void			*ph_routine_epis(void *tmp);
+
+		//		even.c		//
+void			*ph_routine_even(void *tmp);
+
+		//	uneven.c		//
+void			*ph_routine_uneven(void *tmp);
+
+		//	utils_routine.c	//
+void			ph_starting_philo(t_philo *philo, int *alive);
 
 #endif

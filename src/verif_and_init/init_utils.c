@@ -6,11 +6,11 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 22:30:09 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/30 22:31:04 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/25 09:34:18 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/proto.h"
+#include "../../includes/proto.h"
 
 void	ph_init_thread(t_sympos *sympos, pthread_t *thread, void *fun,
 	void *arg)

@@ -6,9 +6,21 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 07:54:54 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/09/26 07:55:43 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/25 10:23:13 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/*	> programme logs:
+
+	timestamp_in_ms X has taken a fork
+	timestamp_in_ms X is eating
+	timestamp_in_ms X is sleeping
+	timestamp_in_ms X is thinking
+	timestamp_in_ms X died
+
+	Replace timestamp_in_ms with the current timestamp in milliseconds
+	and X with the philosopher number.
+*/
 
 /*	> External fonction:
 	memset, printf, malloc, free, write,

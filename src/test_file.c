@@ -6,11 +6,11 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 22:53:35 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/17 20:24:18 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/25 10:10:56 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/proto.h"
+#include "../includes/proto.h"
 
 void	ts_print_philos_fork(t_sympos *sympos)
 {
@@ -71,4 +71,5 @@ void	ts_print_sympos(t_sympos *sympos)
 	ts_print_philos_fork(sympos);
 }
 
-//	-fsanitize=thread
+//	-fsanitize=
+//	./philo 199 190 60 60 5 | sed -r 's/\x1B\[[0-9;]*[A-Za-z]//g' | xclip -selection c

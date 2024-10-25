@@ -6,26 +6,35 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 20:13:07 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/16 17:46:52 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/25 10:17:51 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/proto.h"
 
-int	ph_sleeping(t_philo *philo)
+int	ph_check_printf_verif(t_epis *epis)
 {
-	if (ph_check_sympos_states(philo))
+	int	tmp;
+
+	pthread_mutex_lock(&epis->use_printf->mtx_verif);
+	tmp = *(epis->use_printf->verif);
+	pthread_mutex_unlock(&epis->use_printf->mtx_verif);
+	if (tmp == -2)
 		return (1);
-	ph_speaking(philo->epis, philo->id, LPRO_SLEEP);
-	ph_waiting(philo->epis->agal->tt_sleep);
-	return (0);
+	else
+		return (0);
 }
 
-void	ph_thinking(t_philo *philo)
+void	ph_speaking(t_epis *epis, int id, char *message)
 {
-	if (ph_check_sympos_states(philo))
+	unsigned long	start_time;
+
+	start_time = epis->agal->st_time;
+	if (ph_check_printf_verif(epis))
 		return ;
-	ph_speaking(philo->epis, philo->id, LPRO_THINK);
+	pthread_mutex_lock(&epis->use_printf->mtx_printf);
+	printf("%-10ld %-4d %s", (ph_actualtime() - start_time), id, message);
+	pthread_mutex_unlock(&epis->use_printf->mtx_printf);
 }
 
 void	ph_waiting(unsigned long time)

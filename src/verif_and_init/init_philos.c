@@ -6,11 +6,11 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 07:20:41 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/08 16:17:13 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/25 09:34:16 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/proto.h"
+#include "../../includes/proto.h"
 
 static void	ph_init_philo_kine(t_sympos *sympos, t_philo *philo)
 {

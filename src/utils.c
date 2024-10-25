@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 17:56:48 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/16 14:11:02 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/25 10:23:00 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,3 @@ unsigned long	ph_actualtime(void)
 	}
 	return (t_val.tv_sec * 1000 + t_val.tv_usec / 1000);
 }
-
-/*	> programme logs:
-
-	timestamp_in_ms X has taken a fork
-	timestamp_in_ms X is eating
-	timestamp_in_ms X is sleeping
-	timestamp_in_ms X is thinking
-	timestamp_in_ms X died
-
-	Replace timestamp_in_ms with the current timestamp in milliseconds
-	and X with the philosopher number.
-*/
