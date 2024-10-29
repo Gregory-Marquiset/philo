@@ -6,36 +6,11 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 21:55:16 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/25 10:27:54 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/29 21:12:38 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/proto.h"
-
-static int	ph_check_die_while_sleeping(t_philo *philo)
-{
-	long long		tt_result;
-	unsigned long	last_meal;
-	unsigned long	tt_sleep;
-	unsigned long	tt_die;
-	unsigned long	tt_eat;
-
-	last_meal = *philo->kine->last_meal;
-	tt_sleep = philo->epis->agal->tt_sleep;
-	tt_die = philo->epis->agal->tt_die;
-	tt_eat = philo->epis->agal->tt_eat;
-	tt_result = (long long)tt_sleep + ((long long)ph_actualtime() - (long long)last_meal);
-	if (tt_result > 0 && tt_result < (long long)tt_die)
-		return (0);
-	else
-	{
-		ph_speaking(philo->epis, philo->id, LPRO_SLEEP);
-		ph_waiting(tt_die - (ph_actualtime() - last_meal));
-		ph_modif_var(&(philo->epis->mtx->mtx_id_dead),
-			philo->epis->kine->id_dead, philo->id);
-		return (1);
-	}
-}
 
 static int	ph_check_even_die_while_eating(t_philo *philo)
 {
@@ -122,13 +97,11 @@ void	*ph_routine_even(void *tmp)
 
 
 
-
-
 		ph_speaking(philo->epis, philo->id, LPRO_THINK);
 		if (philo->epis->agal->tt_think > 0)
-			ph_waiting(philo->epis->agal->tt_think);
-		/*if (philo->epis->agal->tt_alt > 0)
-			ph_waiting(philo->epis->agal->tt_alt / 2);*/
+			ph_waiting(philo->epis->agal->tt_think - 10);
+		if (philo->epis->agal->n_philos % 2 != 0)
+			ph_waiting(philo->epis->agal->tt_eat - 10);
 
 
 

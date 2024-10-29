@@ -6,36 +6,11 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 21:55:16 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/25 10:28:30 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/29 21:12:41 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/proto.h"
-
-static int	ph_check_die_while_sleeping(t_philo *philo)
-{
-	long long		tt_result;
-	unsigned long	last_meal;
-	unsigned long	tt_sleep;
-	unsigned long	tt_die;
-	unsigned long	tt_eat;
-
-	last_meal = *philo->kine->last_meal;
-	tt_sleep = philo->epis->agal->tt_sleep;
-	tt_die = philo->epis->agal->tt_die;
-	tt_eat = philo->epis->agal->tt_eat;
-	tt_result = (long long)tt_sleep + ((long long)ph_actualtime() - (long long)last_meal);
-	if (tt_result > 0 && tt_result < (long long)tt_die)
-		return (0);
-	else
-	{
-		ph_speaking(philo->epis, philo->id, LPRO_SLEEP);
-		ph_waiting(tt_die - (ph_actualtime() - last_meal));
-		ph_modif_var(&(philo->epis->mtx->mtx_id_dead),
-			philo->epis->kine->id_dead, philo->id);
-		return (1);
-	}
-}
 
 static int	ph_check_uneven_die_while_eating(t_philo *philo)
 {
@@ -80,8 +55,6 @@ void	*ph_routine_uneven(void *tmp)
 
 	philo = (t_philo *)tmp;
 	ph_starting_philo(philo, &alive);
-
-
 	while (verif == 0 && alive == 0)
 	{
 		verif = ph_take_var(&philo->epis->mtx->mtx_id_dead, philo->epis->kine->id_dead);
@@ -90,7 +63,6 @@ void	*ph_routine_uneven(void *tmp)
 		alive = ph_check_uneven_die_while_eating(philo);
 		if (alive)
 			break ;
-
 		pthread_mutex_lock(philo->lf_fork);
 		ph_speaking(philo->epis, philo->id, LPRO_FORK);
 		pthread_mutex_lock(&philo->rg_fork);
@@ -123,20 +95,11 @@ void	*ph_routine_uneven(void *tmp)
 
 
 		ph_speaking(philo->epis, philo->id, LPRO_THINK);
-		if (philo->epis->agal->n_philos % 2 == 0 && philo->epis->agal->tt_think > 0)
-			ph_waiting(philo->epis->agal->tt_think);
-		else if (philo->epis->agal->n_philos % 2 != 0
-			&& philo->id != 1)
+		if (philo->id != 1)
 		{
 			if (philo->epis->agal->tt_think > 0)
-				ph_waiting(philo->epis->agal->tt_think);
+				ph_waiting(philo->epis->agal->tt_think - 10);
 		}
-		else if (philo->epis->agal->n_philos % 2 != 0
-			&& philo->id == 1)
-			ph_waiting(philo->epis->agal->tt_think);
-
-
-
 
 
 		verif = ph_take_var(&philo->epis->mtx->mtx_id_dead, philo->epis->kine->id_dead);
