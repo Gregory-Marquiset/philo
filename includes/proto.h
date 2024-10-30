@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:16:57 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/25 11:17:10 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/30 10:06:39 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void			*ph_routine_even(void *tmp);
 void			*ph_routine_uneven(void *tmp);
 
 		//	utils_routine.c	//
+int				ph_check_die_while_thinking(t_philo *philo);
 int				ph_check_die_while_sleeping(t_philo *philo);
 void			ph_starting_philo(t_philo *philo, int *alive);
 

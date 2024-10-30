@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 18:00:45 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/25 09:34:04 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/30 08:48:00 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,19 +61,12 @@ static void	ph_program_run_helper(char *argv_1)
 		ph_quit_philo(NULL, 2, LERR_ARGS_H3, CERR_ARGS_H1);
 }
 
-static unsigned long	ph_think_or_alt(t_e_agalma tmp, int flag)
+static unsigned long	ph_calcul_think(t_e_agalma tmp)
 {
-	if (flag == 1)
-	{
-		if (tmp.tt_eat > tmp.tt_sleep)
-			return (tmp.tt_eat - tmp.tt_sleep);
-	}
+	if (tmp.tt_eat > tmp.tt_sleep)
+		return (tmp.tt_eat - tmp.tt_sleep);
 	else
-	{
-		if (tmp.n_philos % 2 != 0)
-			return (tmp.tt_eat + tmp.tt_sleep);
-	}
-	return (0);
+		return (0);
 }
 
 t_sympos	*ph_args_verif_and_make_sympos(int argc, char **argv)
@@ -95,7 +88,6 @@ t_sympos	*ph_args_verif_and_make_sympos(int argc, char **argv)
 		tmp.n_meal = ph_atoi_safe(argv[5]);
 	else
 		tmp.n_meal = -1;
-	tmp.tt_think = ph_think_or_alt(tmp, 1);
-	tmp.tt_alt = ph_think_or_alt(tmp, 2);
+	tmp.tt_think = ph_calcul_think(tmp);
 	return (ph_init_sympos(&tmp));
 }

@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 21:55:16 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/29 21:12:38 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/30 10:14:09 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,9 @@ void	*ph_routine_even(void *tmp)
 
 
 		ph_speaking(philo->epis, philo->id, LPRO_THINK);
+		alive = ph_check_die_while_thinking(philo);
+		if (alive)
+			break ;
 		if (philo->epis->agal->tt_think > 0)
 			ph_waiting(philo->epis->agal->tt_think - 10);
 		if (philo->epis->agal->n_philos % 2 != 0)

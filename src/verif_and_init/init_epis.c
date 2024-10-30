@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 07:46:37 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/25 09:34:12 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/30 08:42:59 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ static void	ph_init_epis_agalma(t_sympos *sympos, t_e_agalma *tmp)
 	sympos->epis->agal->tt_eat = tmp->tt_eat;
 	sympos->epis->agal->tt_sleep = tmp->tt_sleep;
 	sympos->epis->agal->tt_think = tmp->tt_think;
-	sympos->epis->agal->tt_alt = tmp->tt_alt;
 }
 
 void	ph_init_epis(t_sympos *sympos, t_e_agalma *tmp)
