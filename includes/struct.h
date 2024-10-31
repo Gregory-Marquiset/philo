@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 15:41:17 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/30 08:43:17 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/31 17:31:15 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 # define STRUCT_H
 
 		//		episkopos		//
+
+typedef struct s_fork
+{
+	pthread_mutex_t	mtx_verif_f;
+	int				*verif_f;
+	pthread_mutex_t	mtx_fork;			//	mute printf
+}				t_fork;
 
 typedef struct s_printf
 {
@@ -74,8 +81,8 @@ typedef struct s_philo
 {
 	int				id;				//	Un id unique par philosophe, utilisé pour les distinguer l'rs de l'affichage ou la gestion des ressources
 	pthread_t		thread_ph;		//	Le thread associé à chaque philosophe, permettant de gérer leur exécution simultanée
-	pthread_mutex_t	*lf_fork;		//	Pointeurs vers les mutexes représentant les baguettes à gauche et à droite du philosophe
-	pthread_mutex_t	rg_fork;		//	Ils sont utilisés pour synchroniser l'accès aux baguettes
+	t_fork			*lf_fork;		//	Pointeurs vers les mutexes représentant les baguettes à gauche et à droite du philosophe
+	t_fork			rg_fork;		//	Ils sont utilisés pour synchroniser l'accès aux baguettes
 	t_p_kinesis		*kine;			//	variable modifiable
 	t_epis			*epis;			//	acces direct a l'episkopos
 }				t_philo;

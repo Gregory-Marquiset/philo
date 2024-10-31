@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:01:05 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/25 10:08:43 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/31 14:58:19 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ph_without_target_meals(t_epis *epis)
 	while (*(epis->kine->id_dead) == 0)
 	{
 		pthread_mutex_unlock(&epis->mtx->mtx_id_dead);
-		ph_waiting(1);
+		usleep(1);
 		res = *(epis->kine->id_dead);
 		pthread_mutex_lock(&epis->mtx->mtx_id_dead);
 	}
@@ -45,7 +45,7 @@ int	ph_with_target_meals(t_epis *epis)
 			if (ph_check_id_dead(epis))
 				return (0);
 		}
-		ph_waiting(1);
+		usleep(1);
 	}
 }
 
@@ -71,7 +71,7 @@ void	ph_open_table(t_epis *epis)
 	while (*(epis->kine->phs_states) != epis->agal->n_philos)
 	{
 		pthread_mutex_unlock(&epis->mtx->mtx_phs_states);
-		ph_waiting(1);
+		usleep(1);
 		pthread_mutex_lock(&epis->mtx->mtx_phs_states);
 	}
 	pthread_mutex_unlock(&epis->mtx->mtx_phs_states);

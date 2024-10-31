@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 20:13:07 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/25 10:17:51 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/31 14:54:48 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,15 @@ void	ph_speaking(t_epis *epis, int id, char *message)
 	pthread_mutex_unlock(&epis->use_printf->mtx_printf);
 }
 
-void	ph_waiting(unsigned long time)
+void	ph_waiting(t_philo *philo, unsigned long time)
 {
 	unsigned long	init_time;
 
 	init_time = ph_actualtime();
 	while ((ph_actualtime() - init_time) < time)
 	{
-		usleep(time / 100);
+		usleep(1);
+		if (ph_take_var(&philo->epis->mtx->mtx_id_dead, philo->epis->kine->id_dead) != 0)
+			break ;
 	}
 }

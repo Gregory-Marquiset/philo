@@ -6,7 +6,7 @@
 #    By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/26 18:05:12 by gmarquis          #+#    #+#              #
-#    Updated: 2024/10/25 11:07:47 by gmarquis         ###   ########.fr        #
+#    Updated: 2024/10/31 13:26:05 by gmarquis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ src/test_file.c
 
 SRC_ROUTINE = src/routine/epis.c $\
 src/routine/even.c $\
+src/routine/routine.c $\
 src/routine/uneven.c $\
 src/routine/utils_epis.c $\
 src/routine/utils_routine.c
