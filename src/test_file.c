@@ -22,21 +22,21 @@ void	ts_print_philos_fork(t_sympos *sympos)
 			sympos->philos[i].id);
 		if ((void *)&*sympos->philos[i].lf_fork != NULL)
 		{
-			pthread_mutex_lock(sympos->philos[i].lf_fork);
+			pthread_mutex_lock(&sympos->philos[i].lf_fork->mtx_fork);
 
 			printf(LU_YEL1 "lf_fork = %14p" LU_END,
 				(void *)&*sympos->philos[i].lf_fork);
 
-			pthread_mutex_unlock(sympos->philos[i].lf_fork);
+			pthread_mutex_unlock(&sympos->philos[i].lf_fork->mtx_fork);
 		}
 		else
 			printf(LU_YEL1 "lf_fork = NULL" LU_END);
 		if ((void *)&sympos->philos[i].rg_fork != NULL)
 		{
-			pthread_mutex_lock(&sympos->philos[i].rg_fork);
+			pthread_mutex_lock(&sympos->philos[i].rg_fork.mtx_fork);
 			printf(LU_YEL1 " | rg_fork = %14p\n\n" LU_END,
 				(void *)&sympos->philos[i].rg_fork);
-			pthread_mutex_unlock(&sympos->philos[i].rg_fork);
+			pthread_mutex_unlock(&sympos->philos[i].rg_fork.mtx_fork);
 		}
 		i++;
 	}

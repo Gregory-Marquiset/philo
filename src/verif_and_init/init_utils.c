@@ -32,14 +32,14 @@ void	ph_init_fork(t_sympos *sympos, t_philo *philo, t_philo *lf_philo,
 	{
 		philo->rg_fork.verif_f = 0;
 		ph_init_mtx(sympos, philo->rg_fork.mtx_fork);
-		philo->lf_fork->mtx_fork = NULL;
+		philo->lf_fork = NULL;
 	}
 	else if (pos == 1)
 	{
 		philo->rg_fork.verif_f = 0;
 		ph_init_mtx(sympos, philo->rg_fork.mtx_fork);
-		philo->lf_fork->mtx_fork = &(lf_philo->rg_fork.mtx_fork);
+		philo->lf_fork = &(lf_philo->rg_fork);
 	}
 	else if (pos == 2)
-		philo->lf_fork = &(lf_philo->rg_fork.mtx_fork);
+		philo->lf_fork = &(lf_philo->rg_fork);
 }

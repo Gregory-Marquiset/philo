@@ -12,7 +12,7 @@
 
 #include "../../includes/proto.h"
 
-static int	ph_check_uneven_die_while_eating(t_philo *philo)
+/*static int	ph_check_uneven_die_while_eating(t_philo *philo)
 {
 	long long		tt_result;
 	unsigned long	tt_die;
@@ -122,4 +122,4 @@ void	*ph_routine_uneven(void *tmp)
 		i++;
 	}
 	return (NULL);
-}
+}*/

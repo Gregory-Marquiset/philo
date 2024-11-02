@@ -18,14 +18,14 @@
 typedef struct s_fork
 {
 	pthread_mutex_t	mtx_verif_f;
-	int				*verif_f;
-	pthread_mutex_t	mtx_fork;			//	mute printf
+	int				verif_f;
+	pthread_mutex_t	mtx_fork;			//	mute fork
 }				t_fork;
 
 typedef struct s_printf
 {
 	pthread_mutex_t	mtx_verif;
-	int				*verif;
+	int				verif;
 	pthread_mutex_t	mtx_printf;			//	mute printf
 }				t_printf;
 

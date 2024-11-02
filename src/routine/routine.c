@@ -33,13 +33,13 @@ static int	ph_check_die_while_eating(t_philo *philo)
 	{
 		if (philo->id % 2 == 0)
 		{
-			pthread_mutex_lock(philo->lf_fork);
-			pthread_mutex_lock(&philo->rg_fork);
+			pthread_mutex_lock(&philo->lf_fork->mtx_fork);
+			pthread_mutex_lock(&philo->rg_fork.mtx_fork);
 		}
 		else
 		{
-			pthread_mutex_lock(&philo->rg_fork);
-			pthread_mutex_lock(philo->lf_fork);
+			pthread_mutex_lock(&philo->rg_fork.mtx_fork);
+			pthread_mutex_lock(&philo->lf_fork->mtx_fork);
 		}
 		ph_speaking(philo->epis, philo->id, LPRO_FORK);
 		ph_speaking(philo->epis, philo->id, LPRO_FORK);
@@ -49,13 +49,13 @@ static int	ph_check_die_while_eating(t_philo *philo)
 
 		if (philo->id % 2 == 0)
 		{
-			pthread_mutex_unlock(philo->lf_fork);
-			pthread_mutex_unlock(&philo->rg_fork);
+			pthread_mutex_unlock(&philo->lf_fork->mtx_fork);
+			pthread_mutex_unlock(&philo->rg_fork.mtx_fork);
 		}
 		else
 		{
-			pthread_mutex_unlock(&philo->rg_fork);
-			pthread_mutex_unlock(philo->lf_fork);
+			pthread_mutex_unlock(&philo->rg_fork.mtx_fork);
+			pthread_mutex_unlock(&philo->lf_fork->mtx_fork);
 		}
 		ph_modif_var(&(philo->epis->mtx->mtx_id_dead),
 			philo->epis->kine->id_dead, philo->id);
@@ -67,14 +67,16 @@ static void	ph_eating(t_philo *philo)
 {
 	if (philo->id % 2 == 0)
 	{
-		pthread_mutex_lock(philo->lf_fork);
-		pthread_mutex_lock(&philo->rg_fork);
+		pthread_mutex_lock(&philo->lf_fork->mtx_fork);
+		pthread_mutex_lock(&philo->rg_fork.mtx_fork);
 	}
 	else
 	{
-		pthread_mutex_lock(&philo->rg_fork);
-		pthread_mutex_lock(philo->lf_fork);
+		pthread_mutex_lock(&philo->rg_fork.mtx_fork);
+		pthread_mutex_lock(&philo->lf_fork->mtx_fork);
 	}
+	ph_speaking(philo->epis, philo->id, LPRO_FORK);
+	ph_speaking(philo->epis, philo->id, LPRO_FORK);
 
 	ph_speaking(philo->epis, philo->id, LPRO_EAT);
 	ph_waiting(philo, philo->epis->agal->tt_eat);
@@ -82,13 +84,13 @@ static void	ph_eating(t_philo *philo)
 
 	if (philo->id % 2 == 0)
 	{
-		pthread_mutex_unlock(philo->lf_fork);
-		pthread_mutex_unlock(&philo->rg_fork);
+		pthread_mutex_unlock(&philo->lf_fork->mtx_fork);
+		pthread_mutex_unlock(&philo->rg_fork.mtx_fork);
 	}
 	else
 	{
-		pthread_mutex_unlock(&philo->rg_fork);
-		pthread_mutex_unlock(philo->lf_fork);
+		pthread_mutex_unlock(&philo->rg_fork.mtx_fork);
+		pthread_mutex_unlock(&philo->lf_fork->mtx_fork);
 	}
 	*(philo->kine->count_meal) += 1;
 	if (philo->epis->agal->n_meal > 0)
@@ -142,9 +144,6 @@ void	*ph_routine(void *tmp)
 			ph_waiting(philo, philo->epis->agal->tt_think);
 		if (philo->epis->agal->n_philos % 2 != 0 && philo->id % 2 == 0)
 			ph_waiting(philo, philo->epis->agal->tt_eat);
-
-
-
 
 
 		verif = ph_take_var(&philo->epis->mtx->mtx_id_dead, philo->epis->kine->id_dead);

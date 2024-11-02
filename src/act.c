@@ -17,7 +17,7 @@ int	ph_check_printf_verif(t_epis *epis)
 	int	tmp;
 
 	pthread_mutex_lock(&epis->use_printf->mtx_verif);
-	tmp = *(epis->use_printf->verif);
+	tmp = epis->use_printf->verif;
 	pthread_mutex_unlock(&epis->use_printf->mtx_verif);
 	if (tmp == -2)
 		return (1);

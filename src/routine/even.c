@@ -12,7 +12,7 @@
 
 #include "../../includes/proto.h"
 
-static int	ph_check_even_die_while_eating(t_philo *philo)
+/*static int	ph_check_even_die_while_eating(t_philo *philo)
 {
 	long long		tt_result;
 	unsigned long	tt_die;
@@ -116,4 +116,4 @@ void	*ph_routine_even(void *tmp)
 		i++;
 	}
 	return (NULL);
-}
+}*/

@@ -84,7 +84,7 @@ void	ph_speaking_for_dead(t_epis *epis, int id, char *message)
 
 	start_time = epis->agal->st_time;
 	pthread_mutex_lock(&epis->use_printf->mtx_verif);
-	*(epis->use_printf->verif) = -2;
+	epis->use_printf->verif = -2;
 	pthread_mutex_unlock(&epis->use_printf->mtx_verif);
 	pthread_mutex_lock(&epis->use_printf->mtx_printf);
 	printf("%-10ld %-4d %s", (ph_actualtime() - start_time), id, message);

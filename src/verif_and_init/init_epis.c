@@ -17,8 +17,7 @@ static void	ph_init_use_printf(t_sympos *sympos)
 	sympos->epis->use_printf = ph_init_malloc(sympos, 1, sizeof(t_printf));
 	ph_init_mtx(sympos, sympos->epis->use_printf->mtx_printf);
 	ph_init_mtx(sympos, sympos->epis->use_printf->mtx_verif);
-	sympos->epis->use_printf->verif = ph_init_malloc(sympos, 1, sizeof(int));
-	*(sympos->epis->use_printf->verif) = 0;
+	sympos->epis->use_printf->verif = 0;
 }
 
 static void	ph_init_epis_kinesis(t_sympos *sympos)

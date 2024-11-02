@@ -16,16 +16,15 @@ int	ph_check_die_from_starvation(t_philo *philo)
 {
 	long long		tt_result;
 	unsigned long	tt_die;
-	unsigned long	tt_eat;
 	unsigned long	last_meal;
 
 	tt_die = philo->epis->agal->tt_die;
-	tt_eat = philo->epis->agal->tt_eat;
 	last_meal = *philo->kine->last_meal;
 	tt_result = (long long)tt_die - ((long long)ph_actualtime() - (long long)last_meal);
-	//printf("%d = %lld\n", philo->id, tt_result);
 	if (tt_result > 0)
 		return (0);
+	ph_modif_var(&(philo->epis->mtx->mtx_id_dead),
+		philo->epis->kine->id_dead, philo->id);
 	return (1);
 }
 
@@ -89,12 +88,10 @@ int	ph_check_die_while_sleeping(t_philo *philo)
 	unsigned long	last_meal;
 	unsigned long	tt_sleep;
 	unsigned long	tt_die;
-	unsigned long	tt_eat;
 
 	last_meal = *philo->kine->last_meal;
 	tt_sleep = philo->epis->agal->tt_sleep;
 	tt_die = philo->epis->agal->tt_die;
-	tt_eat = philo->epis->agal->tt_eat;
 	tt_result = (long long)tt_sleep + ((long long)ph_actualtime() - (long long)last_meal); /* Add tt_eat ??? */
 	if (tt_result > 0 && tt_result < (long long)tt_die) /* Add tt_eat ??? */
 		return (0);
@@ -138,6 +135,16 @@ void	ph_starting_philo(t_philo *philo, int *alive)
 		usleep(1);
 	}
 	*philo->kine->last_meal = ph_actualtime();
+	if (philo->epis->agal->n_philos == 1)
+	{
+		pthread_mutex_lock(&philo->rg_fork.mtx_fork);
+		ph_speaking(philo->epis, philo->id, LPRO_FORK);
+		ph_waiting(philo, philo->epis->agal->tt_die);
+		pthread_mutex_unlock(&philo->rg_fork.mtx_fork);
+		*alive = 1;
+		ph_modif_var(&(philo->epis->mtx->mtx_id_dead),
+			philo->epis->kine->id_dead, philo->id);
+	}
 	if (philo->id != 1)
 	{
 		*alive = ph_check_die_while_waiting(philo);

@@ -57,7 +57,6 @@ static void	*ph_free_epis(t_epis *epis, int *tmp_n_philos)
 	{
 		pthread_mutex_destroy(&epis->use_printf->mtx_printf);
 		pthread_mutex_destroy(&epis->use_printf->mtx_verif);
-		free (epis->use_printf->verif);
 		free (epis->use_printf);
 	}
 	return (NULL);
@@ -76,7 +75,7 @@ void	ph_quit_philo(t_sympos *sympos, int fd_out, char *message,
 		{
 			while (i < tmp_n_philos)
 			{
-				pthread_mutex_destroy(&sympos->philos[i].rg_fork);
+				pthread_mutex_destroy(&sympos->philos[i].rg_fork.mtx_fork);
 				free(sympos->philos[i].kine->last_meal);
 				free(sympos->philos[i].kine->count_meal);
 				free(sympos->philos[i].kine);
