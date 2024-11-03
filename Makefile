@@ -13,11 +13,13 @@
 SRC = src/main.c $\
 src/test_file.c
 
-SRC_ROUTINE = src/routine/epis.c $\
+SRC_ROUTINE = src/routine/eating.c $\
+src/routine/sleeping.c $\
+src/routine/thinking.c $\
+src/routine/epis.c $\
 src/routine/even.c $\
-src/routine/uneven.c $\
-src/routine/utils_epis.c $\
-src/routine/utils_routine.c
+src/routine/starting.c $\
+src/routine/uneven.c
 
 SRC_U = src/act.c $\
 src/out.c $\

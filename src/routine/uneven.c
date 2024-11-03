@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 21:55:16 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/30 10:07:58 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/11/03 13:38:32 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,10 @@
 static int	ph_check_uneven_die_while_eating(t_philo *philo)
 {
 	long long		tt_result;
-	unsigned long	tt_sleep;
 	unsigned long	tt_die;
 	unsigned long	tt_eat;
 	unsigned long	last_meal;
 
-	tt_sleep = philo->epis->agal->tt_sleep;
 	tt_die = philo->epis->agal->tt_die;
 	tt_eat = philo->epis->agal->tt_eat;
 	*(philo->kine->last_meal) = ph_actualtime();
@@ -60,6 +58,10 @@ void	*ph_routine_uneven(void *tmp)
 		verif = ph_take_var(&philo->epis->mtx->mtx_id_dead, philo->epis->kine->id_dead);
 		if (verif != 0)
 			break;
+
+		alive = ph_check_die_from_starvation(philo);
+		if (alive)
+			break ;
 		alive = ph_check_uneven_die_while_eating(philo);
 		if (alive)
 			break ;
