@@ -36,7 +36,6 @@ int				ph_without_target_meals(t_epis *epis);
 int				ph_with_target_meals(t_epis *epis);
 int				ph_check_id_dead(t_epis *epis);
 void			ph_speaking_for_dead(t_epis *epis, int id, char *message);
-void			ph_open_table(t_epis *epis);
 
 		//	init_epis.c	//
 void			ph_init_epis(t_sympos *sympos, t_e_agalma *tmp);
@@ -89,6 +88,7 @@ void			*ph_routine_uneven(void *tmp);
 
 		//	utils_routine.c	//
 int				ph_check_die_while_thinking(t_philo *philo);
+int				ph_check_die_from_starvation(t_philo *philo);
 int				ph_check_die_while_sleeping(t_philo *philo);
 void			ph_starting_philo(t_philo *philo, int *alive);
 int				ph_check_die_from_starvation(t_philo *philo);

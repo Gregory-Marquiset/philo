@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 18:01:05 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/31 14:58:19 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/11/03 16:07:35 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,3 +90,4 @@ void	ph_speaking_for_dead(t_epis *epis, int id, char *message)
 	printf("%-10ld %-4d %s", (ph_actualtime() - start_time), id, message);
 	pthread_mutex_unlock(&epis->use_printf->mtx_printf);
 }
+

@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 21:55:16 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/31 14:56:49 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/11/03 16:04:37 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,10 @@ void	*ph_routine_uneven(void *tmp)
 		verif = ph_take_var(&philo->epis->mtx->mtx_id_dead, philo->epis->kine->id_dead);
 		if (verif != 0)
 			break;
+
+		alive = ph_check_die_from_starvation(philo);
+		if (alive)
+			break ;
 		alive = ph_check_uneven_die_while_eating(philo);
 		if (alive)
 			break ;
