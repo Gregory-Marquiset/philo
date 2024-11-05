@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:16:57 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/31 14:55:14 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/10/30 10:06:39 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 		//	act.c			//
 int				ph_check_printf_verif(t_epis *epis);
 void			ph_speaking(t_epis *epis, int id, char *message);
-void			ph_waiting(t_philo *philo, unsigned long time);
+void			ph_waiting(unsigned long time);
 
 		//	args_verif.c	//
 t_sympos		*ph_args_verif_and_make_sympos(int argc, char **argv);
@@ -36,6 +36,7 @@ int				ph_without_target_meals(t_epis *epis);
 int				ph_with_target_meals(t_epis *epis);
 int				ph_check_id_dead(t_epis *epis);
 void			ph_speaking_for_dead(t_epis *epis, int id, char *message);
+void			ph_open_table(t_epis *epis);
 
 		//	init_epis.c	//
 void			ph_init_epis(t_sympos *sympos, t_e_agalma *tmp);
@@ -77,9 +78,6 @@ void			ts_print_sympos(t_sympos *sympos);
 		//		epis.c		//
 void			*ph_routine_epis(void *tmp);
 
-		//		routine.c		//
-void			*ph_routine(void *tmp);
-
 		//		even.c		//
 void			*ph_routine_even(void *tmp);
 
@@ -88,9 +86,7 @@ void			*ph_routine_uneven(void *tmp);
 
 		//	utils_routine.c	//
 int				ph_check_die_while_thinking(t_philo *philo);
-int				ph_check_die_from_starvation(t_philo *philo);
 int				ph_check_die_while_sleeping(t_philo *philo);
 void			ph_starting_philo(t_philo *philo, int *alive);
-int				ph_check_die_from_starvation(t_philo *philo);
 
 #endif

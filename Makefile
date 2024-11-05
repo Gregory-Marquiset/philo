@@ -6,20 +6,18 @@
 #    By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/26 18:05:12 by gmarquis          #+#    #+#              #
-#    Updated: 2024/11/03 16:05:19 by gmarquis         ###   ########.fr        #
+#    Updated: 2024/10/25 11:07:47 by gmarquis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC = src/main.c $\
 src/test_file.c
 
-SRC_ROUTINE = src/routine/eating.c $\
-src/routine/sleeping.c $\
-src/routine/thinking.c $\
-src/routine/epis.c $\
+SRC_ROUTINE = src/routine/epis.c $\
 src/routine/even.c $\
-src/routine/starting.c $\
-src/routine/uneven.c
+src/routine/uneven.c $\
+src/routine/utils_epis.c $\
+src/routine/utils_routine.c
 
 SRC_U = src/act.c $\
 src/out.c $\
