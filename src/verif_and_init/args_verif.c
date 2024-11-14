@@ -61,17 +61,9 @@ static void	ph_program_run_helper(char *argv_1)
 		ph_quit_philo(NULL, 2, LERR_ARGS_H3, CERR_ARGS_H1);
 }
 
-static unsigned long	ph_calcul_think(t_e_agalma tmp)
-{
-	if (tmp.tt_eat > tmp.tt_sleep)
-		return (tmp.tt_eat - tmp.tt_sleep);
-	else
-		return (0);
-}
-
 t_sympos	*ph_args_verif_and_make_sympos(int argc, char **argv)
 {
-	t_e_agalma	tmp;
+	t_agalma	tmp;
 
 	if (argc == 2)
 		ph_program_run_helper(argv[1]);
@@ -88,6 +80,7 @@ t_sympos	*ph_args_verif_and_make_sympos(int argc, char **argv)
 		tmp.n_meal = ph_atoi_safe(argv[5]);
 	else
 		tmp.n_meal = -1;
-	tmp.tt_think = ph_calcul_think(tmp);
+	tmp.tt_start = 0;
+	tmp.tt_think = 0;
 	return (ph_init_sympos(&tmp));
 }

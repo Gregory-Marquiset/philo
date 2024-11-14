@@ -11,18 +11,19 @@
 # **************************************************************************** #
 
 SRC = src/main.c $\
-src/test_file.c
+src/test_file.c $\
+src/out.c $\
+src/utils.c
 
-SRC_ROUTINE = src/routine/epis.c $\
+#SRC_ROUTINE = src/routine/epis.c $\
 src/routine/even.c $\
 src/routine/uneven.c $\
 src/routine/utils_epis.c $\
 src/routine/utils_routine.c
 
-SRC_U = src/act.c $\
-src/out.c $\
+
+#SRC_U = src/act.c $\
 src/threading.c $\
-src/utils.c
 
 SRC_VI = src/verif_and_init/args_verif.c $\
 src/verif_and_init/init_epis.c $\
@@ -47,10 +48,10 @@ OBJ = $(SRC:.c=.o)
 OBJ_PREF = $(addprefix $(OBJ_DIR), $(OBJ))
 DEPENDENCIES = $(patsubst %.o,%.d,$(OBJ_PREF))
 
-OBJ_ROUTINE_DIR = obj/src/routine/
-OBJ_ROUTINE = $(SRC_ROUTINE:.c=.o)
-OBJ_ROUTINE_PREF = $(addprefix $(OBJ_ROUTINE_DIR), $(notdir $(OBJ_ROUTINE)))
-DEPENDENCIES_ROUTINE = $(patsubst %.o,%.d,$(OBJ_ROUTINE_PREF))
+#OBJ_ROUTINE_DIR = obj/src/routine/
+#OBJ_ROUTINE = $(SRC_ROUTINE:.c=.o)
+#OBJ_ROUTINE_PREF = $(addprefix $(OBJ_ROUTINE_DIR), $(notdir $(OBJ_ROUTINE)))
+#DEPENDENCIES_ROUTINE = $(patsubst %.o,%.d,$(OBJ_ROUTINE_PREF))
 
 OBJ_U_DIR = obj/src/
 OBJ_U = $(SRC_U:.c=.o)
@@ -74,9 +75,9 @@ $(OBJ_DIR)%.o : src/%.c
 	$(MK) -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(PHFLAGS) $(INCLUDES) -c $< -o $@
 
-$(OBJ_ROUTINE_DIR)%.o : src/routine/%.c
-	$(MK) -p $(OBJ_ROUTINE_DIR)
-	$(CC) $(CFLAGS) $(PHFLAGS) $(INCLUDES) -c $< -o $@
+#$(OBJ_ROUTINE_DIR)%.o : src/routine/%.c
+#	$(MK) -p $(OBJ_ROUTINE_DIR)
+#	$(CC) $(CFLAGS) $(PHFLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJ_U_DIR)%.o : src/%.c 
 	$(MK) -p $(OBJ_U_DIR)
@@ -86,8 +87,11 @@ $(OBJ_VI_DIR)%.o : src/verif_and_init/%.c
 	$(MK) -p $(OBJ_VI_DIR)
 	$(CC) $(CFLAGS) $(PHFLAGS) $(INCLUDES) -c $< -o $@
 
-$(NAME) : $(OBJ_PREF) $(OBJ_ROUTINE_PREF) $(OBJ_U_PREF) $(OBJ_VI_PREF)
+$(NAME) : $(OBJ_PREF) $(OBJ_U_PREF) $(OBJ_VI_PREF)
 	$(CC) $(CFLAGS) $^ -o $@ $(PHFLAGS)
+
+#$(NAME) : $(OBJ_PREF) $(OBJ_ROUTINE_PREF) $(OBJ_U_PREF) $(OBJ_VI_PREF)
+#	$(CC) $(CFLAGS) $^ -o $@ $(PHFLAGS)
 
 clean :
 	$(RM) obj/

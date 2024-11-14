@@ -17,7 +17,7 @@ int	main(int argc, char **argv)
 	t_sympos	*sympos;
 
 	sympos = ph_args_verif_and_make_sympos(argc, argv);
-	//ts_print_sympos(sympos);
-	ph_threading(sympos);
+	ts_print_sympos(sympos);
+	//ph_threading(sympos);
 	ph_quit_philo(sympos, 1, NULL, 0);
 }

@@ -29,36 +29,17 @@ static void	ph_exit(int fd_out, char *message, int error_code)
 	exit(error_code);
 }
 
-static void	ph_destroy_mtx(t_epis *epis)
+static void	*ph_free_epis(t_epis *epis)
 {
-	pthread_mutex_destroy(&epis->mtx->mtx_id_dead);
-	pthread_mutex_destroy(&epis->mtx->mtx_phs_meals);
-	pthread_mutex_destroy(&epis->mtx->mtx_phs_states);
-	free(epis->mtx);
-}
-
-static void	*ph_free_epis(t_epis *epis, int *tmp_n_philos)
-{
-	if (epis->agal)
+	if (epis)
 	{
-		*tmp_n_philos = epis->agal->n_philos;
-		free(epis->agal);
-	}
-	if (epis->kine)
-	{
-		free(epis->kine->id_dead);
-		free(epis->kine->phs_states);
-		free(epis->kine->phs_meals);
-		free(epis->kine);
-	}
-	if (epis->mtx)
-		ph_destroy_mtx(epis);
-	if (epis->use_printf)
-	{
-		pthread_mutex_destroy(&epis->use_printf->mtx_printf);
-		pthread_mutex_destroy(&epis->use_printf->mtx_verif);
-		free (epis->use_printf->verif);
-		free (epis->use_printf);
+		free(epis->id_dead);
+		free (epis->verif);
+		free(epis->phs_meals);
+		pthread_mutex_destroy(&epis->mtx_id_dead);
+		pthread_mutex_destroy(&epis->mtx_phs_meals);
+		pthread_mutex_destroy(&epis->mtx_printf);
+		pthread_mutex_destroy(&epis->mtx_verif);
 	}
 	return (NULL);
 }
@@ -67,11 +48,11 @@ void	ph_quit_philo(t_sympos *sympos, int fd_out, char *message,
 	int error_code)
 {
 	int (i) = 0;
-	int (tmp_n_philos) = 0;
+	int (tmp_n_philos) = sympos->philos[0].agal->n_philos;
 	if (sympos)
 	{
 		if (sympos->epis)
-			sympos->epis = ph_free_epis(sympos->epis, &tmp_n_philos);
+			sympos->epis = ph_free_epis(sympos->epis);
 		if (sympos->philos)
 		{
 			while (i < tmp_n_philos)
@@ -79,7 +60,6 @@ void	ph_quit_philo(t_sympos *sympos, int fd_out, char *message,
 				pthread_mutex_destroy(&sympos->philos[i].rg_fork);
 				free(sympos->philos[i].kine->last_meal);
 				free(sympos->philos[i].kine->count_meal);
-				free(sympos->philos[i].kine);
 				i++;
 			}
 			free(sympos->philos);

@@ -36,13 +36,13 @@ void	*ph_init_malloc(t_sympos *sympos, int nbr, int var_size)
 	return (ptr);
 }
 
-t_sympos	*ph_init_sympos(t_e_agalma *tmp)
+t_sympos	*ph_init_sympos(t_agalma *tmp)
 {
 	t_sympos	*sympos;
 
 	sympos = NULL;
 	sympos = ph_init_malloc(sympos, 1, sizeof(t_sympos));
-	ph_init_epis(sympos, tmp);
-	ph_init_philos(sympos);
+	ph_init_epis(sympos);
+	ph_init_philos(sympos, tmp);
 	return (sympos);
 }
