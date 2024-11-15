@@ -86,8 +86,6 @@ static int	ph_check_die_while_waiting(t_philo *philo)
 
 void	ph_starting_philo(t_philo *philo, int *alive)
 {
-	pthread_mutex_lock(&philo->epis->mtx->mtx_phs_states);
-	pthread_mutex_unlock(&philo->epis->mtx->mtx_phs_states);
 	while (ph_actualtime() < philo->epis->agal->st_time)
 	{
 		ph_waiting(1);

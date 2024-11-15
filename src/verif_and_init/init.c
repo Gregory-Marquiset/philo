@@ -31,7 +31,8 @@ static void	ph_init_epis(t_sympos *sympos, t_agalma *tmp)
 	epis->phs_meals = ph_init_malloc_mutex(sympos,
 		&epis->mtx_phs_meals, 1, sizeof(int));
 	ph_modif_var(&epis->mtx_phs_meals, epis->phs_meals, 0);
-	epis->st_time = tmp->st_time;
+	epis->st_time = ph_init_malloc(sympos, 1, sizeof(unsigned long));
+	*epis->st_time = ph_actualtime() + 100;
 	epis->n_meal = tmp->n_meal;
 	epis->n_philos = tmp->n_philos;
 }

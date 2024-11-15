@@ -29,7 +29,7 @@ void	ph_speaking(t_epis *epis, int id, char *message)
 {
 	unsigned long	st_time;
 
-	st_time = epis->st_time;
+	st_time = *epis->st_time;
 	if (ph_check_printf_verif(epis))
 		return ;
 	pthread_mutex_lock(&epis->mtx_printf);

@@ -14,14 +14,13 @@
 
 void	ph_threading(t_sympos *sympos)
 {
-	//int	i;
-	//int	n_philos;
+	int	i;
+	int	n_philos;
 
-	//n_philos = sympos->epis->n_philos;
-	//sympos->epis->st_time = ph_actualtime() + 101;
+	n_philos = sympos->epis->n_philos;
 	ph_init_thread(sympos, &sympos->epis->thread_ep, &ph_routine_epis,
 		sympos->epis);
-	/*ph_waiting(1);
+	ph_waiting(1);
 	i = 0;
 	while (i < n_philos)
 	{
@@ -35,7 +34,7 @@ void	ph_threading(t_sympos *sympos)
 		if (pthread_join(sympos->philos[i].thread_ph, NULL))
 			ph_quit_philo(sympos, 2, LERR_PT_JOIN, CERR_PT_JOIN);
 		i++;
-	}*/
+	}
 	if (pthread_join(sympos->epis->thread_ep, NULL))
 		ph_quit_philo(sympos, 2, LERR_PT_JOIN, CERR_PT_JOIN);
 }

@@ -65,8 +65,6 @@ static void	ph_init_philo_agalma(t_sympos *sympos, t_philo *philo, t_agalma *tmp
 	agal = philo->agal;
 	agal->n_philos = tmp->n_philos;
 	agal->n_meal = tmp->n_meal;
-	agal->st_time = ph_actualtime();
-	agal->tt_die = tmp->tt_die;
 	agal->tt_eat = tmp->tt_eat;
 	agal->tt_sleep = tmp->tt_sleep;
 	ph_get_tt_start(philo);

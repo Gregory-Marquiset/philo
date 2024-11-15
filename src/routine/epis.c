@@ -16,7 +16,7 @@ static void	ph_speaking_for_dead(t_epis *epis, int id, char *message)
 {
 	unsigned long	st_time;
 
-	st_time = epis->st_time;
+	st_time = *epis->st_time;
 	pthread_mutex_lock(&epis->mtx_verif);
 	*(epis->verif) = -2;
 	pthread_mutex_unlock(&epis->mtx_verif);
@@ -85,8 +85,10 @@ void	*ph_routine_epis(void *tmp)
 	int		meal;
 
 	epis = (t_epis *)tmp;
-	dead = 4;
+	dead = 0;
 	meal = 0;
+	while (*epis->st_time > ph_actualtime())
+		ph_waiting(1);
 	while (dead == 0 && meal == 0)
 	{
 		if (epis->n_meal > 0)
