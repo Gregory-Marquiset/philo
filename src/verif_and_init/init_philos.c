@@ -76,8 +76,8 @@ static void	ph_init_philo_agalma(t_sympos *sympos, t_philo *philo, t_agalma *tmp
 static void	ph_init_philo_kine(t_sympos *sympos, t_philo *philo)
 {
 	philo->kine = ph_init_malloc(sympos, 1, sizeof(t_kinesis));
-	philo->kine->last_meal = ph_init_malloc(sympos, 1, sizeof(int));
-	*(philo->kine->last_meal) = 0;
+	philo->kine->last_meal = ph_init_malloc(sympos, 1, sizeof(unsigned long));
+	*(philo->kine->last_meal) = ph_actualtime();
 	philo->kine->count_meal = ph_init_malloc(sympos, 1, sizeof(int));
 	*(philo->kine->count_meal) = 0;
 	philo->kine->phs_meals = sympos->epis->phs_meals;

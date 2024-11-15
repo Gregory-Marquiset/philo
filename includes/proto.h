@@ -47,14 +47,14 @@ void			ph_init_philos(t_sympos *sympos, t_agalma *tmp);
 		//	init_utils.c	//
 void			ph_init_thread(t_sympos *sympos, pthread_t *thread, void *fun,
 					void *arg);
-void			ph_init_mtx(t_sympos *sympos, pthread_mutex_t mtx);
+void			ph_init_mtx(t_sympos *sympos, pthread_mutex_t *mtx);
 void			ph_init_fork(t_sympos *sympos, t_philo *philo, t_philo *rg_philo,
 					int pos);
 
 		//	init.c			//
 void			*ph_init_malloc_mutex(t_sympos *sympos, pthread_mutex_t *mutex,
-				int nbr, int var_size);
-void			*ph_init_malloc(t_sympos *sympos, int nbr, int var_size);
+				int nbr, size_t var_size);
+void			*ph_init_malloc(t_sympos *sympos, int nbr, size_t var_size);
 t_sympos		*ph_init_sympos(t_agalma *tmp);
 
 		//	out.c			//

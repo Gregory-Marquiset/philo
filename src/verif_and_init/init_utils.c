@@ -19,9 +19,9 @@ void	ph_init_thread(t_sympos *sympos, pthread_t *thread, void *fun,
 		ph_quit_philo(sympos, 2, LERR_PT_CREAT, CERR_PT_CREAT);
 }
 
-void	ph_init_mtx(t_sympos *sympos, pthread_mutex_t mtx)
+void	ph_init_mtx(t_sympos *sympos, pthread_mutex_t *mtx)
 {
-	if (pthread_mutex_init(&mtx, NULL))
+	if (pthread_mutex_init(mtx, NULL))
 		ph_quit_philo(sympos, 2, LERR_MU_INIT, CERR_MU_INIT);
 }
 
@@ -30,12 +30,12 @@ void	ph_init_fork(t_sympos *sympos, t_philo *philo, t_philo *lf_philo,
 {
 	if (pos == 0)
 	{
-		ph_init_mtx(sympos, philo->rg_fork);
+		ph_init_mtx(sympos, &philo->rg_fork);
 		philo->lf_fork = NULL;
 	}
 	else if (pos == 1)
 	{
-		ph_init_mtx(sympos, philo->rg_fork);
+		ph_init_mtx(sympos, &philo->rg_fork);
 		philo->lf_fork = &(lf_philo->rg_fork);
 	}
 	else if (pos == 2)

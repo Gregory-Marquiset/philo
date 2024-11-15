@@ -40,6 +40,7 @@ static void	*ph_free_epis(t_epis *epis)
 		pthread_mutex_destroy(&epis->mtx_phs_meals);
 		pthread_mutex_destroy(&epis->mtx_printf);
 		pthread_mutex_destroy(&epis->mtx_verif);
+		free(epis);
 	}
 	return (NULL);
 }
@@ -60,6 +61,8 @@ void	ph_quit_philo(t_sympos *sympos, int fd_out, char *message,
 				pthread_mutex_destroy(&sympos->philos[i].rg_fork);
 				free(sympos->philos[i].kine->last_meal);
 				free(sympos->philos[i].kine->count_meal);
+				free(sympos->philos[i].kine);
+				free(sympos->philos[i].agal);
 				i++;
 			}
 			free(sympos->philos);

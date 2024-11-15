@@ -13,7 +13,7 @@
 #include "../../includes/proto.h"
 
 void	*ph_init_malloc_mutex(t_sympos *sympos, pthread_mutex_t *mutex,
-	int nbr, int var_size)
+	int nbr, size_t var_size)
 {
 	void	*ptr;
 
@@ -26,7 +26,7 @@ void	*ph_init_malloc_mutex(t_sympos *sympos, pthread_mutex_t *mutex,
 	return (ptr);
 }
 
-void	*ph_init_malloc(t_sympos *sympos, int nbr, int var_size)
+void	*ph_init_malloc(t_sympos *sympos, int nbr, size_t var_size)
 {
 	void	*ptr;
 
