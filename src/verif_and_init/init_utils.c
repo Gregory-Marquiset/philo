@@ -12,6 +12,30 @@
 
 #include "../../includes/proto.h"
 
+void	*ph_init_malloc_mutex(t_sympos *sympos, pthread_mutex_t *mutex,
+	int nbr, size_t var_size)
+{
+	void	*ptr;
+
+	ptr = malloc(nbr * var_size);
+	if (!ptr)
+	{
+		pthread_mutex_unlock(mutex);
+		ph_quit_philo(sympos, 2, LERR_MALLOC, CERR_MALLOC);
+	}
+	return (ptr);
+}
+
+void	*ph_init_malloc(t_sympos *sympos, int nbr, size_t var_size)
+{
+	void	*ptr;
+
+	ptr = malloc(nbr * var_size);
+	if (!ptr)
+		ph_quit_philo(sympos, 2, LERR_MALLOC, CERR_MALLOC);
+	return (ptr);
+}
+
 void	ph_init_thread(t_sympos *sympos, pthread_t *thread, void *fun,
 	void *arg)
 {

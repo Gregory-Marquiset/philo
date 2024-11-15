@@ -31,31 +31,22 @@ void			ph_waiting(unsigned long time);
 		//	args_verif.c	//
 t_sympos		*ph_args_verif_and_make_sympos(int argc, char **argv);
 
-/*		//	epis_utils.c	//
-int				ph_without_target_meals(t_epis *epis);
-int				ph_with_target_meals(t_epis *epis);
-int				ph_check_id_dead(t_epis *epis);
-void			ph_speaking_for_dead(t_epis *epis, int id, char *message);
-void			ph_open_table(t_epis *epis);
-*/
-		//	init_epis.c	//
+		//	init.c			//
 void			ph_init_epis(t_sympos *sympos);
+t_sympos		*ph_init_sympos(t_agalma *tmp);
 
 		//	init_philos.c	//
 void			ph_init_philos(t_sympos *sympos, t_agalma *tmp);
 
 		//	init_utils.c	//
+void			*ph_init_malloc_mutex(t_sympos *sympos, pthread_mutex_t *mutex,
+				int nbr, size_t var_size);
+void			*ph_init_malloc(t_sympos *sympos, int nbr, size_t var_size);
 void			ph_init_thread(t_sympos *sympos, pthread_t *thread, void *fun,
 					void *arg);
 void			ph_init_mtx(t_sympos *sympos, pthread_mutex_t *mtx);
 void			ph_init_fork(t_sympos *sympos, t_philo *philo, t_philo *rg_philo,
 					int pos);
-
-		//	init.c			//
-void			*ph_init_malloc_mutex(t_sympos *sympos, pthread_mutex_t *mutex,
-				int nbr, size_t var_size);
-void			*ph_init_malloc(t_sympos *sympos, int nbr, size_t var_size);
-t_sympos		*ph_init_sympos(t_agalma *tmp);
 
 		//	out.c			//
 void			ph_quit_philo(t_sympos *sympos, int fd_out, char *message,

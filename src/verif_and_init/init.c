@@ -12,28 +12,25 @@
 
 #include "../../includes/proto.h"
 
-void	*ph_init_malloc_mutex(t_sympos *sympos, pthread_mutex_t *mutex,
-	int nbr, size_t var_size)
+void	ph_init_epis(t_sympos *sympos)
 {
-	void	*ptr;
+	t_epis *epis;
+	sympos->epis = ph_init_malloc(sympos, 1, sizeof(t_epis));
+	epis = sympos->epis;
+	epis->thread_ep = 0;
 
-	ptr = malloc(nbr * var_size);
-	if (!ptr)
-	{
-		pthread_mutex_unlock(mutex);
-		ph_quit_philo(sympos, 2, LERR_MALLOC, CERR_MALLOC);
-	}
-	return (ptr);
-}
-
-void	*ph_init_malloc(t_sympos *sympos, int nbr, size_t var_size)
-{
-	void	*ptr;
-
-	ptr = malloc(nbr * var_size);
-	if (!ptr)
-		ph_quit_philo(sympos, 2, LERR_MALLOC, CERR_MALLOC);
-	return (ptr);
+	ph_init_mtx(sympos, &epis->mtx_verif);
+	epis->verif = ph_init_malloc(sympos, 1, sizeof(int));
+	ph_modif_var(&epis->mtx_verif, epis->verif, 0);
+	ph_init_mtx(sympos, &epis->mtx_printf);
+	ph_init_mtx(sympos, &epis->mtx_id_dead);
+	epis->id_dead = ph_init_malloc_mutex(sympos,
+		&epis->mtx_id_dead, 1, sizeof(int));
+	ph_modif_var(&epis->mtx_id_dead, epis->id_dead, 0);
+	ph_init_mtx(sympos, &epis->mtx_phs_meals);
+	epis->phs_meals = ph_init_malloc_mutex(sympos,
+		&epis->mtx_phs_meals, 1, sizeof(int));
+	ph_modif_var(&epis->mtx_phs_meals, epis->phs_meals, 0);
 }
 
 t_sympos	*ph_init_sympos(t_agalma *tmp)

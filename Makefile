@@ -26,7 +26,6 @@ src/routine/utils_routine.c
 src/threading.c $\
 
 SRC_VI = src/verif_and_init/args_verif.c $\
-src/verif_and_init/init_epis.c $\
 src/verif_and_init/init_philos.c $\
 src/verif_and_init/init_utils.c $\
 src/verif_and_init/init.c
