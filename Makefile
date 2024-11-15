@@ -18,9 +18,8 @@ SRC = src/act.c \
       src/utils.c
 
 SRC_ROUTINE = src/routine/epis.c \
-	  src/routine/philos.c
-	  #src/routine/uneven.c \
-	  #src/routine/utils_routine.c
+	  src/routine/philos.c \
+	  src/routine/utils_routine.c
 
 SRC_VI = src/verif_and_init/args_verif.c \
          src/verif_and_init/init_philos.c \

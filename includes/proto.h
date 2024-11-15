@@ -23,28 +23,34 @@
 # include "struct.h"
 # include "define.h"
 
-		//	act.c			//
-int				ph_check_printf_verif(t_epis *epis);
-void			ph_speaking(t_epis *epis, int id, char *message);
-void			ph_waiting(unsigned long time);
+/*_________________________________________________*/
 
-		//	out.c			//
-void			ph_quit_philo(t_sympos *sympos, int fd_out, char *message,
-					int error_code);
+//		ROUTINE				//
 
-		//	test_file.c		//
-void			ts_print_philos_fork(t_sympos *sympos);
-void			ts_print_philos_states(t_epis *epis);
-void			ts_print_sympos(t_sympos *sympos);
+		//		epis.c		//
+void			*ph_routine_epis(void *tmp);
 
-		//	threading.c		//
-void			ph_threading(t_sympos *sympos);
+		//		philos.c		//
+void			*ph_routine_philos(void *tmp);
 
-		//	utils.c			//
-int				ph_take_var(pthread_mutex_t *mutex, int *var);
-void			ph_incr_var(pthread_mutex_t *mutex, int *var);
-void			ph_modif_var(pthread_mutex_t *mutex, int *dest, int src);
-unsigned long	ph_actualtime(void);
+/*		//		even.c		//
+void			*ph_routine_even(void *tmp);
+
+		//	uneven.c		//
+void			*ph_routine_uneven(void *tmp);
+
+		//	utils_routine.c	//
+//int				ph_check_die_while_thinking(t_philo *philo);
+//int				ph_check_die_while_sleeping(t_philo *philo);*/
+void			ph_starting_philo(t_philo *philo, int *alive);
+void  ph_thinking(t_philo *philo, int *verif, int *alive);
+void  ph_eating(t_philo *philo, int *verif, int *alive);
+void  ph_sleeping(t_philo *philo, int *verif, int *alive);
+void	ph_starting_philo(t_philo *philo, int *alive);
+
+/*_________________________________________________*/
+
+//		VERIF_AND_INIT		//
 
 		//	args_verif.c	//
 t_sympos		*ph_args_verif_and_make_sympos(int argc, char **argv);
@@ -65,21 +71,30 @@ void			ph_init_mtx(t_sympos *sympos, pthread_mutex_t *mtx);
 void			ph_init_fork(t_sympos *sympos, t_philo *philo, t_philo *rg_philo,
 					int pos);
 
-		//		epis.c		//
-void			*ph_routine_epis(void *tmp);
+/*_________________________________________________*/
 
-		//		philos.c		//
-void			*ph_routine_philos(void *tmp);
-/*
-		//		even.c		//
-void			*ph_routine_even(void *tmp);
+		//	act.c			//
+int				ph_check_printf_verif(t_epis *epis);
+void			ph_speaking(t_epis *epis, int id, char *message);
+void			ph_waiting(unsigned long time);
 
-		//	uneven.c		//
-void			*ph_routine_uneven(void *tmp);
-*/
-		//	utils_routine.c	//
-//int				ph_check_die_while_thinking(t_philo *philo);
-//int				ph_check_die_while_sleeping(t_philo *philo);
-void			ph_starting_philo(t_philo *philo, int *alive);
+		//	out.c			//
+void			ph_quit_philo(t_sympos *sympos, int fd_out, char *message,
+					int error_code);
+
+		//	test_file.c		//
+void			ts_print_philo(t_philo *philo);
+void			ts_print_philos_fork(t_sympos *sympos);
+void			ts_print_philos_states(t_epis *epis);
+void			ts_print_sympos(t_sympos *sympos);
+
+		//	threading.c		//
+void			ph_threading(t_sympos *sympos);
+
+		//	utils.c			//
+int				ph_take_var(pthread_mutex_t *mutex, int *var);
+void			ph_incr_var(pthread_mutex_t *mutex, int *var);
+void			ph_modif_var(pthread_mutex_t *mutex, int *dest, int src);
+unsigned long	ph_actualtime(void);
 
 #endif

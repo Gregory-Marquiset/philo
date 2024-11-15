@@ -12,6 +12,19 @@
 
 #include "../includes/proto.h"
 
+void  ts_print_philo(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->epis->mtx_printf);
+	printf("philo[%2d] sur n_philo %3d\n"
+		"n_meal %2d, tt_star %ld\n"
+		"tt_eat %ld, tt_sleep %ld\n"
+		"tt_think %ld, tt_die %ld\n\n", philo->id, philo->agal->n_philos,
+		philo->agal->n_meal, philo->agal->tt_start,
+		philo->agal->tt_eat, philo->agal->tt_sleep,
+		philo->agal->tt_think, philo->agal->tt_die);
+	pthread_mutex_unlock(&philo->epis->mtx_printf);
+}
+
 void	ts_print_philos_infos(t_sympos *sympos)
 {
 	int (i) = 0;

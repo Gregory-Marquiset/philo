@@ -67,6 +67,7 @@ static void	ph_init_philo_agalma(t_sympos *sympos, t_philo *philo, t_agalma *tmp
 	agal->n_meal = tmp->n_meal;
 	agal->tt_eat = tmp->tt_eat;
 	agal->tt_sleep = tmp->tt_sleep;
+	agal->tt_die = tmp->tt_die;
 	ph_get_tt_start(philo);
 	ph_get_tt_think(philo);
 }

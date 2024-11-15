@@ -36,6 +36,7 @@ typedef struct s_agalma
 {
 	int				n_philos;	//	Number of philosophers and fork from 1 to n
 	int				n_meal;		//	n meal for each philo, when reached program stop, if ndef infinit loop until 1 philo die
+	unsigned long	st_time;	//  tume to start the routine
 	unsigned long	tt_start;	//	(in milliseconds) time spend waiting before starting
 	unsigned long	tt_eat;		//	(in milliseconds) time needed by a philosopher for eating a meal
 	unsigned long	tt_sleep;	//	(in milliseconds) time spend sleeping

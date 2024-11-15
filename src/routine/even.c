@@ -12,40 +12,6 @@
 
 #include "../../includes/proto.h"
 
-static int	ph_check_even_die_while_eating(t_philo *philo)
-{
-	long long		tt_result;
-	unsigned long	tt_sleep;
-	unsigned long	tt_die;
-	unsigned long	tt_eat;
-	unsigned long	last_meal;
-
-	tt_sleep = philo->epis->agal->tt_sleep;
-	tt_die = philo->epis->agal->tt_die;
-	tt_eat = philo->epis->agal->tt_eat;
-	*(philo->kine->last_meal) = ph_actualtime();
-	last_meal = *philo->kine->last_meal;
-	tt_result = ((long long)tt_die - (((long long)ph_actualtime() - (long long)last_meal) + (long long)tt_eat));
-	if (tt_result > 0 && tt_result < (long long)tt_die)
-		return (0);
-	else
-	{
-		pthread_mutex_lock(philo->lf_fork);
-		ph_speaking(philo->epis, philo->id, LPRO_FORK);
-		pthread_mutex_lock(&philo->rg_fork);
-		ph_speaking(philo->epis, philo->id, LPRO_FORK);
-
-		ph_speaking(philo->epis, philo->id, LPRO_EAT);
-		ph_waiting(tt_die);
-
-		pthread_mutex_unlock(philo->lf_fork);
-		pthread_mutex_unlock(&philo->rg_fork);
-		ph_modif_var(&(philo->epis->mtx->mtx_id_dead),
-			philo->epis->kine->id_dead, philo->id);
-		return (1);
-	}
-}
-
 void	*ph_routine_even(void *tmp)
 {
 	t_philo	*philo;
