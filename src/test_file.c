@@ -47,9 +47,9 @@ void	ts_print_sympos(t_sympos *sympos)
 	printf(LU_BLU1 "Episkopos watches the symposium:\n"
 		"He speak at %14p for %d philosophers\ntt_die: %ld\ntt_eat: %ld\n"
 		"tt_sleep: %ld\nn_meal: %d\n" LU_END,
-		(void *)&sympos->epis->mtx_printf, sympos->philos[0].agal->n_philos,
+		(void *)&sympos->epis->mtx_printf, sympos->epis->n_philos,
 		sympos->philos[0].agal->tt_die, sympos->philos[0].agal->tt_eat,
-		sympos->philos[0].agal->tt_sleep, sympos->philos[0].agal->n_meal);
+		sympos->philos[0].agal->tt_sleep, sympos->epis->n_meal);
 	pthread_mutex_unlock(&sympos->epis->mtx_printf);
 	ts_print_philos_infos(sympos);
 }

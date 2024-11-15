@@ -12,13 +12,13 @@
 
 #include "../../includes/proto.h"
 
-void	ph_init_epis(t_sympos *sympos)
+static void	ph_init_epis(t_sympos *sympos, t_agalma *tmp)
 {
 	t_epis *epis;
+
 	sympos->epis = ph_init_malloc(sympos, 1, sizeof(t_epis));
 	epis = sympos->epis;
 	epis->thread_ep = 0;
-
 	ph_init_mtx(sympos, &epis->mtx_verif);
 	epis->verif = ph_init_malloc(sympos, 1, sizeof(int));
 	ph_modif_var(&epis->mtx_verif, epis->verif, 0);
@@ -31,6 +31,9 @@ void	ph_init_epis(t_sympos *sympos)
 	epis->phs_meals = ph_init_malloc_mutex(sympos,
 		&epis->mtx_phs_meals, 1, sizeof(int));
 	ph_modif_var(&epis->mtx_phs_meals, epis->phs_meals, 0);
+	epis->st_time = tmp->st_time;
+	epis->n_meal = tmp->n_meal;
+	epis->n_philos = tmp->n_philos;
 }
 
 t_sympos	*ph_init_sympos(t_agalma *tmp)
@@ -39,7 +42,7 @@ t_sympos	*ph_init_sympos(t_agalma *tmp)
 
 	sympos = NULL;
 	sympos = ph_init_malloc(sympos, 1, sizeof(t_sympos));
-	ph_init_epis(sympos);
+	ph_init_epis(sympos, tmp);
 	ph_init_philos(sympos, tmp);
 	return (sympos);
 }

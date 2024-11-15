@@ -18,6 +18,6 @@ int	main(int argc, char **argv)
 
 	sympos = ph_args_verif_and_make_sympos(argc, argv);
 	ts_print_sympos(sympos);
-	//ph_threading(sympos);
+	ph_threading(sympos);
 	ph_quit_philo(sympos, 1, NULL, 0);
 }

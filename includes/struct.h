@@ -25,6 +25,9 @@ typedef struct s_epis
 	int				*id_dead;         		//	l'id du philo mort
 	pthread_mutex_t	mtx_phs_meals;	//	mute phs_meals
 	int				*phs_meals;		        //	indique l'etat des repas des philos
+	unsigned long	st_time;
+	int				n_meal;
+	int				n_philos;
 }				t_epis;
 
 		//		philo		//

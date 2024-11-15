@@ -16,9 +16,9 @@ int	ph_check_printf_verif(t_epis *epis)
 {
 	int	tmp;
 
-	pthread_mutex_lock(&epis->use_printf->mtx_verif);
-	tmp = *(epis->use_printf->verif);
-	pthread_mutex_unlock(&epis->use_printf->mtx_verif);
+	pthread_mutex_lock(&epis->mtx_verif);
+	tmp = *(epis->verif);
+	pthread_mutex_unlock(&epis->mtx_verif);
 	if (tmp == -2)
 		return (1);
 	else
@@ -27,14 +27,14 @@ int	ph_check_printf_verif(t_epis *epis)
 
 void	ph_speaking(t_epis *epis, int id, char *message)
 {
-	unsigned long	start_time;
+	unsigned long	st_time;
 
-	start_time = epis->agal->st_time;
+	st_time = epis->st_time;
 	if (ph_check_printf_verif(epis))
 		return ;
-	pthread_mutex_lock(&epis->use_printf->mtx_printf);
-	printf("%-10ld %-4d %s", (ph_actualtime() - start_time), id, message);
-	pthread_mutex_unlock(&epis->use_printf->mtx_printf);
+	pthread_mutex_lock(&epis->mtx_printf);
+	printf("%-10ld %-4d %s", (ph_actualtime() - st_time), id, message);
+	pthread_mutex_unlock(&epis->mtx_printf);
 }
 
 void	ph_waiting(unsigned long time)
