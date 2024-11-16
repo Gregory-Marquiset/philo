@@ -16,7 +16,7 @@ void	ph_starting_philo(t_philo *philo, int *alive)
 {
 	unsigned long (tt_start) = philo->agal->tt_start;
 	unsigned long (tt_die) = philo->agal->tt_die;
-	ts_print_philo(philo);
+	//ts_print_philo(philo);
 	while (*philo->epis->st_time > ph_actualtime())
 		ph_waiting(1);
 	if (philo->agal->n_philos == 1)
@@ -42,11 +42,11 @@ void	ph_starting_philo(t_philo *philo, int *alive)
 void  *ph_routine_philos(void *tmp)
 {
 	t_philo (*philo) = (t_philo *)tmp;
-	//int (verif) = 0;
+	int (verif) = 0;
 	int (alive) = 0;
 	ph_starting_philo(philo, &alive);
-	ph_speaking(philo->epis, philo->id, LTEST_TEST_0);
-	/*while (verif == 0 && !alive)
+	ph_incr_var(philo->kine->mtx_phs_meals, philo->kine->phs_meals);
+	while (verif == 0 && !alive)
 	{
 		ph_eating(philo, &verif, &alive);
 		if (verif != 0 || alive)
@@ -55,6 +55,6 @@ void  *ph_routine_philos(void *tmp)
 		if (verif != 0 || alive)
 			break;
 		ph_thinking(philo, &verif, &alive);
-	}*/
+	}
 	return (NULL);
 }

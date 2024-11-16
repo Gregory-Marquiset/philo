@@ -14,9 +14,7 @@
 
 static unsigned long	ph_strlen(char *str)
 {
-	unsigned long	i;
-
-	i = 0;
+	unsigned long (i) = 0;
 	while (str[i])
 		i++;
 	return (i);
@@ -48,15 +46,19 @@ static void	*ph_free_epis(t_epis *epis)
 void	ph_quit_philo(t_sympos *sympos, int fd_out, char *message,
 	int error_code)
 {
+	int n_philos;
+
 	int (i) = 0;
-	int (tmp_n_philos) = sympos->philos[0].agal->n_philos;
 	if (sympos)
 	{
 		if (sympos->epis)
+		{
+			n_philos = sympos->epis->n_philos;
 			sympos->epis = ph_free_epis(sympos->epis);
+		}
 		if (sympos->philos)
 		{
-			while (i < tmp_n_philos)
+			while (i < n_philos)
 			{
 				pthread_mutex_destroy(&sympos->philos[i].rg_fork);
 				free(sympos->philos[i].kine->last_meal);

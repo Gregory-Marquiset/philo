@@ -75,7 +75,7 @@ t_sympos	*ph_args_verif_and_make_sympos(int argc, char **argv)
 	tmp.tt_sleep = (unsigned long)ph_atoi_safe(argv[4]);
 	if (tmp.n_philos > 200 || tmp.tt_die < 60 || tmp.tt_eat < 60
 		|| tmp.tt_sleep < 60)
-		ph_quit_philo(NULL, 2, LERR_ARGS_H1, CERR_ARGS_H1);
+		ph_quit_philo(NULL, 2, LERR_ARGS_H0, CERR_ARGS_H0);
 	if (argv[5])
 		tmp.n_meal = ph_atoi_safe(argv[5]);
 	else
