@@ -6,7 +6,7 @@
 #    By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/26 18:05:12 by gmarquis          #+#    #+#              #
-#    Updated: 2024/11/15 12:05:47 by gmarquis         ###   ########.fr        #
+#    Updated: 2024/11/26 10:11:10 by gmarquis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,10 +32,10 @@ NAME = philo
 
 MK = mkdir
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3 -MMD -MP -fPIC
+CFLAGS = -Wall -Wextra -Werror -g3 -MMD -MP -fPIC -fsanitize=thread
 PHFLAGS = -pthread
 VALGRIND = valgrind --tool=helgrind --history-level=full
-ARGS = 5 1100 500 400 5
+ARGS = 3 190 60 60 25
 RM = rm -rf
 
 OBJ_DIR = obj/

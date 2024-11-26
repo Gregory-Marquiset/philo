@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   epis.c                                             :+:      :+:    :+:   */
+/*   philos.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 21:55:16 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/25 09:45:20 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/11/20 08:40:02 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void  *ph_routine_philos(void *tmp)
 	int (verif) = 0;
 	int (alive) = 0;
 	ph_starting_philo(philo, &alive);
-	ph_incr_var(philo->kine->mtx_phs_meals, philo->kine->phs_meals);
+	//ph_incr_var(philo->kine->mtx_phs_meals, philo->kine->phs_meals);
 	while (verif == 0 && !alive)
 	{
 		ph_eating(philo, &verif, &alive);

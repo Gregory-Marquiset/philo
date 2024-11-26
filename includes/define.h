@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 20:07:20 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/17 15:47:09 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/11/20 09:26:59 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,20 @@ Number of meal most be between 1 and int max\n\
 All time values most be between 60 and int max\n\
 All time values are in milliseconds\n\n" LU_END \
 LU_BLU2 "<-----| TIPS |----->\n" LU_END \
-"If you want to test this programe with:\n" \
+"If you want to test this program with a visualizer, you can use this site:\n" \
 LU_CYA2 "https://nafuka11.github.io/philosophers-visualizer/\n\n" LU_END \
-"You can pipe philo with the following commande:\n" \
-LU_YEL1 "sed -r 's/\\x1B[[0-9;]*[A-Za-z]//g' | xclip -selection c\n\n" LU_END \
-"This line copies the output from philo so you can paste it easly.\n" \
-"It's like with the right click but it goes faster and it deletes the colors.\n" \
-"Be careful in case of an infinite loop Ctrl+C will not allow the copy.\n"
+"If you want to test 'philo' more easily without manually copying and pasting,\n" \
+"this two bash lines copy the output from 'philo' so you can paste it easily.\n" \
+"It's similar to using the right click to copy but it's faster.\n" \
+"The lines also removes color codes from the output because " \
+"they are not accepted by the site.\n\n" LU_END \
+"The first one is to be used with a specified number of meals:\n" \
+LU_YEL1 "./philo n_philo tt_die tt_eat tt_sleep n_meal " \
+"| sed -r 's/\\x1B[[0-9;]*[A-Za-z]//g' | xclip -selection c\n\n" LU_END \
+"The second one is to be used without a specified number of meals but with a timeout:\n" \
+LU_YEL1 "timeout 10 ./philo n_philo tt_die tt_eat tt_sleep 2>&1 " \
+"| sed -r 's/\\x1B[[0-9;]*[A-Za-z]//g' | cat | xclip -selection c\n\n" LU_END
+
 
 	//		log error		//
 # define LERR_ARGS_H0 LU_RED2 "Error: " LU_END "One or more arguments are out of range!\n" LU_BLU2 "For help run: " LU_END "./philo --help++\n"
