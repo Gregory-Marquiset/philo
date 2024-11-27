@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 21:55:16 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/11/20 08:40:02 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/11/27 07:05:31 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ph_starting_philo(t_philo *philo, int *alive)
 	*alive = ph_take_var(philo->kine->mtx_id_dead, philo->kine->id_dead);
 }
 
-void  *ph_routine_philos(void *tmp)
+void	*ph_routine_philos(void *tmp)
 {
 	t_philo (*philo) = (t_philo *)tmp;
 	int (verif) = 0;

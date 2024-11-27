@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 21:55:16 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/11/20 08:25:04 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/11/27 09:01:58 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,15 @@ int	ph_check_die_while_thinking(t_philo *philo)
 	long long		tt_result;
 	unsigned long	last_meal;
 	unsigned long	tt_die;
+	unsigned long	tt_think;
 
 	last_meal = *philo->kine->last_meal;
 	tt_die = philo->agal->tt_die;
+	tt_think = philo->agal->tt_think;
 	tt_result = (long long)tt_die - ((long long)ph_actualtime() - (long long)last_meal);
-	//printf("%d = %lld\n", philo->id, tt_result);
-	if (tt_result > 0 && tt_result < (long long)tt_die)
+	//printf("%d r = %lld\n", philo->id, tt_result);
+	//printf("%d t = %lld\n", philo->id, (long long)tt_think);
+	if (tt_result > 0 && tt_result < (long long)tt_die && tt_result > (long long)tt_think)
 		return (0);
 	else
 	{
