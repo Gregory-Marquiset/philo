@@ -23,14 +23,12 @@ int	ph_check_die_while_thinking(t_philo *philo)
 	tt_die = philo->agal->tt_die;
 	tt_think = philo->agal->tt_think;
 	tt_result = (long long)tt_die - ((long long)ph_actualtime() - (long long)last_meal);
-	//printf("%d r = %lld\n", philo->id, tt_result);
-	//printf("%d t = %lld\n", philo->id, (long long)tt_think);
 	if (tt_result > 0 && tt_result < (long long)tt_die && tt_result > (long long)tt_think)
 		return (0);
 	else
 	{
 		ph_speaking(philo->epis, philo->id, LPRO_THINK);
-		ph_waiting(tt_die - (ph_actualtime() - last_meal));
+		ph_waiting(tt_die - ((long long)ph_actualtime() - (long long)last_meal));
 		ph_modif_var(&(philo->epis->mtx_id_dead),
 			philo->kine->id_dead, philo->id);
 		return (1);

@@ -31,6 +31,17 @@ static int	ph_check_id_dead(t_epis *epis)
 
 	res = 0;
 	pthread_mutex_lock(&epis->mtx_id_dead);
+	res = *epis->id_dead;
+	pthread_mutex_unlock(&epis->mtx_id_dead);
+	return (res);
+}
+
+/*static int	ph_check_id_dead(t_epis *epis)
+{
+	int	res;
+
+	res = 0;
+	pthread_mutex_lock(&epis->mtx_id_dead);
 	if (*(epis->id_dead) > 0)
 	{
 		res = *epis->id_dead;
@@ -39,9 +50,24 @@ static int	ph_check_id_dead(t_epis *epis)
 	}
 	pthread_mutex_unlock(&epis->mtx_id_dead);
 	return (0);
-}
+}*/
 
 static int	ph_without_target_meals(t_epis *epis)
+{
+	int	res;
+
+	res = 0;
+	while (res == 0)
+	{
+		pthread_mutex_lock(&epis->mtx_id_dead);
+		res = *(epis->id_dead);
+		pthread_mutex_unlock(&epis->mtx_id_dead);
+		ph_waiting(1);
+	}
+	return (res);
+}
+
+/*static int	ph_without_target_meals(t_epis *epis)
 {
 	int	res;
 
@@ -56,7 +82,7 @@ static int	ph_without_target_meals(t_epis *epis)
 	}
 	pthread_mutex_unlock(&epis->mtx_id_dead);
 	return (res);
-}
+}*/
 
 static int	ph_with_target_meals(t_epis *epis)
 {
@@ -103,5 +129,6 @@ void	*ph_routine_epis(void *tmp)
 	}
 	if (dead != 0)
 		ph_speaking_for_dead(epis, dead, LPRO_DIED);
+	printf("Huuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu\n");
 	return (NULL);
 }

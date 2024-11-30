@@ -33,8 +33,7 @@ void	ph_starting_philo(t_philo *philo, int *alive)
 	else
 	{
 		ph_waiting(tt_die);
-		if(!ph_take_var(philo->kine->mtx_id_dead, philo->kine->id_dead))
-			ph_modif_var(philo->kine->mtx_id_dead, philo->kine->id_dead, philo->id);
+		ph_modif_var(philo->kine->mtx_id_dead, philo->kine->id_dead, philo->id);
 	}
 	*alive = ph_take_var(philo->kine->mtx_id_dead, philo->kine->id_dead);
 }
@@ -45,16 +44,16 @@ void	*ph_routine_philos(void *tmp)
 	int (verif) = 0;
 	int (alive) = 0;
 	ph_starting_philo(philo, &alive);
-	//ph_incr_var(philo->kine->mtx_phs_meals, philo->kine->phs_meals);
-	while (verif == 0 && !alive)
+	while (verif == 0 && alive == 0)
 	{
 		ph_eating(philo, &verif, &alive);
-		if (verif != 0 || alive)
-			break;
+		if (verif != 0 || alive != 0)
+			return (NULL);
 		ph_sleeping(philo, &verif, &alive);
-		if (verif != 0 || alive)
-			break;
+		if (verif != 0 || alive != 0)
+			return (NULL);
 		ph_thinking(philo, &verif, &alive);
 	}
+	printf("Haaaaaaaaaaaaaaaaaaa %d\n", philo->id);
 	return (NULL);
 }

@@ -44,9 +44,6 @@
 # define LU_END "\033[0m"
 
 	//		log help		//
-# define LERR_ARGS_H2 "./program_name number_of_philosophers time_to_die time_to_eat \
-time_to_sleep (optional)number_of_times_each_philosopher_must_eat\n"\
-LU_BLU2 "For more details run: " LU_END "./philo --help++\n"
 # define LERR_ARGS_H3 LU_BLU2 "\nHere some details about the project philo:\n" LU_END \
 "the project calls for creating a symposium of philosophers\n\
 who eat, think and sleep continuously in the same dish\n\

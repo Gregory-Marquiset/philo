@@ -56,8 +56,6 @@ static int	ph_strncmp(const char *s1, const char *s2, unsigned long n)
 static void	ph_program_run_helper(char *argv_1)
 {
 	if (!ph_strncmp(argv_1, "--help", 7))
-		ph_quit_philo(NULL, 2, LERR_ARGS_H2, CERR_ARGS_H1);
-	else if (!ph_strncmp(argv_1, "--help++", 9))
 		ph_quit_philo(NULL, 2, LERR_ARGS_H3, CERR_ARGS_H1);
 }
 

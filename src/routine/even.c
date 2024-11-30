@@ -12,7 +12,7 @@
 
 #include "../../includes/proto.h"
 
-void	*ph_routine_even(void *tmp)
+/*void	*ph_routine_even(void *tmp)
 {
 	t_philo	*philo;
 	int		verif = 0;
@@ -86,4 +86,4 @@ void	*ph_routine_even(void *tmp)
 		i++;
 	}
 	return (NULL);
-}
+}*/

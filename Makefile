@@ -32,7 +32,7 @@ NAME = philo
 
 MK = mkdir
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3 -MMD -MP -fPIC -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -g3 -MMD -MP -fPIC
 PHFLAGS = -pthread
 VALGRIND = valgrind --tool=helgrind --history-level=full
 ARGS = 3 190 60 60 25
