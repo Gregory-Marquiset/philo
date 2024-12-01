@@ -34,9 +34,9 @@ void	ph_threading(t_sympos *sympos)
 		if (pthread_join(sympos->philos[i].thread_ph, NULL))
 			ph_quit_philo(sympos, 2, LERR_PT_JOIN, CERR_PT_JOIN);
 		i++;
-		printf("\tphilo %d\n", i);
+//    printf("Philosopher %d has been join.\n", i);
 	}
-	printf("\tepis\n");
 	if (pthread_join(sympos->epis->thread_ep, NULL))
 		ph_quit_philo(sympos, 2, LERR_PT_JOIN, CERR_PT_JOIN);
+//	printf("Episkopos thread has been join.\n");
 }

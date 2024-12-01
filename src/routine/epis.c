@@ -125,10 +125,14 @@ void	*ph_routine_epis(void *tmp)
 			dead = ph_check_id_dead(epis);
 		}
 		else
+		{
 			dead = ph_without_target_meals(epis);
+			if (dead != 0)
+				ph_modif_var(&epis->mtx_id_dead, epis->id_dead, -1);
+		}
 	}
 	if (dead != 0)
 		ph_speaking_for_dead(epis, dead, LPRO_DIED);
-	printf("Huuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu\n");
+//    printf("Episkopos thread has finished.\n");
 	return (NULL);
 }

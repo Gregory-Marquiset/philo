@@ -35,7 +35,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -g3 -MMD -MP -fPIC
 PHFLAGS = -pthread
 VALGRIND = valgrind --tool=helgrind --history-level=full
-ARGS = 3 190 60 60 25
+ARGS = 200 130 60 60
 RM = rm -rf
 
 OBJ_DIR = obj/
@@ -57,8 +57,7 @@ v: $(NAME)
 	-$(VALGRIND) ./$(NAME) $(ARGS) 2> valgrind
 
 $(OBJ_DIR)%.o : %.c
-	@$(MK) -p $(dir $@)
-	@$(MK) -p $(DEP_DIR)$(dir $<)
+	@$(MK) -p $(dir $@) $(DEP_DIR)$(dir $<)
 	$(CC) $(CFLAGS) $(PHFLAGS) $(INCLUDES) -c $< -o $@ -MMD -MF $(DEP_DIR)$*.d
 
 $(NAME) : $(OBJ_PREF) $(OBJ_ROUTINE_PREF) $(OBJ_VI_PREF)

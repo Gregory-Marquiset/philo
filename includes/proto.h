@@ -33,20 +33,12 @@ void			*ph_routine_epis(void *tmp);
 		//		philos.c		//
 void			*ph_routine_philos(void *tmp);
 
-/*		//		even.c		//
-void			*ph_routine_even(void *tmp);
-
-		//	uneven.c		//
-void			*ph_routine_uneven(void *tmp);
-
 		//	utils_routine.c	//
-//int				ph_check_die_while_thinking(t_philo *philo);
-//int				ph_check_die_while_sleeping(t_philo *philo);*/
 void			ph_starting_philo(t_philo *philo, int *alive);
-void  ph_thinking(t_philo *philo, int *verif, int *alive);
-void  ph_eating(t_philo *philo, int *verif, int *alive);
-void  ph_sleeping(t_philo *philo, int *verif, int *alive);
-void	ph_starting_philo(t_philo *philo, int *alive);
+void			ph_thinking(t_philo *philo, int *verif, int *alive);
+void			ph_eating(t_philo *philo, int *verif, int *alive);
+void			ph_sleeping(t_philo *philo, int *verif, int *alive);
+void			ph_starting_philo(t_philo *philo, int *alive);
 
 /*_________________________________________________*/
 

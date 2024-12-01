@@ -54,6 +54,6 @@ void	*ph_routine_philos(void *tmp)
 			return (NULL);
 		ph_thinking(philo, &verif, &alive);
 	}
-	printf("Haaaaaaaaaaaaaaaaaaa %d\n", philo->id);
+//    printf("Philosopher %d has finished.\n", philo->id);
 	return (NULL);
 }

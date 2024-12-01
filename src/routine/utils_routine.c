@@ -41,7 +41,7 @@ void  ph_thinking(t_philo *philo, int *verif, int *alive)
 	if (*verif != 0)
 		return ;
 	*alive = ph_check_die_while_thinking(philo);
-	if (*alive)
+	if (*alive != 0)
 		return ;
 	ph_speaking(philo->epis, philo->id, LPRO_THINK);
 	ph_waiting(philo->agal->tt_think);
@@ -76,7 +76,7 @@ void  ph_sleeping(t_philo *philo, int *verif, int *alive)
 	if (*verif != 0)
 		return ;
 	*alive = ph_check_die_while_sleeping(philo);
-	if (*alive)
+	if (*alive != 0)
 		return ;
 	ph_speaking(philo->epis, philo->id, LPRO_SLEEP);
 	ph_waiting(philo->agal->tt_sleep);
@@ -130,7 +130,7 @@ void  ph_eating(t_philo *philo, int *verif, int *alive)
 	if (*verif != 0)
 		return ;
 	*alive = ph_check_even_die_while_eating(philo);
-	if (*alive)
+	if (*alive != 0)
 		return ;
 	ph_take_fork(philo);
 	ph_speaking(philo->epis, philo->id, LPRO_EAT);
