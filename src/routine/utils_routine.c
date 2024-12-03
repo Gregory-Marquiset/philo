@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 21:55:16 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/11/27 09:01:58 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/12/03 10:31:25 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	ph_check_die_while_thinking(t_philo *philo)
 		return (0);
 	else
 	{
-		ph_speaking(philo->epis, philo->id, LPRO_THINK);
+		if (ph_speaking(philo->epis, philo->id, LPRO_THINK))
+			return (1);
 		ph_waiting(tt_die - ((long long)ph_actualtime() - (long long)last_meal));
 		ph_modif_var(&(philo->epis->mtx_id_dead),
 			philo->kine->id_dead, philo->id);
@@ -43,7 +44,8 @@ void  ph_thinking(t_philo *philo, int *verif, int *alive)
 	*alive = ph_check_die_while_thinking(philo);
 	if (*alive != 0)
 		return ;
-	ph_speaking(philo->epis, philo->id, LPRO_THINK);
+	if (ph_speaking(philo->epis, philo->id, LPRO_THINK))
+			return ;
 	ph_waiting(philo->agal->tt_think);
 }
 
@@ -62,7 +64,8 @@ int	ph_check_die_while_sleeping(t_philo *philo)
 		return (0);
 	else
 	{
-		ph_speaking(philo->epis, philo->id, LPRO_SLEEP);
+		if (ph_speaking(philo->epis, philo->id, LPRO_SLEEP))
+			return (1);
 		ph_waiting(tt_die - ((long long)ph_actualtime() - (long long)last_meal));
 		ph_modif_var(philo->kine->mtx_id_dead,
 			philo->kine->id_dead, philo->id);
@@ -78,26 +81,46 @@ void  ph_sleeping(t_philo *philo, int *verif, int *alive)
 	*alive = ph_check_die_while_sleeping(philo);
 	if (*alive != 0)
 		return ;
-	ph_speaking(philo->epis, philo->id, LPRO_SLEEP);
+	if (ph_speaking(philo->epis, philo->id, LPRO_SLEEP))
+		return ;
 	ph_waiting(philo->agal->tt_sleep);
 }
 
-void  ph_take_fork(t_philo *philo)
+int	ph_take_fork(t_philo *philo)
 {
 	if (philo->id % 2 == 0)
 	{
 		pthread_mutex_lock(philo->lf_fork);
-		ph_speaking(philo->epis, philo->id, LPRO_FORK);
+		if (ph_speaking(philo->epis, philo->id, LPRO_FORK))
+		{
+			pthread_mutex_unlock(philo->lf_fork);
+			return (1);
+		}
 		pthread_mutex_lock(&philo->rg_fork);
-		ph_speaking(philo->epis, philo->id, LPRO_FORK);
+		if (ph_speaking(philo->epis, philo->id, LPRO_FORK))
+		{
+			pthread_mutex_unlock(philo->lf_fork);
+			pthread_mutex_unlock(&philo->rg_fork);
+			return (1);
+		}
 	}
 	else
 	{
 		pthread_mutex_lock(&philo->rg_fork);
-		ph_speaking(philo->epis, philo->id, LPRO_FORK);
+		if (ph_speaking(philo->epis, philo->id, LPRO_FORK))
+		{
+			pthread_mutex_unlock(&philo->rg_fork);
+			return (1);
+		}
 		pthread_mutex_lock(philo->lf_fork);
-		ph_speaking(philo->epis, philo->id, LPRO_FORK);
+		if (ph_speaking(philo->epis, philo->id, LPRO_FORK))
+		{
+			pthread_mutex_unlock(&philo->rg_fork);
+			pthread_mutex_unlock(philo->lf_fork);
+			return (1);
+		}
 	}
+	return (0);
 }
 
 static int	ph_check_even_die_while_eating(t_philo *philo)
@@ -114,8 +137,10 @@ static int	ph_check_even_die_while_eating(t_philo *philo)
 		return (0);
 	else
 	{
-		ph_take_fork(philo);
-		ph_speaking(philo->epis, philo->id, LPRO_EAT);
+		if (ph_take_fork(philo))
+			return (1);
+		if (ph_speaking(philo->epis, philo->id, LPRO_EAT))
+			return (1);
 		ph_waiting(tt_die);
 		pthread_mutex_unlock(philo->lf_fork);
 		pthread_mutex_unlock(&philo->rg_fork);
@@ -132,8 +157,10 @@ void  ph_eating(t_philo *philo, int *verif, int *alive)
 	*alive = ph_check_even_die_while_eating(philo);
 	if (*alive != 0)
 		return ;
-	ph_take_fork(philo);
-	ph_speaking(philo->epis, philo->id, LPRO_EAT);
+	if (ph_take_fork(philo))
+		return ;
+	if (ph_speaking(philo->epis, philo->id, LPRO_EAT))
+		return ;
 	ph_waiting(philo->agal->tt_eat);
 	pthread_mutex_unlock(philo->lf_fork);
 	pthread_mutex_unlock(&philo->rg_fork);

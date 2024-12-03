@@ -6,13 +6,13 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 21:55:16 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/12/03 09:33:31 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/12/03 10:29:14 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/proto.h"
 
-void	ph_starting_philo(t_philo *philo, int *alive)
+int	ph_starting_philo(t_philo *philo, int *alive)
 {
 	unsigned long (tt_start) = philo->agal->tt_start;
 	unsigned long (tt_die) = philo->agal->tt_die;
@@ -22,7 +22,11 @@ void	ph_starting_philo(t_philo *philo, int *alive)
 	if (philo->agal->n_philos == 1)
 	{
 		pthread_mutex_lock(&philo->rg_fork);
-		ph_speaking(philo->epis, philo->id, LPRO_FORK);
+		if (ph_speaking(philo->epis, philo->id, LPRO_FORK))
+		{
+			pthread_mutex_unlock(&philo->rg_fork);
+			return (1);
+		}
 		ph_waiting(tt_die);
 		pthread_mutex_unlock(&philo->rg_fork);
 		ph_modif_var(philo->kine->mtx_id_dead,
@@ -36,6 +40,7 @@ void	ph_starting_philo(t_philo *philo, int *alive)
 		ph_modif_var(philo->kine->mtx_id_dead, philo->kine->id_dead, philo->id);
 	}
 	*alive = ph_take_var(philo->kine->mtx_id_dead, philo->kine->id_dead);
+	return (0);
 }
 
 void	*ph_routine_philos(void *tmp)
@@ -43,7 +48,7 @@ void	*ph_routine_philos(void *tmp)
 	t_philo (*philo) = (t_philo *)tmp;
 	int (verif) = 0;
 	int (alive) = 0;
-	ph_starting_philo(philo, &alive);
+	alive = ph_starting_philo(philo, &alive);
 	while (verif == 0 && alive == 0)
 	{
 		ph_eating(philo, &verif, &alive);

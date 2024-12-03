@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 20:13:07 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/11/05 19:01:11 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/12/03 09:38:53 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,17 @@ int	ph_check_printf_verif(t_epis *epis)
 		return (0);
 }
 
-void	ph_speaking(t_epis *epis, int id, char *message)
+int	ph_speaking(t_epis *epis, int id, char *message)
 {
 	unsigned long	st_time;
 
 	st_time = *epis->st_time;
 	if (ph_check_printf_verif(epis))
-		return ;
+		return (1);
 	pthread_mutex_lock(&epis->mtx_printf);
 	printf("%-10ld %-4d %s", (ph_actualtime() - st_time), id, message);
 	pthread_mutex_unlock(&epis->mtx_printf);
+	return (0);
 }
 
 void	ph_waiting(unsigned long time)
@@ -44,7 +45,5 @@ void	ph_waiting(unsigned long time)
 
 	init_time = ph_actualtime();
 	while ((ph_actualtime() - init_time) < time)
-	{
 		usleep(time / 100);
-	}
 }

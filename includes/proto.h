@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:16:57 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/30 10:06:39 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/12/03 10:30:20 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,10 @@ void			*ph_routine_epis(void *tmp);
 void			*ph_routine_philos(void *tmp);
 
 		//	utils_routine.c	//
-void			ph_starting_philo(t_philo *philo, int *alive);
+int				ph_starting_philo(t_philo *philo, int *alive);
 void			ph_thinking(t_philo *philo, int *verif, int *alive);
 void			ph_eating(t_philo *philo, int *verif, int *alive);
 void			ph_sleeping(t_philo *philo, int *verif, int *alive);
-void			ph_starting_philo(t_philo *philo, int *alive);
 
 /*_________________________________________________*/
 
@@ -67,7 +66,7 @@ void			ph_init_fork(t_sympos *sympos, t_philo *philo, t_philo *rg_philo,
 
 		//	act.c			//
 int				ph_check_printf_verif(t_epis *epis);
-void			ph_speaking(t_epis *epis, int id, char *message);
+int				ph_speaking(t_epis *epis, int id, char *message);
 void			ph_waiting(unsigned long time);
 
 		//	out.c			//
