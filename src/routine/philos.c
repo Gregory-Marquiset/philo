@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 21:55:16 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/11/27 07:05:31 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/12/03 09:33:31 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,5 @@ void	*ph_routine_philos(void *tmp)
 			return (NULL);
 		ph_thinking(philo, &verif, &alive);
 	}
-//    printf("Philosopher %d has finished.\n", philo->id);
 	return (NULL);
 }

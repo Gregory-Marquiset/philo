@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 21:55:16 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/25 09:45:20 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/12/03 07:47:49 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,13 +125,9 @@ void	*ph_routine_epis(void *tmp)
 			dead = ph_check_id_dead(epis);
 		}
 		else
-		{
 			dead = ph_without_target_meals(epis);
-			if (dead != 0)
-				ph_modif_var(&epis->mtx_id_dead, epis->id_dead, -1);
-		}
 	}
-	if (dead != 0)
+	if (dead > 0)
 		ph_speaking_for_dead(epis, dead, LPRO_DIED);
 //    printf("Episkopos thread has finished.\n");
 	return (NULL);
