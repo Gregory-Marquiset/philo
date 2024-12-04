@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 20:07:20 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/11/20 09:26:59 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/12/04 07:48:59 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,35 +45,35 @@
 
 	//		log help		//
 # define LERR_ARGS_H3 LU_BLU2 "\nHere some details about the project philo:\n" LU_END \
-"the project calls for creating a symposium of philosophers\n\
-who eat, think and sleep continuously in the same dish\n\
-but with a limited number of fork and must therefore\n\
-eat in turns so as not to die of hunger.\n\n" \
+"\tthe project calls for creating a symposium of philosophers\n\
+\twho eat, think and sleep continuously in the same dish\n\
+\tbut with a limited number of fork and must therefore\n\
+\teat in turns so as not to die of hunger.\n\n" \
 LU_BLU2 "For run project philo you need 5 or 6 arguments\n" LU_END \
-"1: program_name -> The program name\n\
-2: number_of_philosophers -> The number of philosopher you want\n\
-3: time_to_die -> Time max between each philosopher meal\n\
-4: time_to_eat -> Time needed by a philosopher for eating a meal\n\
-5: time_to_sleep -> Time spent sleeping\n\
-6: (optional)number_of_times_each_philosopher_must_eat -> Number of meal for each philo,\n\
-when reached program stop, ifndef run until one philo die\n\n" \
+"\t1: program_name -> The program name\n\
+\t2: number_of_philosophers -> The number of philosopher you want\n\
+\t3: time_to_die -> Time max between each philosopher meal\n\
+\t4: time_to_eat -> Time needed by a philosopher for eating a meal\n\
+\t5: time_to_sleep -> Time spent sleeping\n\
+\t6: (optional)number_of_times_each_philosopher_must_eat -> Number of meal for each philo,\n\
+\t\twhen reached program stop, ifndef run until one philo die\n\n" \
 LU_YEL1 "Number of philos most be between 1 and 200\n\
 Number of meal most be between 1 and int max\n\
 All time values most be between 60 and int max\n\
 All time values are in milliseconds\n\n" LU_END \
-LU_BLU2 "<-----| TIPS |----->\n" LU_END \
+LU_BLU2 "\t\t<-----| TIPS |----->\n" LU_END \
 "If you want to test this program with a visualizer, you can use this site:\n" \
-LU_CYA2 "https://nafuka11.github.io/philosophers-visualizer/\n\n" LU_END \
+LU_CYA2 "\thttps://nafuka11.github.io/philosophers-visualizer/\n\n" LU_END \
 "If you want to test 'philo' more easily without manually copying and pasting,\n" \
 "this two bash lines copy the output from 'philo' so you can paste it easily.\n" \
 "It's similar to using the right click to copy but it's faster.\n" \
 "The lines also removes color codes from the output because " \
 "they are not accepted by the site.\n\n" LU_END \
 "The first one is to be used with a specified number of meals:\n" \
-LU_YEL1 "./philo n_philo tt_die tt_eat tt_sleep n_meal " \
+LU_YEL1 "\t./philo n_philo tt_die tt_eat tt_sleep n_meal " \
 "| sed -r 's/\\x1B[[0-9;]*[A-Za-z]//g' | xclip -selection c\n\n" LU_END \
 "The second one is to be used without a specified number of meals but with a timeout:\n" \
-LU_YEL1 "timeout 10 ./philo n_philo tt_die tt_eat tt_sleep 2>&1 " \
+LU_YEL1 "\ttimeout 10 ./philo n_philo tt_die tt_eat tt_sleep 2>&1 " \
 "| sed -r 's/\\x1B[[0-9;]*[A-Za-z]//g' | cat | xclip -selection c\n\n" LU_END
 
 

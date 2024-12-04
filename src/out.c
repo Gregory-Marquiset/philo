@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 18:08:00 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/12/03 09:33:11 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/12/04 08:17:32 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ static void	*ph_free_epis(t_epis *epis)
 void	ph_quit_philo(t_sympos *sympos, int fd_out, char *message,
 	int error_code)
 {
-	int	n_philos;
-
+	int (n_philos) = 0;
 	int (i) = 0;
 	if (sympos)
 	{

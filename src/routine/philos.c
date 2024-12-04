@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 21:55:16 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/12/03 10:29:14 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/12/04 08:10:55 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,13 @@ int	ph_starting_philo(t_philo *philo, int *alive)
 {
 	unsigned long (tt_start) = philo->agal->tt_start;
 	unsigned long (tt_die) = philo->agal->tt_die;
-	//ts_print_philo(philo);
 	while (*philo->epis->st_time > ph_actualtime())
 		ph_waiting(1);
 	if (philo->agal->n_philos == 1)
 	{
 		pthread_mutex_lock(&philo->rg_fork);
 		if (ph_speaking(philo->epis, philo->id, LPRO_FORK))
-		{
-			pthread_mutex_unlock(&philo->rg_fork);
-			return (1);
-		}
+			return (pthread_mutex_unlock(&philo->rg_fork), 1);
 		ph_waiting(tt_die);
 		pthread_mutex_unlock(&philo->rg_fork);
 		ph_modif_var(philo->kine->mtx_id_dead,

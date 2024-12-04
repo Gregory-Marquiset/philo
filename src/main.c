@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:36:48 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/12/03 09:11:46 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/12/04 08:16:12 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	main(int argc, char **argv)
 	t_sympos	*sympos;
 
 	sympos = ph_args_verif_and_make_sympos(argc, argv);
-	//ts_print_sympos(sympos);
 	ph_threading(sympos);
 	ph_quit_philo(sympos, 1, NULL, 0);
 }

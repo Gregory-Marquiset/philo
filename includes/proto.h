@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:16:57 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/12/03 10:30:20 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/12/04 08:24:40 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,13 @@ void			*ph_routine_epis(void *tmp);
 		//		philos.c		//
 void			*ph_routine_philos(void *tmp);
 
-		//	utils_routine.c	//
+		//	sleep_think.c	//
 int				ph_starting_philo(t_philo *philo, int *alive);
 void			ph_thinking(t_philo *philo, int *verif, int *alive);
-void			ph_eating(t_philo *philo, int *verif, int *alive);
 void			ph_sleeping(t_philo *philo, int *verif, int *alive);
+
+		//		eat.c		//
+void			ph_eating(t_philo *philo, int *verif, int *alive);
 
 /*_________________________________________________*/
 

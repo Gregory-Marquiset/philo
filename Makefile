@@ -6,7 +6,7 @@
 #    By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/26 18:05:12 by gmarquis          #+#    #+#              #
-#    Updated: 2024/11/27 09:25:15 by gmarquis         ###   ########.fr        #
+#    Updated: 2024/12/04 08:25:09 by gmarquis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ SRC = src/act.c \
 
 SRC_ROUTINE = src/routine/epis.c \
 	  src/routine/philos.c \
-	  src/routine/utils_routine.c
+	  src/routine/sleep_think.c \
+	  src/routine/eat.c
 
 SRC_VI = src/verif_and_init/args_verif.c \
          src/verif_and_init/init_philos.c \
@@ -33,9 +34,10 @@ NAME = philo
 MK = mkdir
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g3 -MMD -MP -fPIC
+#-fsanitize=thread (ralenti beaucoup le programme et creer des erreur, a ne pas combiner avec valgrind)
 PHFLAGS = -pthread
 VALGRIND = valgrind --tool=helgrind --history-level=full
-ARGS = 200 130 60 60
+ARGS = 199 210 60 60 25
 RM = rm -rf
 
 OBJ_DIR = obj/
@@ -51,10 +53,6 @@ OBJ_VI_PREF = $(addprefix $(OBJ_DIR), $(OBJ_VI))
 DEPENDENCIES = $(patsubst $(OBJ_DIR)%.o,$(DEP_DIR)%.d,$(OBJ_PREF) $(OBJ_ROUTINE_PREF) $(OBJ_VI_PREF))
 
 all : $(NAME)
-
-v: $(NAME)
-	clear
-	-$(VALGRIND) ./$(NAME) $(ARGS) 2> valgrind
 
 $(OBJ_DIR)%.o : %.c
 	@$(MK) -p $(dir $@) $(DEP_DIR)$(dir $<)

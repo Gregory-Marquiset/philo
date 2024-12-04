@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 07:20:41 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/11/27 09:07:16 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/12/04 08:09:30 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	ph_get_tt_start(t_philo *philo)
 {
-	unsigned long *tt_start;
-	unsigned long *tt_eat;
+	unsigned long	*tt_start;
+	unsigned long	*tt_eat;
 
 	tt_start = &(philo->agal->tt_start);
 	tt_eat = &(philo->agal->tt_eat);
@@ -34,9 +34,9 @@ static void	ph_get_tt_start(t_philo *philo)
 
 static void	ph_get_tt_think(t_philo *philo)
 {
-	unsigned long *tt_eat;
-	unsigned long *tt_sleep;
-	unsigned long *tt_think;
+	unsigned long	*tt_eat;
+	unsigned long	*tt_sleep;
+	unsigned long	*tt_think;
 
 	tt_eat = &(philo->agal->tt_eat);
 	tt_sleep = &(philo->agal->tt_sleep);
@@ -57,9 +57,10 @@ static void	ph_get_tt_think(t_philo *philo)
 	}
 }
 
-static void	ph_init_philo_agalma(t_sympos *sympos, t_philo *philo, t_agalma *tmp)
+static void	ph_init_philo_agalma(t_sympos *sympos, t_philo *philo,
+	t_agalma *tmp)
 {
-	t_agalma  *agal;
+	t_agalma	*agal;
 
 	philo->agal = ph_init_malloc(sympos, 1, sizeof(t_agalma));
 	agal = philo->agal;

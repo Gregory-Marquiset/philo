@@ -6,13 +6,13 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 22:53:35 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/12/03 08:10:53 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/12/04 08:19:26 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/proto.h"
 
-void  ts_print_philo(t_philo *philo)
+void	ts_print_philo(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->epis->mtx_printf);
 	printf("philo[%2d] sur n_philo %3d\n"
@@ -32,14 +32,14 @@ void	ts_print_philos_infos(t_sympos *sympos)
 	pthread_mutex_lock(&sympos->epis->mtx_printf);
 	while (i < n_philo)
 	{
-		printf(LU_YEL1 "Philosopher[%2d] is here:\nhe start at %ld and think %ld\n" LU_END,
-			sympos->philos[i].id, sympos->philos[i].agal->tt_start, sympos->philos[i].agal->tt_think);
+		printf(LU_YEL1 "Philosopher[%2d] is here:\nhe start at "
+			"%ld and think %ld\n" LU_END,
+			sympos->philos[i].id, sympos->philos[i].agal->tt_start,
+			sympos->philos[i].agal->tt_think);
 		if (sympos->philos[0].agal->n_philos > 1)
 		{
-
 			printf(LU_YEL1 "lf_fork = %14p" LU_END,
 				(void *)sympos->philos[i].lf_fork);
-
 		}
 		else
 			printf(LU_YEL1 "lf_fork = NULL" LU_END);
@@ -62,6 +62,3 @@ void	ts_print_sympos(t_sympos *sympos)
 	pthread_mutex_unlock(&sympos->epis->mtx_printf);
 	ts_print_philos_infos(sympos);
 }
-
-//	-fsanitize=
-//	./philo 199 190 60 60 5 | sed -r 's/\x1B\[[0-9;]*[A-Za-z]//g' | xclip -selection c
