@@ -6,11 +6,11 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 22:41:45 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/12/04 08:08:52 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/12/04 08:37:38 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/proto.h"
+#include "../../../includes/mandatory/proto.h"
 
 static void	ph_init_epis(t_sympos *sympos, t_agalma *tmp)
 {

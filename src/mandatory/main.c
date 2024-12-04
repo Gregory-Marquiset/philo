@@ -6,11 +6,11 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 13:36:48 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/12/04 08:16:12 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/12/04 08:37:09 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/proto.h"
+#include "../../includes/mandatory/proto.h"
 
 int	main(int argc, char **argv)
 {

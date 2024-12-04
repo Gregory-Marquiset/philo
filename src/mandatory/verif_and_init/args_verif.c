@@ -6,11 +6,11 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 18:00:45 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/30 08:48:00 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/12/04 08:37:25 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/proto.h"
+#include "../../../includes/mandatory/proto.h"
 
 static int	ph_atoi_safe(char *str)
 {

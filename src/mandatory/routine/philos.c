@@ -6,11 +6,11 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 21:55:16 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/12/04 08:10:55 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/12/04 08:37:51 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/proto.h"
+#include "../../../includes/mandatory/proto.h"
 
 int	ph_starting_philo(t_philo *philo, int *alive)
 {

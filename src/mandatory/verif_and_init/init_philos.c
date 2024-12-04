@@ -6,11 +6,11 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 07:20:41 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/12/04 08:09:30 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/12/04 08:37:30 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/proto.h"
+#include "../../../includes/mandatory/proto.h"
 
 static void	ph_get_tt_start(t_philo *philo)
 {

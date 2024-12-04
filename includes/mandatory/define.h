@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 20:07:20 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/12/04 07:48:59 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/12/04 08:58:00 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ LU_YEL1 "\t./philo n_philo tt_die tt_eat tt_sleep n_meal " \
 "The second one is to be used without a specified number of meals but with a timeout:\n" \
 LU_YEL1 "\ttimeout 10 ./philo n_philo tt_die tt_eat tt_sleep 2>&1 " \
 "| sed -r 's/\\x1B[[0-9;]*[A-Za-z]//g' | cat | xclip -selection c\n\n" LU_END
-
 
 	//		log error		//
 # define LERR_ARGS_H0 LU_RED2 "Error: " LU_END "One or more arguments are out of range!\n" LU_BLU2 "For help run: " LU_END "./philo --help++\n"

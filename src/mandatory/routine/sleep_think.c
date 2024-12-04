@@ -6,11 +6,11 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 08:20:55 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/12/04 08:21:37 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/12/04 08:37:57 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/proto.h"
+#include "../../../includes/mandatory/proto.h"
 
 int	ph_check_die_while_thinking(t_philo *philo)
 {

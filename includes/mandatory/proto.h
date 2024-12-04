@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:16:57 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/12/04 08:24:40 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/12/04 08:42:43 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ void			ph_init_philos(t_sympos *sympos, t_agalma *tmp);
 
 		//	init_utils.c	//
 void			*ph_init_malloc_mutex(t_sympos *sympos, pthread_mutex_t *mutex,
-				int nbr, size_t var_size);
+					int nbr, size_t var_size);
 void			*ph_init_malloc(t_sympos *sympos, int nbr, size_t var_size);
 void			ph_init_thread(t_sympos *sympos, pthread_t *thread, void *fun,
 					void *arg);
 void			ph_init_mtx(t_sympos *sympos, pthread_mutex_t *mtx);
-void			ph_init_fork(t_sympos *sympos, t_philo *philo, t_philo *rg_philo,
-					int pos);
+void			ph_init_fork(t_sympos *sympos, t_philo *philo,
+					t_philo *rg_philo, int pos);
 
 /*_________________________________________________*/
 

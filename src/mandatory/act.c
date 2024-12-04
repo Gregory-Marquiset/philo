@@ -6,11 +6,11 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 20:13:07 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/12/03 09:38:53 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/12/04 08:37:12 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/proto.h"
+#include "../../includes/mandatory/proto.h"
 
 int	ph_check_printf_verif(t_epis *epis)
 {

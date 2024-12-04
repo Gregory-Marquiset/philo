@@ -6,11 +6,11 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 17:56:48 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/25 10:23:00 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/12/04 08:36:56 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/proto.h"
+#include "../../includes/mandatory/proto.h"
 
 int	ph_take_var(pthread_mutex_t *mutex, int *var)
 {

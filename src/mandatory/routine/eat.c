@@ -6,11 +6,11 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 08:21:16 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/12/04 08:23:42 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/12/04 08:37:44 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/proto.h"
+#include "../../../includes/mandatory/proto.h"
 
 static int	ph_take_fork(t_philo *philo)
 {

@@ -6,11 +6,11 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 22:30:09 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/10/25 09:34:18 by gmarquis         ###   ########.fr       */
+/*   Updated: 2024/12/04 08:37:35 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/proto.h"
+#include "../../../includes/mandatory/proto.h"
 
 void	*ph_init_malloc_mutex(t_sympos *sympos, pthread_mutex_t *mutex,
 	int nbr, size_t var_size)
