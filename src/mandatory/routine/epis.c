@@ -20,6 +20,7 @@ static void	ph_speaking_for_dead(t_epis *epis, int id, char *message)
 	pthread_mutex_lock(&epis->mtx_verif);
 	*(epis->verif) = -2;
 	pthread_mutex_unlock(&epis->mtx_verif);
+	usleep(2);
 	pthread_mutex_lock(&epis->mtx_printf);
 	printf("%-10ld %-4d %s", (ph_actualtime() - st_time), id, message);
 	pthread_mutex_unlock(&epis->mtx_printf);
