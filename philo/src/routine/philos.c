@@ -17,23 +17,29 @@ int	ph_starting_philo(t_philo *philo, int *alive)
 	unsigned long (tt_start) = philo->agal->tt_start;
 	unsigned long (tt_die) = philo->agal->tt_die;
 	while (*philo->epis->st_time > ph_actualtime())
-		ph_waiting(1);
+		ph_waiting(1, philo->kine->mtx_id_dead, philo->kine->id_dead);
 	if (philo->agal->n_philos == 1)
 	{
 		pthread_mutex_lock(&philo->rg_fork);
+		philo->rg = true;
 		if (ph_speaking(philo->epis, philo->id, LPRO_FORK))
-			return (pthread_mutex_unlock(&philo->rg_fork), 1);
-		ph_waiting(tt_die);
+		{
+			pthread_mutex_unlock(&philo->rg_fork);
+			philo->rg = false;
+			return (1);
+		}
+		ph_waiting(tt_die, philo->kine->mtx_id_dead, philo->kine->id_dead);
 		pthread_mutex_unlock(&philo->rg_fork);
+		philo->rg = false;
 		ph_modif_var(philo->kine->mtx_id_dead,
 			philo->kine->id_dead, philo->id);
 		return (1);
 	}
 	if (tt_start < tt_die)
-		ph_waiting(tt_start);
+		ph_waiting(tt_start, philo->kine->mtx_id_dead, philo->kine->id_dead);
 	else
 	{
-		ph_waiting(tt_die);
+		ph_waiting(tt_die, philo->kine->mtx_id_dead, philo->kine->id_dead);
 		ph_modif_var(philo->kine->mtx_id_dead, philo->kine->id_dead, philo->id);
 	}
 	*alive = ph_take_var(philo->kine->mtx_id_dead, philo->kine->id_dead);
@@ -56,9 +62,12 @@ void	*ph_routine_philos(void *tmp)
 			break ;
 		ph_thinking(philo, &verif, &alive);
 	}
-	/*char	buffer[50];
-	snprintf(buffer, sizeof(buffer), "%d\n", *philo->kine->count_meal);
-	ph_speaking(philo->epis, philo->id, buffer);*/
+	if (philo->rg == true)
+		pthread_mutex_unlock(&philo->rg_fork);
+	philo->rg = false;
+	if (philo->lf == true)
+		pthread_mutex_unlock(philo->lf_fork);
+	philo->lf = false;
 	usleep(2);
 	return (NULL);
 }

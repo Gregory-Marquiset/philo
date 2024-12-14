@@ -61,7 +61,9 @@ typedef struct s_philo
 	t_agalma		*agal;
 	t_kinesis		*kine;
 	t_epis			*epis;
+	bool			lf;
 	pthread_mutex_t	*lf_fork;
+	bool			rg;
 	pthread_mutex_t	rg_fork;
 }				t_philo;
 

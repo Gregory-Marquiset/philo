@@ -39,11 +39,15 @@ int	ph_speaking(t_epis *epis, int id, char *message)
 	return (0);
 }
 
-void	ph_waiting(unsigned long time)
+void	ph_waiting(unsigned long time, pthread_mutex_t *mutex, int *var)
 {
 	unsigned long	init_time;
 
 	init_time = ph_actualtime();
 	while ((ph_actualtime() - init_time) < time)
+	{
 		usleep(time / 100);
+		if (ph_take_var(mutex, var) != 0)
+            break;
+	}
 }

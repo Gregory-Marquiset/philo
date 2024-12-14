@@ -47,28 +47,30 @@ static int	ph_without_target_meals(t_epis *epis)
 		pthread_mutex_lock(&epis->mtx_id_dead);
 		res = *(epis->id_dead);
 		pthread_mutex_unlock(&epis->mtx_id_dead);
-		ph_waiting(1);
+		ph_waiting(1, &epis->mtx_id_dead, epis->id_dead);
 	}
 	return (res);
 }
 
 static int	ph_with_target_meals(t_epis *epis)
 {
+	int	full_philos;
+
 	while (1)
 	{
 		pthread_mutex_lock(&epis->mtx_phs_meals);
-		if (*(epis->phs_meals) >= epis->n_philos)
+		full_philos = *(epis->phs_meals);
+		pthread_mutex_unlock(&epis->mtx_phs_meals);
+		if (full_philos == epis->n_philos)
 		{
-			pthread_mutex_unlock(&epis->mtx_phs_meals);
 			return (1);
 		}
 		else
 		{
-			pthread_mutex_unlock(&epis->mtx_phs_meals);
 			if (ph_check_id_dead(epis))
 				return (0);
 		}
-		ph_waiting(1);
+		ph_waiting(1, &epis->mtx_id_dead, epis->id_dead);
 	}
 }
 
@@ -82,7 +84,7 @@ void	*ph_routine_epis(void *tmp)
 	dead = 0;
 	meal = 0;
 	while (*epis->st_time > ph_actualtime())
-		ph_waiting(1);
+		ph_waiting(1, &epis->mtx_id_dead, epis->id_dead);
 	while (dead == 0 && meal == 0)
 	{
 		if (epis->n_meal > 0)

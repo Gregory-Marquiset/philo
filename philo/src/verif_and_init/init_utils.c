@@ -65,4 +65,6 @@ void	ph_init_fork(t_sympos *sympos, t_philo *philo, t_philo *lf_philo,
 	}
 	else if (pos == 2)
 		philo->lf_fork = &(lf_philo->rg_fork);
+	philo->rg = false;
+	philo->lf = false;
 }

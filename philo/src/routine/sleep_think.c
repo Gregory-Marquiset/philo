@@ -32,7 +32,7 @@ int	ph_check_die_while_thinking(t_philo *philo)
 		if (ph_speaking(philo->epis, philo->id, LPRO_THINK))
 			return (1);
 		ph_waiting(tt_die - ((long long)ph_actualtime()
-				- (long long)last_meal));
+				- (long long)last_meal), philo->kine->mtx_id_dead, philo->kine->id_dead);
 		ph_modif_var(&(philo->epis->mtx_id_dead), philo->kine->id_dead,
 			philo->id);
 		return (1);
@@ -49,7 +49,7 @@ void	ph_thinking(t_philo *philo, int *verif, int *alive)
 		return ;
 	if (ph_speaking(philo->epis, philo->id, LPRO_THINK))
 		return ;
-	ph_waiting(philo->agal->tt_think);
+	ph_waiting(philo->agal->tt_think, philo->kine->mtx_id_dead, philo->kine->id_dead);
 }
 
 int	ph_check_die_while_sleeping(t_philo *philo)
@@ -71,7 +71,7 @@ int	ph_check_die_while_sleeping(t_philo *philo)
 		if (ph_speaking(philo->epis, philo->id, LPRO_SLEEP))
 			return (1);
 		ph_waiting(tt_die - ((long long)ph_actualtime()
-				- (long long)last_meal));
+				- (long long)last_meal), philo->kine->mtx_id_dead, philo->kine->id_dead);
 		ph_modif_var(philo->kine->mtx_id_dead, philo->kine->id_dead, philo->id);
 		return (1);
 	}
@@ -87,5 +87,5 @@ void	ph_sleeping(t_philo *philo, int *verif, int *alive)
 		return ;
 	if (ph_speaking(philo->epis, philo->id, LPRO_SLEEP))
 		return ;
-	ph_waiting(philo->agal->tt_sleep);
+	ph_waiting(philo->agal->tt_sleep, philo->kine->mtx_id_dead, philo->kine->id_dead);
 }

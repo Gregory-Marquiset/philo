@@ -20,6 +20,7 @@
 # include <pthread.h>
 # include <limits.h>
 # include <string.h>
+#include <stdbool.h>
 
 # include "struct.h"
 # include "define.h"
@@ -70,7 +71,7 @@ void			ph_init_fork(t_sympos *sympos, t_philo *philo,
 		//	act.c			//
 int				ph_check_printf_verif(t_epis *epis);
 int				ph_speaking(t_epis *epis, int id, char *message);
-void			ph_waiting(unsigned long time);
+void			ph_waiting(unsigned long time, pthread_mutex_t *mutex, int *var);
 
 		//	out.c			//
 void			ph_quit_philo(t_sympos *sympos, int fd_out, char *message,
@@ -78,8 +79,6 @@ void			ph_quit_philo(t_sympos *sympos, int fd_out, char *message,
 
 		//	test_file.c		//
 void			ts_print_philo(t_philo *philo);
-void			ts_print_philos_fork(t_sympos *sympos);
-void			ts_print_philos_states(t_epis *epis);
 void			ts_print_sympos(t_sympos *sympos);
 
 		//	threading.c		//
