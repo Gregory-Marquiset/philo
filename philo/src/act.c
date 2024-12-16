@@ -34,7 +34,7 @@ int	ph_speaking(t_epis *epis, int id, char *message)
 	if (ph_check_printf_verif(epis))
 		return (1);
 	pthread_mutex_lock(&epis->mtx_printf);
-	printf("%-10ld %-4d %s", (ph_actualtime() - st_time), id, message);
+	printf("%ld %d %s", (ph_actualtime() - st_time), id, message);
 	pthread_mutex_unlock(&epis->mtx_printf);
 	return (0);
 }
