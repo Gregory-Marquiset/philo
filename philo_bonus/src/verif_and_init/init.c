@@ -85,6 +85,7 @@ static void	st_init_philos(t_sympos *sympos, t_agalma *tmp)
 	while (i < sympos->n_philos)
 	{
 		sympos->philos[i].id = i + 1;
+		sympos->philos[i].pid_philos = 0;
 		st_init_philo_agalma(sympos, &(sympos->philos[i]), tmp);
 		i++;
 	}

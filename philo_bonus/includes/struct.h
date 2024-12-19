@@ -29,6 +29,7 @@ typedef struct s_agalma
 typedef struct s_philo
 {
 	int				id;
+	int				pid_philos;
 	t_agalma		*agal;
 	unsigned long	*last_meal;
 	int				*count_meal;

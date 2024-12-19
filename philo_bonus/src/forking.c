@@ -11,11 +11,46 @@
 /* ************************************************************************** */
 
 #include "../includes/proto.h"
+#include <sys/wait.h>
 
-/*void	phb_forking(t_sympos *sympos)
+
+void	st_test(t_philo *philo)
 {
+	printf("philo %d ready\n", philo->id);
+	if (philo->id == 60)
+		exit (philo->id);
+	exit (0);
+}
 
-}*/
+void	phb_forking(t_sympos *sympos)
+{
+	int i = 0;
+	pid_t pid;
+	int status = 0;
+	while (i < sympos->n_philos)
+	{
+		pid = fork();
+		if (pid == -1)
+		{
+			printf("safe quit\n");
+			return ;
+		}
+		else if (pid == 0)
+		{
+			st_test(&sympos->philos[i]);
+		}
+		i++;
+	}
+	i = 0;
+	while (i < sympos->n_philos)
+	{
+		waitpid(-1, &status, 2);
+		status = WEXITSTATUS(status);
+		if (status > 0)
+			printf("%d die\n", status);
+		i++;
+	}
+}
 
 /*void	ph_threading(t_sympos *sympos)
 {
