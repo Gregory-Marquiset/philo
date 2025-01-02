@@ -48,6 +48,6 @@ void	ph_waiting(unsigned long time, pthread_mutex_t *mutex, int *var)
 	{
 		usleep(time / 100);
 		if (ph_take_var(mutex, var) != 0)
-            break;
+			break;
 	}
 }

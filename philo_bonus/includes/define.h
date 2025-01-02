@@ -88,12 +88,12 @@ LU_YEL1 "\ttimeout 10 ./philo n_philo tt_die tt_eat tt_sleep 2>&1 " \
 	//		project log		//
 # define LPRO_JSYM LU_GRE1 "join the symposium\n" LU_END
 # define LPRO_LSYM LU_GRE1 "left the symposium\nsymposium" LU_END
-# define LPRO_FORK LU_BLU1 "has taken a fork\n" LU_END
-# define LPRO_MEAL LU_GRE1 "all meal as bean eaten\n\n" LU_END
-# define LPRO_EAT LU_MAJ1 "is eating\n" LU_END
-# define LPRO_SLEEP LU_CYA1 "is sleeping\n" LU_END
-# define LPRO_THINK LU_YEL1 "is thinking\n" LU_END
-# define LPRO_DIED LU_RED1 "died\n" LU_END
+# define LPRO_FORK "has taken a fork\n"
+# define LPRO_MEAL "all meal as bean eaten\n\n"
+# define LPRO_EAT "is eating\n"
+# define LPRO_SLEEP "is sleeping\n"
+# define LPRO_THINK "is thinking\n"
+# define LPRO_DIED "died\n"
 
 	//		test log		//
 # define LTEST_TEST_3D LU_YEL2 "Test: %3d\n" LU_END

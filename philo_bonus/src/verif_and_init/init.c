@@ -12,6 +12,28 @@
 
 #include "../../includes/proto.h"
 
+static void phb_init_semaphores(t_sympos *sympos)
+{
+    // Supprime d’éventuels sémaphores “fantômes” non fermés d’une exécution précédente
+    sem_unlink("sem_forks");
+    sem_unlink("sem_log");
+    sem_unlink("sem_one_death");
+
+    // Créer le sémaphore pour les fourchettes : valeur initiale = sympos->n_philos
+    sympos->sem_forks = sem_open("sem_forks", O_CREAT | O_EXCL, 0644, sympos->n_philos);
+    if (sympos->sem_forks == SEM_FAILED)
+        phb_quit_philo(sympos, 2, LU_RED1"Error: sem_open sem_forks\n"LU_END, CERR_MALLOC);
+    
+    // Créer le sémaphore pour l’affichage : valeur initiale = 1 (mutex)
+    sympos->sem_log = sem_open("sem_log", O_CREAT | O_EXCL, 0644, 1);
+    if (sympos->sem_log == SEM_FAILED)
+        phb_quit_philo(sympos, 2, LU_RED1"Error: sem_open sem_log\n"LU_END, CERR_MALLOC);
+	
+    sympos->sem_one_death = sem_open("sem_one_death", O_CREAT | O_EXCL, 0644, 1);
+    if (sympos->sem_one_death == SEM_FAILED)
+        phb_quit_philo(sympos, 2, "Error: sem_open sem_one_death\n", CERR_MALLOC);
+}
+
 static void	st_get_tt_start(t_philo *philo, int n_philos)
 {
 	unsigned long	*tt_start;
@@ -70,6 +92,7 @@ static void	st_init_philo_agalma(t_sympos *sympos, t_philo *philo,
 	agal->tt_eat = tmp->tt_eat;
 	agal->tt_sleep = tmp->tt_sleep;
 	agal->tt_die = tmp->tt_die;
+	agal->st_time = phb_actualtime();
 	st_get_tt_start(philo, sympos->n_philos);
 	st_get_tt_think(philo, sympos->n_philos);
 }
@@ -86,6 +109,10 @@ static void	st_init_philos(t_sympos *sympos, t_agalma *tmp)
 	{
 		sympos->philos[i].id = i + 1;
 		sympos->philos[i].pid_philos = 0;
+		sympos->philos[i].count_meal = malloc(sizeof(int));
+		if (!sympos->philos[i].count_meal)
+			phb_quit_philo(sympos, 2, LERR_MALLOC, CERR_MALLOC);
+		*sympos->philos[i].count_meal = 0;
 		st_init_philo_agalma(sympos, &(sympos->philos[i]), tmp);
 		i++;
 	}
@@ -101,5 +128,7 @@ t_sympos	*phb_init_sympos(t_agalma *tmp, int n_philos)
 	memset(sympos, 0, sizeof(t_sympos));
 	sympos->n_philos = n_philos;
 	st_init_philos(sympos, tmp);
+	
+	phb_init_semaphores(sympos);
 	return (sympos);
 }

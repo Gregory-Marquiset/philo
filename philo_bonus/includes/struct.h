@@ -41,6 +41,9 @@ typedef struct s_sympos
 {
 	int		n_philos;
 	t_philo	*philos;
+	sem_t   *sem_forks;
+    sem_t   *sem_log;
+	sem_t   *sem_one_death;
 }				t_sympos;
 
 #endif

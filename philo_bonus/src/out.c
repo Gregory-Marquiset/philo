@@ -27,27 +27,38 @@ static void	st_exit(int fd_out, char *message, int error_code)
 	exit(error_code);
 }
 
-void	phb_quit_philo(t_sympos *sympos, int fd_out, char *message,
-	int error_code)
+void    phb_quit_philo(t_sympos *sympos, int fd_out, char *message, int error_code)
 {
-	int	n_philos;
-	int	i;
+    int i = 0;
 
-	n_philos = 0;
-	i = 0;
-	if (sympos)
-	{
-		n_philos = sympos->n_philos;
-		if (sympos->philos)
+    if (sympos)
+    {
+        if (sympos->philos)
+        {
+            while (i < sympos->n_philos)
+            {
+                free(sympos->philos[i].agal);
+                i++;
+            }
+            free(sympos->philos);
+        }
+        if (sympos->sem_forks != SEM_FAILED && sympos->sem_forks != NULL)
+        {
+            sem_close(sympos->sem_forks);
+            sem_unlink("sem_forks");
+        }
+        if (sympos->sem_log != SEM_FAILED && sympos->sem_log != NULL)
+        {
+            sem_close(sympos->sem_log);
+            sem_unlink("sem_log");
+        }
+		if (sympos->sem_one_death && sympos->sem_one_death != SEM_FAILED)
 		{
-			while (i < n_philos)
-			{
-				free(sympos->philos[i].agal);
-				i++;
-			}
-			free(sympos->philos);
+			sem_close(sympos->sem_one_death);
+			sem_unlink("sem_one_death");
 		}
-		free(sympos);
-	}
-	st_exit(fd_out, message, error_code);
+        free(sympos);
+    }
+    // Affiche un message si besoin, puis exit
+    st_exit(fd_out, message, error_code);
 }

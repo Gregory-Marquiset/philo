@@ -20,6 +20,8 @@
 # include <pthread.h>
 # include <limits.h>
 # include <string.h>
+# include <semaphore.h>
+# include <fcntl.h>
 
 # include "struct.h"
 # include "define.h"
@@ -52,7 +54,7 @@ t_sympos		*phb_init_sympos(t_agalma *tmp, int n_philos);
 /*_________________________________________________*/
 
 		//	act.c			//
-void			phb_waiting(unsigned long time);
+//void			phb_waiting(unsigned long time);
 
 		//	out.c			//
 void			phb_quit_philo(t_sympos *sympos, int fd_out, char *message,
@@ -66,6 +68,12 @@ void			ts_print_sympos(t_sympos *sympos);
 void			phb_forking(t_sympos *sympos);
 
 		//	utils.c			//
+void			phb_speaking(t_sympos *sympos, int philo_id, char *msg);
+void			phb_speaking_for_dead(t_sympos *sympos, int philo_id);
 unsigned long	phb_actualtime(void);
+void			phb_waiting(unsigned long time);
+
+		//	routine.c		//
+void	phb_philo_routine(t_sympos *sympos, t_philo *philo);
 
 #endif

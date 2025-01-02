@@ -11,17 +11,18 @@
 # **************************************************************************** #
 
 SRC = src/forking.c \
-      src/main.c \
-      src/out.c \
-      src/test_file.c \
-      src/utils.c
+	src/main.c \
+	src/out.c \
+	src/test_file.c \
+	src/utils.c
 
-SRC_ROUTINE = src/routine/philos.c \
-	  src/routine/sleep_think.c \
-	  src/routine/eat.c
+SRC_ROUTINE = src/routine/routine.c \
+	src/routine/philos.c \
+	src/routine/sleep_think.c \
+	src/routine/eat.c
 
 SRC_VI = src/verif_and_init/args_verif.c \
-         src/verif_and_init/init.c
+	src/verif_and_init/init.c
 
 INCLUDES = -Iincludes
 
