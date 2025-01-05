@@ -14,17 +14,14 @@
 
 static void phb_init_semaphores(t_sympos *sympos)
 {
-    // Supprime d’éventuels sémaphores “fantômes” non fermés d’une exécution précédente
     sem_unlink("sem_forks");
     sem_unlink("sem_log");
     sem_unlink("sem_one_death");
 
-    // Créer le sémaphore pour les fourchettes : valeur initiale = sympos->n_philos
     sympos->sem_forks = sem_open("sem_forks", O_CREAT | O_EXCL, 0644, sympos->n_philos);
     if (sympos->sem_forks == SEM_FAILED)
         phb_quit_philo(sympos, 2, LU_RED1"Error: sem_open sem_forks\n"LU_END, CERR_MALLOC);
     
-    // Créer le sémaphore pour l’affichage : valeur initiale = 1 (mutex)
     sympos->sem_log = sem_open("sem_log", O_CREAT | O_EXCL, 0644, 1);
     if (sympos->sem_log == SEM_FAILED)
         phb_quit_philo(sympos, 2, LU_RED1"Error: sem_open sem_log\n"LU_END, CERR_MALLOC);
@@ -109,10 +106,7 @@ static void	st_init_philos(t_sympos *sympos, t_agalma *tmp)
 	{
 		sympos->philos[i].id = i + 1;
 		sympos->philos[i].pid_philos = 0;
-		sympos->philos[i].count_meal = malloc(sizeof(int));
-		if (!sympos->philos[i].count_meal)
-			phb_quit_philo(sympos, 2, LERR_MALLOC, CERR_MALLOC);
-		*sympos->philos[i].count_meal = 0;
+		sympos->philos[i].count_meal = 0;
 		st_init_philo_agalma(sympos, &(sympos->philos[i]), tmp);
 		i++;
 	}

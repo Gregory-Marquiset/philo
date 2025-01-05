@@ -32,7 +32,7 @@ typedef struct s_philo
 	int				pid_philos;
 	t_agalma		*agal;
 	unsigned long	*last_meal;
-	int				*count_meal;
+	int				count_meal;
 }				t_philo;
 
 		//		symposium		//

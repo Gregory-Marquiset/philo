@@ -59,6 +59,5 @@ void    phb_quit_philo(t_sympos *sympos, int fd_out, char *message, int error_co
 		}
         free(sympos);
     }
-    // Affiche un message si besoin, puis exit
     st_exit(fd_out, message, error_code);
 }
