@@ -41,30 +41,10 @@ static int	ph_atoi_safe(char *str)
 	return ((int)result);
 }
 
-static int	ph_strncmp(const char *s1, const char *s2, unsigned long n)
-{
-	unsigned long	i;
-
-	i = 0;
-	if (n == 0)
-		return (0);
-	while (s1[i] && s1[i] == s2[i] && i < (n - 1))
-		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-}
-
-static void	ph_program_run_helper(char *argv_1)
-{
-	if (!ph_strncmp(argv_1, "--help", 7))
-		ph_quit_philo(NULL, 2, LERR_ARGS_H3, CERR_ARGS_H1);
-}
-
 t_sympos	*ph_args_verif_and_make_sympos(int argc, char **argv)
 {
 	t_agalma	tmp;
 
-	if (argc == 2)
-		ph_program_run_helper(argv[1]);
 	if (argc < 5 || argc > 6)
 		ph_quit_philo(NULL, 2, LERR_ARGS_H1, CERR_ARGS_H1);
 	tmp.n_philos = ph_atoi_safe(argv[1]);

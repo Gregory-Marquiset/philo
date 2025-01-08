@@ -12,6 +12,60 @@
 
 #include "../../includes/proto.h"
 
+static int	ph_even_helper(t_philo *philo)
+{
+	if (ph_speaking(philo->epis, philo->id, LPRO_FORK))
+	{
+		pthread_mutex_unlock(philo->lf_fork);
+		return (philo->lf = false, 1);
+	}
+	if (!ph_take_var(philo->kine->mtx_id_dead, philo->kine->id_dead))
+	{
+		pthread_mutex_lock(&philo->rg_fork);
+		philo->rg = true;
+	}
+	else
+	{
+		pthread_mutex_unlock(philo->lf_fork);
+		return (philo->lf = false, 1);
+	}
+	if (ph_speaking(philo->epis, philo->id, LPRO_FORK))
+	{
+		pthread_mutex_unlock(philo->lf_fork);
+		philo->lf = false;
+		pthread_mutex_unlock(&philo->rg_fork);
+		return (philo->rg = false, 1);
+	}
+	return (0);
+}
+
+static int	ph_odd_helper(t_philo *philo)
+{
+	if (ph_speaking(philo->epis, philo->id, LPRO_FORK))
+	{
+		pthread_mutex_unlock(&philo->rg_fork);
+		return (philo->rg = false, 1);
+	}
+	if (!ph_take_var(philo->kine->mtx_id_dead, philo->kine->id_dead))
+	{
+		pthread_mutex_lock(philo->lf_fork);
+		philo->lf = true;
+	}
+	else
+	{
+		pthread_mutex_unlock(&philo->rg_fork);
+		return (philo->rg = false, 1);
+	}
+	if (ph_speaking(philo->epis, philo->id, LPRO_FORK))
+	{
+		pthread_mutex_unlock(&philo->rg_fork);
+		philo->rg = false;
+		pthread_mutex_unlock(philo->lf_fork);
+		return (philo->lf = false, 1);
+	}
+	return (0);
+}
+
 static int	ph_take_fork(t_philo *philo)
 {
 	if (philo->id % 2 == 0)
@@ -23,31 +77,8 @@ static int	ph_take_fork(t_philo *philo)
 		}
 		else
 			return (1);
-		if (ph_speaking(philo->epis, philo->id, LPRO_FORK))
-		{
-			pthread_mutex_unlock(philo->lf_fork);
-			philo->lf = false;
+		if (ph_even_helper(philo))
 			return (1);
-		}
-		if (!ph_take_var(philo->kine->mtx_id_dead, philo->kine->id_dead))
-		{
-			pthread_mutex_lock(&philo->rg_fork);
-			philo->rg = true;
-		}
-		else
-		{
-			pthread_mutex_unlock(philo->lf_fork);
-			philo->lf = false;
-			return (1);
-		}
-		if (ph_speaking(philo->epis, philo->id, LPRO_FORK))
-		{
-			pthread_mutex_unlock(philo->lf_fork);
-			philo->lf = false;
-			pthread_mutex_unlock(&philo->rg_fork);
-			philo->rg = false;
-			return (1);
-		}
 	}
 	else
 	{
@@ -58,46 +89,19 @@ static int	ph_take_fork(t_philo *philo)
 		}
 		else
 			return (1);
-		if (ph_speaking(philo->epis, philo->id, LPRO_FORK))
-		{
-			pthread_mutex_unlock(&philo->rg_fork);
-			philo->rg = false;
+		if (ph_odd_helper(philo))
 			return (1);
-		}
-		if (!ph_take_var(philo->kine->mtx_id_dead, philo->kine->id_dead))
-		{
-			pthread_mutex_lock(philo->lf_fork);
-			philo->lf = true;
-		}
-		else
-		{
-			pthread_mutex_unlock(&philo->rg_fork);
-			philo->rg = false;
-			return (1);
-		}
-		if (ph_speaking(philo->epis, philo->id, LPRO_FORK))
-		{
-			pthread_mutex_unlock(&philo->rg_fork);
-			philo->rg = false;
-			pthread_mutex_unlock(philo->lf_fork);
-			philo->lf = false;
-			return (1);
-		}
 	}
 	return (0);
 }
 
 static int	ph_check_even_die_while_eating(t_philo *philo)
 {
-	long long		tt_result;
-	unsigned long	last_meal;
-
 	unsigned long (tt_die) = philo->agal->tt_die;
-	unsigned long (tt_eat) = philo->agal->tt_eat;
 	*(philo->kine->last_meal) = ph_actualtime();
-	last_meal = *philo->kine->last_meal;
-	tt_result = (((long long)ph_actualtime() - (long long)last_meal)
-			+ (long long)tt_eat);
+	unsigned long (last_meal) = *philo->kine->last_meal;
+	long long (tt_result) = (((long long)ph_actualtime() - (long long)last_meal)
+			+ (long long)philo->agal->tt_eat);
 	if (tt_result > 0 && tt_result < (long long)tt_die)
 		return (0);
 	else
@@ -107,10 +111,8 @@ static int	ph_check_even_die_while_eating(t_philo *philo)
 		if (ph_speaking(philo->epis, philo->id, LPRO_EAT))
 		{
 			pthread_mutex_unlock(philo->lf_fork);
-			philo->lf = false;
 			pthread_mutex_unlock(&philo->rg_fork);
-			philo->rg = false;
-			return (1);
+			return (philo->lf = false, philo->rg = false, 1);
 		}
 		ph_waiting(tt_die, philo->kine->mtx_id_dead, philo->kine->id_dead);
 		pthread_mutex_unlock(philo->lf_fork);
@@ -122,31 +124,31 @@ static int	ph_check_even_die_while_eating(t_philo *philo)
 	}
 }
 
-void	ph_eating(t_philo *philo, int *verif, int *alive)
+void	ph_eating(t_philo *p, int *verif, int *alive)
 {
-	*verif = ph_take_var(philo->kine->mtx_id_dead, philo->kine->id_dead);
+	*verif = ph_take_var(p->kine->mtx_id_dead, p->kine->id_dead);
 	if (*verif != 0)
 		return ;
-	*alive = ph_check_even_die_while_eating(philo);
+	*alive = ph_check_even_die_while_eating(p);
 	if (*alive != 0)
 		return ;
-	if (ph_take_fork(philo))
+	if (ph_take_fork(p))
 		return ;
-	if (ph_speaking(philo->epis, philo->id, LPRO_EAT))
+	if (ph_speaking(p->epis, p->id, LPRO_EAT))
 	{
-		pthread_mutex_unlock(philo->lf_fork);
-		philo->lf = false;
-		pthread_mutex_unlock(&philo->rg_fork);
-		philo->rg = false;
+		pthread_mutex_unlock(p->lf_fork);
+		p->lf = false;
+		pthread_mutex_unlock(&p->rg_fork);
+		p->rg = false;
 		return ;
 	}
-	ph_waiting(philo->agal->tt_eat, philo->kine->mtx_id_dead, philo->kine->id_dead);
-	pthread_mutex_unlock(philo->lf_fork);
-	philo->lf = false;
-	pthread_mutex_unlock(&philo->rg_fork);
-	philo->rg = false;
-	*(philo->kine->count_meal) += 1;
-	if (philo->agal->n_meal > 0)
-		if (*(philo->kine->count_meal) == philo->agal->n_meal)
-			ph_incr_var(philo->kine->mtx_phs_meals, philo->kine->phs_meals);
+	ph_waiting(p->agal->tt_eat, p->kine->mtx_id_dead, p->kine->id_dead);
+	pthread_mutex_unlock(p->lf_fork);
+	p->lf = false;
+	pthread_mutex_unlock(&p->rg_fork);
+	p->rg = false;
+	*(p->kine->count_meal) += 1;
+	if (p->agal->n_meal > 0)
+		if (*(p->kine->count_meal) == p->agal->n_meal)
+			ph_incr_var(p->kine->mtx_phs_meals, p->kine->phs_meals);
 }

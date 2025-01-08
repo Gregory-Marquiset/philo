@@ -33,7 +33,7 @@ void	*ph_init_malloc(t_sympos *sympos, int nbr, size_t var_size)
 	ptr = malloc(nbr * var_size);
 	if (!ptr)
 		ph_quit_philo(sympos, 2, LERR_MALLOC, CERR_MALLOC);
-	memset(ptr, 0, var_size);
+	memset(ptr, 0, nbr * var_size);
 	return (ptr);
 }
 

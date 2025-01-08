@@ -56,7 +56,7 @@ all : $(NAME)
 
 $(OBJ_DIR)%.o : %.c
 	@$(MK) -p $(dir $@) $(DEP_DIR)$(dir $<)
-	$(CC) $(CFLAGS) $(PHFLAGS) $(INCLUDES) -c $< -o $@ -MMD -MF $(DEP_DIR)$*.d
+	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@ -MMD -MF $(DEP_DIR)$*.d
 
 $(NAME) : $(OBJ_PREF) $(OBJ_ROUTINE_PREF) $(OBJ_VI_PREF)
 	$(CC) $(CFLAGS) $^ -o $@ $(PHFLAGS)

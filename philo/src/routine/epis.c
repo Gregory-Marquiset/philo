@@ -22,7 +22,7 @@ static void	ph_speaking_for_dead(t_epis *epis, int id, char *message)
 	pthread_mutex_unlock(&epis->mtx_verif);
 	usleep(2);
 	pthread_mutex_lock(&epis->mtx_printf);
-	printf("%-10ld %-4d %s", (ph_actualtime() - st_time), id, message);
+	printf("%-ld %-d %s", (ph_actualtime() - st_time), id, message);
 	pthread_mutex_unlock(&epis->mtx_printf);
 }
 
@@ -32,7 +32,7 @@ static int	ph_check_id_dead(t_epis *epis)
 
 	res = 0;
 	pthread_mutex_lock(&epis->mtx_id_dead);
-	res = *epis->id_dead;
+	res = *(epis->id_dead);
 	pthread_mutex_unlock(&epis->mtx_id_dead);
 	return (res);
 }
@@ -99,9 +99,6 @@ void	*ph_routine_epis(void *tmp)
 	}
 	if (dead > 0)
 		ph_speaking_for_dead(epis, dead, LPRO_DIED);
-	/*char	buffer[50];
-	snprintf(buffer, sizeof(buffer), "%d\n", *epis->phs_meals);
-	ph_speaking(epis, 0, buffer);*/
 	usleep(2);
 	return (NULL);
 }

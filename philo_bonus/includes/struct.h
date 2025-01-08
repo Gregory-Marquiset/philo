@@ -6,7 +6,7 @@
 /*   By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 15:41:17 by gmarquis          #+#    #+#             */
-/*   Updated: 2024/12/04 08:54:55 by gmarquis         ###   ########.fr       */
+/*   Updated: 2025/01/08 12:30:54 by gmarquis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,15 @@ typedef struct s_sympos
     sem_t   *sem_log;
 	sem_t   *sem_one_death;
 }				t_sympos;
+
+typedef struct s_fork_helper
+{
+	int		i;
+	int		status;
+	int		finished;
+	int		code;
+	pid_t	pid;
+	pid_t	ended;
+}				t_fork_helper;
 
 #endif

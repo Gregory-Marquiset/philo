@@ -6,7 +6,7 @@
 #    By: gmarquis <gmarquis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/26 18:05:12 by gmarquis          #+#    #+#              #
-#    Updated: 2024/12/04 08:39:21 by gmarquis         ###   ########.fr        #
+#    Updated: 2025/01/08 12:20:18 by gmarquis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,6 @@ SRC = src/forking.c \
 
 SRC_ROUTINE = src/routine/routine.c \
 	src/routine/philos.c \
-	src/routine/sleep_think.c \
 	src/routine/eat.c
 
 SRC_VI = src/verif_and_init/args_verif.c \

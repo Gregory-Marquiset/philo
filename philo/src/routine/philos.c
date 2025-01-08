@@ -12,6 +12,23 @@
 
 #include "../../includes/proto.h"
 
+static void	ph_starting_helper(t_philo *philo, unsigned long tt_die)
+{
+	pthread_mutex_lock(&philo->rg_fork);
+	philo->rg = true;
+	if (ph_speaking(philo->epis, philo->id, LPRO_FORK))
+	{
+		pthread_mutex_unlock(&philo->rg_fork);
+		philo->rg = false;
+		return ;
+	}
+	ph_waiting(tt_die, philo->kine->mtx_id_dead, philo->kine->id_dead);
+	pthread_mutex_unlock(&philo->rg_fork);
+	philo->rg = false;
+	ph_modif_var(philo->kine->mtx_id_dead,
+		philo->kine->id_dead, philo->id);
+}
+
 int	ph_starting_philo(t_philo *philo, int *alive)
 {
 	unsigned long (tt_start) = philo->agal->tt_start;
@@ -20,19 +37,7 @@ int	ph_starting_philo(t_philo *philo, int *alive)
 		ph_waiting(1, philo->kine->mtx_id_dead, philo->kine->id_dead);
 	if (philo->agal->n_philos == 1)
 	{
-		pthread_mutex_lock(&philo->rg_fork);
-		philo->rg = true;
-		if (ph_speaking(philo->epis, philo->id, LPRO_FORK))
-		{
-			pthread_mutex_unlock(&philo->rg_fork);
-			philo->rg = false;
-			return (1);
-		}
-		ph_waiting(tt_die, philo->kine->mtx_id_dead, philo->kine->id_dead);
-		pthread_mutex_unlock(&philo->rg_fork);
-		philo->rg = false;
-		ph_modif_var(philo->kine->mtx_id_dead,
-			philo->kine->id_dead, philo->id);
+		ph_starting_helper(philo, tt_die);
 		return (1);
 	}
 	if (tt_start < tt_die)
@@ -46,28 +51,26 @@ int	ph_starting_philo(t_philo *philo, int *alive)
 	return (0);
 }
 
-void	*ph_routine_philos(void *tmp)
+void	*ph_routine_philos(void *arg)
 {
-	t_philo (*philo) = (t_philo *)tmp;
+	t_philo *(philo) = (t_philo *)arg;
 	int (verif) = 0;
 	int (alive) = 0;
-	alive = ph_starting_philo(philo, &alive);
-	while (verif == 0 && alive == 0)
+	if (ph_starting_philo(philo, &alive))
+		return (NULL);
+	while (!verif && !alive)
 	{
 		ph_eating(philo, &verif, &alive);
-		if (verif != 0 || alive != 0)
+		if (verif || alive)
 			break ;
 		ph_sleeping(philo, &verif, &alive);
-		if (verif != 0 || alive != 0)
+		if (verif || alive)
 			break ;
 		ph_thinking(philo, &verif, &alive);
 	}
-	if (philo->rg == true)
-		pthread_mutex_unlock(&philo->rg_fork);
-	philo->rg = false;
-	if (philo->lf == true)
+	if (philo->lf)
 		pthread_mutex_unlock(philo->lf_fork);
-	philo->lf = false;
-	usleep(2);
+	if (philo->rg)
+		pthread_mutex_unlock(&philo->rg_fork);
 	return (NULL);
 }
